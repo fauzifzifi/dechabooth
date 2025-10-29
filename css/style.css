@@ -399,7 +399,7 @@ a:focus {
 }
 
 .about_section .img-box img {
-  width: 50%;
+   width: 600px; height: 400px;
 }
 
 .chocolate_section .heading_container {
