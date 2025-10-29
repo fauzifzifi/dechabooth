@@ -45,7 +45,6 @@
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                 <li class="nav-item active"><a class="nav-link" href="menu.php">Menu</a></li>
-                <li class="nav-item"><a class="nav-link" href="testimonial.html">Testimonial</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
               </ul>
               <div class="quote_btn-container">
