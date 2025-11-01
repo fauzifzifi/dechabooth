@@ -119,7 +119,6 @@
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>
                 <a href="menu.php">Menu</a>
-                <a href="testimonial.html">Testimonial</a>
                 <a href="contact.html">Contact us</a>
               </div>
             </div>
