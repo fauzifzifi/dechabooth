@@ -66,7 +66,7 @@
           <?php
           $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan'");
           while ($row = mysqli_fetch_assoc($makanan)) {
-          ?>
+            ?>
             <div class="box">
               <div class="img-box">
                 <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
@@ -92,7 +92,7 @@
           <?php
           $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman'");
           while ($row = mysqli_fetch_assoc($minuman)) {
-          ?>
+            ?>
             <div class="box">
               <div class="img-box">
                 <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
@@ -144,10 +144,11 @@
 
   <!-- JS -->
   <script src="js/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/custom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/custom.js"></script>
 
 
 </body>
+
 </html>
