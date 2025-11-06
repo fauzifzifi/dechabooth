@@ -1,3 +1,22 @@
+<?php include "koneksi.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
+  $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
+  $telepon = mysqli_real_escape_string($koneksi, $_POST['telepon']);
+  $email = mysqli_real_escape_string($koneksi, $_POST['email']);
+  $pesan = mysqli_real_escape_string($koneksi, $_POST['pesan']);
+
+  $query = "INSERT INTO contact_us (nama, telepon, email, pesan) VALUES ('$nama', '$telepon', '$email', '$pesan')";
+  if (mysqli_query($koneksi, $query)) {
+    $msg = "Pesan kamu berhasil dikirim!";
+    $msg_type = "success";
+  } else {
+    $msg = "Gagal mengirim pesan: " . mysqli_error($koneksi);
+    $msg_type = "error";
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -58,13 +77,14 @@
                 <li class="nav-item ">
                   <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="about.html"> About</a>
                 </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="menu.php">Menu</a>
-                </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="menu.php">Menu
+                  </a>
+                </li>
+                <li class="nav-item active">
                   <a class="nav-link" href="contact.php">Contact Us</a>
                 </li>
               </ul>
@@ -77,51 +97,72 @@
           </nav>
         </div>
       </header>
-      <!-- end header section -->
     </div>
+    <!-- end header section -->
 
-    <!-- about section -->
-
-    <section class="about_section layout_padding ">
-      <div class="container  ">
+    <!-- contact section -->
+    <section class="contact_section layout_padding">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6">
-            <div class="detail-box">
+          <div class="col-md-5 col-lg-4 offset-md-1">
+            <div class="form_container">
               <div class="heading_container">
                 <h2>
-                  About Decha Booth
+                  Contact Us
                 </h2>
               </div>
-              <p style="text-align: justify;">
-                Decha Booth mulai berdiri pada bulan Januari 2017. Awalnya, usaha ini hanya berfokus pada penjualan
-                minuman sederhana yang dirintis dengan penuh semangat oleh pemiliknya. Tempat usaha pertama berupa
-                container yang berlokasi di Gondang. Seiring berjalannya waktu dan meningkatnya minat pelanggan, Decha
-                Booth kemudian berpindah lokasi ke Nganjuk pada Mei 2025 untuk memperluas jangkauan dan meningkatkan
-                pelayanan.
-                <p style="text-align: justify;">
-                Pemilik Decha Booth berasal dari Jatirejo, sedangkan sang suami merupakan warga asli Rejoso. Perpaduan
-                keduanya menghadirkan usaha yang hangat, penuh kekeluargaan, dan terus berkembang hingga sekarang.
-                </p>
-                <p style="text-align: justify;">
-                Asal Usul Nama “Decha Booth”. Nama Decha Booth berasal dari perpaduan nama antara pemilik dan suaminya. Nama ini menjadi simbol
-                kebersamaan dan kerja sama mereka dalam membangun usaha dari nol hingga bisa dikenal seperti sekarang.
-                “Booth” sendiri dipilih karena usaha ini berawal dari konsep booth sederhana yang melayani pelanggan
-                dengan cepat dan ramah.
-                </p>
-              </p>
+              <form method="POST" action="">
+                <?php if (isset($msg)) { ?>
+                  <div id="notif" style="margin-bottom:15px;
+                padding:10px 15px;
+                border-radius:8px;
+                font-weight:500;
+                color:#fff;
+                background-color:<?php echo ($msg_type == 'success') ? '#4CAF50' : '#f44336'; ?>;
+                transition:opacity 0.5s ease;">
+                    <?php echo $msg; ?>
+                  </div>
+                  <script>
+                    setTimeout(() => {
+                      const notif = document.getElementById("notif");
+                      if (notif) {
+                        notif.style.opacity = "0";
+                        setTimeout(() => notif.remove(), 500); // hapus elemen setelah efek fade out
+                      }
+                    }, 3000); // hilang setelah 3 detik
+                  </script>
+                <?php } ?>
+
+                <div>
+                  <input type="text" name="nama" placeholder="Nama" required />
+                </div>
+                <div>
+                  <input type="text" name="telepon" placeholder="Nomor Telepon" required />
+                </div>
+                <div>
+                  <input type="email" name="email" placeholder="Email" required />
+                </div>
+                <div>
+                  <textarea name="pesan" class="message-box" placeholder="Pesan" rows="4" required></textarea>
+                </div>
+                <div class="d-flex">
+                  <button type="submit" name="kirim_pesan">KIRIM</button>
+                </div>
+                </form>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="img-box">
-              <img src="images/dechabooth.png">
+            <div class="map_container">
+              <div class="map">
+                <div id="googleMap"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-
-    <!-- end about section -->
+    <!-- end contact section -->
 
 
     <!-- info section -->
@@ -230,6 +271,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  <!-- Google Map -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
 
 </body>
 

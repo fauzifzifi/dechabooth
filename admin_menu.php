@@ -53,7 +53,7 @@ if (isset($_GET['hapus'])) {
             <header class="header_section">
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-lg custom_nav-container ">
-                        <a class="navbar-brand" href="index.html">Decha Booth</a>
+                        <a class="navbar-brand" href="index.php">Decha Booth</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent">
                             <span class=""> </span>
@@ -61,11 +61,11 @@ if (isset($_GET['hapus'])) {
 
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                                 <li class="nav-item active"><a class="nav-link" href="admin_menu.php">Menu Admin</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                                <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
                             </ul>
                             <div class="quote_btn-container">
                                 <a href="manage_menu.php" class="btn btn-primary">Tambah Item Baru</a>
@@ -96,10 +96,6 @@ if (isset($_GET['hapus'])) {
                                 <h6><?php echo $row['nama_menu']; ?></h6>
                                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
                                 <p>Stok: <?php echo $row['stok']; ?></p>
-                                <a href="?hapus=<?php echo $row['id_menu']; ?>" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah kamu yakin ingin menghapus <?php echo htmlspecialchars($row['nama_menu'], ENT_QUOTES); ?>?')">
-                                    Hapus
-                                </a>
                             </div>
                         </div>
                     <?php } ?>
@@ -126,10 +122,6 @@ if (isset($_GET['hapus'])) {
                                 <h6><?php echo $row['nama_menu']; ?></h6>
                                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
                                 <p>Stok: <?php echo $row['stok']; ?></p>
-                                <a href="?hapus=<?php echo $row['id_menu']; ?>" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah kamu yakin ingin menghapus <?php echo htmlspecialchars($row['nama_menu'], ENT_QUOTES); ?>?')">
-                                    Hapus
-                                </a>
                             </div>
                         </div>
                     <?php } ?>
@@ -145,10 +137,10 @@ if (isset($_GET['hapus'])) {
                         <div class="info_links">
                             <h4>Menu Admin</h4>
                             <div class="info_links_menu">
-                                <a href="index.html">Home</a>
+                                <a href="index.php">Home</a>
                                 <a href="about.html">About</a>
                                 <a href="admin_menu.php">Menu Admin</a>
-                                <a href="contact.html">Contact us</a>
+                                <a href="contact.php">Contact us</a>
                             </div>
                         </div>
                     </div>

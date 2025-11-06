@@ -463,8 +463,7 @@ a:focus {
   margin-top: 10px;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+ 
 }
 
 .chocolate_section .box .detail-box h6 {
@@ -491,10 +490,11 @@ a:focus {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
 }
 
-.chocolate_section .box:hover .detail-box {
-  visibility: visible;
-  opacity: 1;
+.chocolate_section .box .detail-box {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
+
 
 .chocolate_section .slick-prev,
 .chocolate_section .slick-next {
@@ -939,4 +939,5 @@ a:focus {
 .footer_section a {
   color: inherit;
 }
+
 /*# sourceMappingURL=style.css.map */

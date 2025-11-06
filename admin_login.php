@@ -123,7 +123,7 @@
 
 <body>
   <!-- Tombol kembali ke home -->
-  <a href="index.html" class="back-home">
+  <a href="index.php" class="back-home">
     <i class="bi bi-arrow-left-circle-fill"></i> Kembali ke Home
   </a>
 
