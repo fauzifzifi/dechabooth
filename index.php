@@ -58,6 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+
+  <!-- cart css-->
+  <link rel="stylesheet" href="css/cart.css">
+
 </head>
 
 <body>
@@ -94,8 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 </li>
               </ul>
               <div class="quote_btn-container">
-                <a href="">
-                  <i class="bi bi-cart4" aria-hidden="true"></i>
+                <a href="#" id="cartButton" class="cart-icon">
+                  <i class="bi bi-cart4"></i>
+                  <span class="cart-count" id="cartCount">0</span>
                 </a>
                 <a href="admin_login.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -187,7 +192,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <a href="#">PESAN SEKARANG</a>
+                 <!-- Tombol ganti -->
+                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>">
+                  <button class="minus">−</button>
+                  <span class="quantity-number">0</span>
+                  <button class="plus">+</button>
+                </div>
               </div>
             </div>
           <?php } ?>
@@ -212,7 +222,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <a href="#">PESAN SEKARANG</a>
+                 <!-- Tombol ganti -->
+                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>">
+                  <button class="minus">−</button>
+                  <span class="quantity-number">0</span>
+                  <button class="plus">+</button>
+                </div>
               </div>
             </div>
           <?php } ?>
@@ -368,10 +383,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         </div>
       </div>
     </section>
-
     <!-- end info_section -->
-
   </div>
+
+  <!-- panel cart -->
+  <div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>Keranjang</h3>
+    <button id="closeCart">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <strong>Total: Rp<span id="cartTotal">0</span></strong>
+  </div>
+  </div>
+  <!-- panel cart -->
 
   <!-- footer section -->
   <footer class="container-fluid footer_section">
@@ -397,7 +423,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
-
+  <!-- cart js -->
+  <script src="js/cart.js"></script>
 </body>
 
 </html>

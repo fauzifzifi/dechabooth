@@ -24,6 +24,9 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+  <!-- cart style -->
+  <link href="css/cart.css" rel="stylesheet" />
+
 </head>
 
 <body class="sub_page">
@@ -74,7 +77,12 @@
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <a href="#">PESAN SEKARANG</a>
+                 <!-- Tombol ganti -->
+                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>">
+                  <button class="minus">−</button>
+                  <span class="quantity-number">0</span>
+                  <button class="plus">+</button>
+                </div>
               </div>
             </div>
           <?php } ?>
