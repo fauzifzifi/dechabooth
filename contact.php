@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                   <input type="email" name="email" placeholder="Email" required />
                 </div>
                 <div>
-                  <textarea name="pesan" class="message-box" placeholder="Pesan" rows="4" required></textarea>
+                  <textarea name="pesan" placeholder="Pesan" required></textarea>
                 </div>
                 <div class="d-flex">
                   <button type="submit" name="kirim_pesan">KIRIM</button>
