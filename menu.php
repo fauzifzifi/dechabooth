@@ -211,6 +211,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/custom.js"></script>
+  <script src="js/cart.js"></script>
 
 
 </body>
