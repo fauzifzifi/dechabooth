@@ -982,7 +982,7 @@ a:focus {
   font-size: 16px;
 }
 
-/* keranjang */
+/* === PANEL KERANJANG === */
 .cart-panel {
   position: fixed;
   top: 0;
@@ -1053,9 +1053,76 @@ a:focus {
   font-weight: bold;
 }
 
+/* === TOMBOL CHECKOUT & CLEAR CART === */
+.btn-checkout,
+.btn-clear {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
+  margin-top: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+
+.btn-checkout {
+  background-color: #25d366; /* hijau WA */
+}
+
+.btn-clear {
+  background-color: #e53935; /* merah hapus */
+}
+
+.btn-checkout:hover {
+  background-color: #1ebe5d;
+}
+
+.btn-clear:hover {
+  background-color: #c62828;
+}
+
+/* === TOMBOL IKON KERANJANG DI POJOK === */
+.cart-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #7e57c2;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999997 !important;
+}
+
+.cart-button span {
+  background: red;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 14px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+/* === RESPONSIVE === */
 @media (max-width: 600px) {
   .cart-panel {
     width: 100%;
+  }
+
+  .cart-button {
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
   }
 }
 

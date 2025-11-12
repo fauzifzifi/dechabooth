@@ -235,14 +235,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     </section>
 
     <!-- panel cart -->
-    <div class="cart-panel" id="cartPanel">
+    <div id="cartPanel" class="cart-panel">
       <div class="cart-header">
-        <h3>Keranjang</h3>
-        <button id="closeCart">×</button>
+        <h3>Keranjang Belanja</h3>
+        <button id="closeCart" class="close-btn">×</button>
       </div>
-      <div class="cart-items" id="cartItems"></div>
+
+      <div id="cartItems" class="cart-items"></div>
+
       <div class="cart-footer">
-        <strong>Total: Rp<span id="cartTotal">0</span></strong>
+        <p>Total: Rp<span id="cartTotal">0</span></p>
+
+        <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
+        <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
       </div>
     </div>
     <!-- panel cart -->
