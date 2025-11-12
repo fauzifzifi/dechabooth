@@ -32,7 +32,7 @@
 
 <body class="sub_page">
 
-  <div class="main_body_content">
+  <div class="">
 
     <div class="hero_area">
       <!-- header section -->
@@ -56,8 +56,15 @@
                   <i class="bi bi-cart4"></i>
                   <span class="cart-count" id="cartCount">0</span>
                 </a>
+<<<<<<< Updated upstream
                 <a href="admin_login.php"><i class="fa fa-user" aria-hidden="true"></i></a>
               </div>h
+=======
+                <a href="admin_login.php">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+              </div>
+>>>>>>> Stashed changes
             </div>
           </nav>
         </div>

@@ -79,11 +79,11 @@ a:focus {
   box-shadow: none;
 }
 
-.main_body_content {
+/* .main_body_content {
   margin: 45px 45px 0 45px;
   -webkit-box-shadow: 0 0 95px 0 rgba(0, 0, 0, 0.07);
   box-shadow: 0 0 95px 0 rgba(0, 0, 0, 0.07);
-}
+} */
 
 /*header section*/
 .hero_area {

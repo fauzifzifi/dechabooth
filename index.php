@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
 <body>
 
-  <div class="main_body_content">
+  <div class="">
 
     <div class="hero_area">
       <!-- header section strats -->
