@@ -13,6 +13,8 @@
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- slick slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
@@ -26,7 +28,6 @@
   <link href="css/responsive.css" rel="stylesheet" />
   <!-- cart style -->
   <link href="css/cart.css" rel="stylesheet" />
-
 </head>
 
 <body class="sub_page">
@@ -51,14 +52,31 @@
                 <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
               </ul>
               <div class="quote_btn-container">
+                <a href="#" id="cartButton" class="cart-icon">
+                  <i class="bi bi-cart4"></i>
+                  <span class="cart-count" id="cartCount">0</span>
+                </a>
                 <a href="admin_login.php"><i class="fa fa-user" aria-hidden="true"></i></a>
-              </div>
+              </div>h
             </div>
           </nav>
         </div>
       </header>
     </div>
 
+     <!-- panel keranjang -->
+    <div class="cart-panel" id="cartPanel">
+      <div class="cart-header">
+        <h3>Keranjang</h3>
+        <button id="closeCart">×</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer">
+        <strong>Total: Rp<span id="cartTotal">0</span></strong>
+      </div>
+    </div>
+    <!-- panel keranjang -->
+    
     <!-- ====== MAKANAN SECTION ====== -->
     <section class="chocolate_section">
       <div class="container">
