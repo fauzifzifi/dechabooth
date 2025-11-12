@@ -52,6 +52,7 @@
                 <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
               </ul>
               <div class="quote_btn-container">
+<<<<<<< Updated upstream
                  <a href="#" id="cartButton" class="cart-icon">
                   <i class="bi bi-cart4"></i>
                   <span class="cart-count" id="cartCount">0</span>
@@ -61,6 +62,12 @@
 <<<<<<< HEAD
               </div>h
 =======
+=======
+                <a href="#" id="cartButton" class="cart-icon">
+                  <i class="bi bi-cart4"></i>
+                  <span class="cart-count" id="cartCount">0</span>
+                </a>
+>>>>>>> Stashed changes
                 <a href="admin_login.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </a>
