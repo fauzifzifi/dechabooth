@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     <!-- end contact section -->
 
 
-    <!-- info section -->
+   <!-- info section -->
     <section class="info_section layout_padding2">
       <div class="container">
         <div class="row info_main_row">
@@ -187,29 +187,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 <a href="contact.php">
                   Contact us
                 </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_insta">
-              <h4>
-                Follow Us
-              </h4>
-              <div class="insta_box">
-                <div class="img-box">
-                  <img src="images/facebook.png" alt="">
-                </div>
-                <p>
-                  Decha Booth
-                </p>
-              </div>
-              <div class="insta_box">
-                <div class="img-box">
-                  <img src="images/insta-img.png" alt="">
-                </div>
-                <p>
-                  long established fact that a reader
-                </p>
               </div>
             </div>
           </div>
@@ -246,7 +223,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         </div>
       </div>
     </section>
-
     <!-- end info_section -->
 
   </div>
