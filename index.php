@@ -328,29 +328,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="info_insta">
-              <h4>
-                Follow Us
-              </h4>
-              <div class="insta_box">
-                <div class="img-box">
-                  <img src="images/facebook.png" alt="">
-                </div>
-                <p>
-                  Decha Booth
-                </p>
-              </div>
-              <div class="insta_box">
-                <div class="img-box">
-                  <img src="images/insta-img.png" alt="">
-                </div>
-                <p>
-                  long established fact that a reader
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
             <div class="info_detail">
               <h4>
                 Company
