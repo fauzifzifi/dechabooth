@@ -192,8 +192,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                 <!-- Tombol ganti -->
-                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>">
+                <!-- Tombol ganti -->
+                <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
+                  data-price="<?php echo $row['harga']; ?>">
                   <button class="minus">−</button>
                   <span class="quantity-number">0</span>
                   <button class="plus">+</button>
@@ -222,8 +223,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                 <!-- Tombol ganti -->
-                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>">
+                <!-- Tombol ganti -->
+                <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
+                  data-price="<?php echo $row['harga']; ?>">
                   <button class="minus">−</button>
                   <span class="quantity-number">0</span>
                   <button class="plus">+</button>
@@ -235,6 +237,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
       </div>
     </section>
 
+    <!-- panel cart -->
+    <div class="cart-panel" id="cartPanel">
+      <div class="cart-header">
+        <h3>Keranjang</h3>
+        <button id="closeCart">×</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-footer">
+        <strong>Total: Rp<span id="cartTotal">0</span></strong>
+      </div>
+    </div>
+    <!-- panel cart -->
 
     <!-- contact section -->
 
@@ -362,19 +376,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     </section>
     <!-- end info_section -->
   </div>
-
-  <!-- panel cart -->
-  <div class="cart-panel" id="cartPanel">
-  <div class="cart-header">
-    <h3>Keranjang</h3>
-    <button id="closeCart">×</button>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-footer">
-    <strong>Total: Rp<span id="cartTotal">0</span></strong>
-  </div>
-  </div>
-  <!-- panel cart -->
 
   <!-- footer section -->
   <footer class="container-fluid footer_section">
