@@ -59,9 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
-  <!-- cart css-->
-  <link rel="stylesheet" href="css/cart.css">
-
 </head>
 
 <body>
