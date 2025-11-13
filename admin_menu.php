@@ -9,7 +9,7 @@ include 'koneksi.php';
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
     $query = mysqli_query($koneksi, "DELETE FROM menu WHERE id_menu='$id'");
-    
+
     if ($query) {
         echo "<script>alert('Menu berhasil dihapus!'); window.location='admin_menu.php';</script>";
     } else {
@@ -61,7 +61,7 @@ if (isset($_GET['hapus'])) {
 
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="admin_trigger.php">trg</a></li>
                                 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                                 <li class="nav-item active"><a class="nav-link" href="admin_menu.php">Menu Admin</a>
                                 </li>
