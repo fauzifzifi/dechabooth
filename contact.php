@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-   <!-- Bootstrap Icons -->
+  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!--slick slider stylesheet -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
@@ -93,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="quote_btn-container">
                 <a href="#" id="cartButton" class="cart-icon">
                   <i class="bi bi-cart4"></i>
+                  <span class="cart-count" id="cartCount">0</span>
                 </a>
                 <a href="admin_login.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -104,6 +105,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
       </header>
     </div>
     <!-- end header section -->
+
+    <!-- panel keranjang -->
+    <div id="cartPanel" class="cart-panel">
+      <div class="cart-header">
+        <h3>Keranjang Belanja</h3>
+        <button id="closeCart" class="close-btn">×</button>
+      </div>
+
+      <div id="cartItems" class="cart-items"></div>
+
+      <div class="cart-footer">
+        <p>Total: Rp<span id="cartTotal">0</span></p>
+
+        <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
+        <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
+      </div>
+    </div>
+
+    <!-- Tambahkan ini ⬇️ -->
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <!-- panel keranjang -->
 
     <!-- contact section -->
     <section class="contact_section layout_padding">
@@ -153,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 <div class="d-flex">
                   <button type="submit" name="kirim_pesan">KIRIM</button>
                 </div>
-                </form>
+              </form>
             </div>
           </div>
           <div class="col-md-6">
@@ -170,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     <!-- end contact section -->
 
 
-   <!-- info section -->
+    <!-- info section -->
     <section class="info_section layout_padding2">
       <div class="container">
         <div class="row info_main_row">
@@ -256,7 +279,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
   <!-- End Google Map -->
-
+  <!-- cart js -->
+  <script src="js/cart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

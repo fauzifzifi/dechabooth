@@ -73,6 +73,7 @@
               <div class="quote_btn-container">
                 <a href="#" id="cartButton" class="cart-icon">
                   <i class="bi bi-cart4"></i>
+                  <span class="cart-count" id="cartCount">0</span>
                 </a>
                 <a href="admin_login.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
@@ -84,7 +85,27 @@
       </header>
       <!-- end header section -->
     </div>
+<!-- panel keranjang -->
+  <div id="cartPanel" class="cart-panel">
+    <div class="cart-header">
+      <h3>Keranjang Belanja</h3>
+      <button id="closeCart" class="close-btn">×</button>
+    </div>
 
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <p>Total: Rp<span id="cartTotal">0</span></p>
+
+      <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
+      <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
+    </div>
+  </div>
+
+  <!-- Tambahkan ini ⬇️ -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <!-- panel keranjang -->
     <!-- about section -->
 
     <section class="about_section layout_padding ">
@@ -211,6 +232,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

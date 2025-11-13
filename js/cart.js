@@ -15,6 +15,8 @@ let cartCount,
 
 // ===== Helper: tunggu elemen DOM siap dan pasang semua listener di sini =====
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Content Loaded - Initializing cart...");
+
   // Ambil elemen (sesuaikan id di HTML)
   cartCount = document.getElementById("cartCount");
   cartPanel = document.getElementById("cartPanel");
@@ -28,10 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
   emptyCartMessage = document.getElementById("emptyCartMessage");
 
   // Pasang event listeners & update awal
-  attachQuantityListeners(); // pasang + / - listener pada produk
+  attachQuantityListeners();
   attachPanelListeners();
   attachCheckoutAndClearListeners();
-  updateCart(); // render awal
+  updateCart();
 });
 
 // === Simpan ke localStorage ===
@@ -40,7 +42,6 @@ function saveCart() {
 }
 
 // === Fungsi menambah/mengupdate item ke keranjang ===
-// name harus unik (nama_menu saat ini)
 function addToCart(name, price, qty) {
   if (qty === 0) {
     delete cart[name];
@@ -85,13 +86,8 @@ function updateCart() {
 
   if (emptyCartMessage) {
     if (Object.keys(cart).length === 0) {
-      // pastikan element emptyCartMessage ada dan bukan template
-      try {
-        cartItems.appendChild(emptyCartMessage);
-      } catch (e) {
-        // jika append gagal karena element sudah berada di DOM, ignore
-      }
       emptyCartMessage.style.display = "block";
+      cartItems.appendChild(emptyCartMessage);
     } else {
       emptyCartMessage.style.display = "none";
     }
@@ -100,7 +96,6 @@ function updateCart() {
   if (cartCount) cartCount.textContent = totalQty;
   if (cartTotal) cartTotal.textContent = totalHarga.toLocaleString("id-ID");
 
-  // update quantity number pada setiap produk (jika masih ada di page)
   document.querySelectorAll(".quantity-controls").forEach((box) => {
     const qtyText = box.querySelector(".quantity-number");
     const name = box.dataset.name;
@@ -108,27 +103,39 @@ function updateCart() {
     else qtyText.textContent = "0";
   });
 
-  if (checkoutBtn) checkoutBtn.disabled = Object.keys(cart).length === 0;
+  // PERBAIKAN: Ubah styling tombol checkout berdasarkan isi keranjang
+  if (checkoutBtn) {
+    if (Object.keys(cart).length === 0) {
+      // Keranjang kosong - tombol aktif tapi dengan style disabled
+      checkoutBtn.disabled = false; // Biarkan bisa diklik
+      checkoutBtn.classList.add("disabled");
+      checkoutBtn.style.opacity = "0.6";
+      checkoutBtn.style.cursor = "not-allowed";
+    } else {
+      // Keranjang ada isi - tombol aktif penuh
+      checkoutBtn.disabled = false;
+      checkoutBtn.classList.remove("disabled");
+      checkoutBtn.style.opacity = "1";
+      checkoutBtn.style.cursor = "pointer";
+    }
+  }
 
   saveCart();
 }
 
-// ===== Tutup panel dengan callback: tunggu transitionend atau fallback timeout =====
+// ===== Tutup panel dengan callback =====
 function closeCartPanel(callback) {
   if (!cartPanel || !cartOverlay) {
     if (typeof callback === "function") callback();
     return;
   }
 
-  // remove active classes -> CSS transition should run
   cartPanel.classList.remove("active");
   cartOverlay.classList.remove("active");
-  document.body.classList.remove("no-scroll"); // jika kamu menggunakan body.no-scroll
+  document.body.classList.remove("no-scroll");
 
-  // Jika panel punya transisi CSS pada properti 'right' atau 'transform', dengarkan event transitionend
   let fired = false;
   const onTransitionEnd = (ev) => {
-    // Pastikan transition berasal dari cartPanel (safety)
     if (ev.target === cartPanel) {
       fired = true;
       cartPanel.removeEventListener("transitionend", onTransitionEnd);
@@ -138,7 +145,6 @@ function closeCartPanel(callback) {
 
   cartPanel.addEventListener("transitionend", onTransitionEnd);
 
-  // fallback: jika tidak ada transitionend dalam 500ms, panggil callback
   setTimeout(() => {
     if (!fired) {
       cartPanel.removeEventListener("transitionend", onTransitionEnd);
@@ -169,7 +175,6 @@ function attachPanelListeners() {
 
 // ===== Pasang listener pada tombol + / - produk =====
 function attachQuantityListeners() {
-  // jika elemen belum ada di DOM, querySelectorAll mengembalikan NodeList kosong
   document.querySelectorAll(".quantity-controls").forEach((box) => {
     const plus = box.querySelector(".plus");
     const minus = box.querySelector(".minus");
@@ -178,14 +183,12 @@ function attachQuantityListeners() {
     const price = parseInt(box.dataset.price || "0", 10);
     const stok = parseInt(box.dataset.stok || "9999", 10);
 
-    // inisialisasi dari cart jika ada
     if (cart[name]) qtyText.textContent = cart[name].qty;
 
     if (plus) {
       plus.addEventListener("click", () => {
         let qty = parseInt(qtyText.textContent || "0", 10) + 1;
         if (qty > stok) {
-          // tutup panel dulu lalu tampilkan alert (Swal jika tersedia)
           closeCartPanel(() => {
             if (typeof Swal !== "undefined") {
               Swal.fire({
@@ -221,25 +224,44 @@ function attachQuantityListeners() {
 // ===== Pasang listener Checkout & Clear =====
 function attachCheckoutAndClearListeners() {
   if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", async (ev) => {
-      ev.preventDefault();
+    console.log("Attaching checkout listener to button:", checkoutBtn);
 
-      // Jika keranjang kosong -> tutup panel lalu tampilkan alert (Swal/fallback)
+    // Hapus atribut disabled dari HTML dan atur melalui JavaScript
+    checkoutBtn.disabled = false;
+
+    checkoutBtn.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      console.log("Checkout button clicked!");
+      console.log("Cart contents:", cart);
+      console.log("Cart keys length:", Object.keys(cart).length);
+
+      // Cek apakah keranjang kosong
       if (Object.keys(cart).length === 0) {
+        console.log("Cart is empty - showing alert");
+
+        // Tutup panel dan tampilkan alert
         closeCartPanel(() => {
-          Swal.fire({
-            icon: "warning",
-            title: "Keranjang Kosong!",
-            text: "Silakan tambahkan item terlebih dahulu sebelum checkout.",
-            confirmButtonColor: "#7b2cbf",
-          });
+          if (typeof Swal !== "undefined") {
+            Swal.fire({
+              icon: "warning",
+              title: "Keranjang Kosong!",
+              text: "Silakan tambahkan item terlebih dahulu sebelum checkout.",
+              confirmButtonColor: "#7b2cbf",
+            });
+          } else {
+            alert(
+              "Keranjang kosong! Silakan tambahkan item terlebih dahulu sebelum checkout."
+            );
+          }
         });
         return;
       }
 
-      // Build pesan WA
+      // Lanjutkan proses checkout jika keranjang tidak kosong
+      console.log("Proceeding with checkout...");
       let pesan = "Halo, saya ingin memesan:\n";
       let total = 0;
+
       for (const [name, item] of Object.entries(cart)) {
         const subtotal = item.price * item.qty;
         pesan += `- ${name} x${item.qty} = Rp${subtotal.toLocaleString(
@@ -247,42 +269,28 @@ function attachCheckoutAndClearListeners() {
         )}\n`;
         total += subtotal;
       }
+
       pesan += `\nTotal: Rp${total.toLocaleString("id-ID")}\n\nTerima kasih!`;
       const nomor = "6282336881878";
       const encodedPesan = encodeURIComponent(pesan);
 
-      // Kirim ke server untuk update stok (tetap jalan, tidak memblokir)
-      try {
-        await fetch("update_stok.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(
-            Object.entries(cart).map(([name, item]) => ({
-              name,
-              qty: item.qty,
-            }))
-          ),
-        });
-      } catch (err) {
+      // Update stok
+      fetch("update_stok.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          Object.entries(cart).map(([name, item]) => ({
+            name,
+            qty: item.qty,
+          }))
+        ),
+      }).catch((err) => {
         console.error("Gagal update stok:", err);
-        // tetap lanjutkan flow (tapi beri tahu)
-        closeCartPanel(() => {
-          if (typeof Swal !== "undefined") {
-            Swal.fire({
-              icon: "error",
-              title: "Gagal update stok",
-              text: "Terjadi kesalahan saat memperbarui stok. Silakan coba lagi.",
-              confirmButtonColor: "#7b2cbf",
-            });
-          } else {
-            alert("Gagal update stok di server.");
-          }
-        });
-        return;
-      }
+      });
 
-      // Berhasil: kosongkan cart, tutup panel, tampilkan Swal lalu open WA
+      // Kosongkan cart dan buka WA
       clearCartAndResetCounters();
+
       closeCartPanel(() => {
         if (typeof Swal !== "undefined") {
           Swal.fire({
@@ -315,7 +323,9 @@ function attachCheckoutAndClearListeners() {
   }
 
   if (clearCartBtn) {
-    clearCartBtn.addEventListener("click", () => {
+    clearCartBtn.addEventListener("click", function () {
+      console.log("Clear cart button clicked");
+
       if (Object.keys(cart).length === 0) {
         closeCartPanel(() => {
           if (typeof Swal !== "undefined") {
@@ -333,8 +343,8 @@ function attachCheckoutAndClearListeners() {
       }
 
       // Konfirmasi hapus semua
-      if (typeof Swal !== "undefined") {
-        closeCartPanel(() => {
+      closeCartPanel(() => {
+        if (typeof Swal !== "undefined") {
           Swal.fire({
             icon: "question",
             title: "Hapus Semua?",
@@ -355,16 +365,14 @@ function attachCheckoutAndClearListeners() {
               });
             }
           });
-        });
-      } else {
-        // fallback confirm
-        closeCartPanel(() => {
+        } else {
+          // fallback confirm
           if (confirm("Yakin ingin menghapus semua isi keranjang?")) {
             clearCartAndResetCounters();
             alert("Keranjang berhasil dikosongkan.");
           }
-        });
-      }
+        }
+      });
     });
   }
 }
