@@ -328,13 +328,13 @@ include 'koneksi.php';
 
             <ul class="navbar-nav" id="navbarNav">
                 <li class="nav-item">
-                    <a class="nav-link" href="admin_menu.php">
-                        <i class="fas fa-th-large"></i> Menu Admin
+                    <a class="nav-link active" href="admin_trigger.php">
+                        <i class="fas fa-history"></i> Riwayat Stok
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="admin_trigger.php">
-                        <i class="fas fa-history"></i> Riwayat Stok
+                    <a class="nav-link" href="admin_menu.php">
+                        <i class="fas fa-th-large"></i> Menu Admin
                     </a>
                 </li>
                 <li class="nav-item">
