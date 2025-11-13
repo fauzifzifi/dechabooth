@@ -92,36 +92,53 @@ document.querySelectorAll(".quantity-controls").forEach((box) => {
   });
 });
 
-// tombol checkout WA
-document.getElementById("checkoutBtn").addEventListener("click", () => {
-  if (Object.keys(cart).length === 0) {
-    alert("Keranjang masih kosong!");
-    return;
-  }
+// === Tombol Checkout (Kirim ke WhatsApp) ===
+if (checkoutBtn) {
+  checkoutBtn.addEventListener("click", () => {
+    if (Object.keys(cart).length === 0) {
+      alert("Keranjang masih kosong!");
+      return;
+    }
 
-  let pesan = "Halo, saya ingin memesan:\n";
-  let total = 0;
+    let pesan = "Halo, saya ingin memesan:\n";
+    let total = 0;
 
-  for (const [name, item] of Object.entries(cart)) {
-    pesan += `- ${name} x${item.qty} = Rp${(
-      item.price * item.qty
-    ).toLocaleString()}\n`;
-    total += item.price * item.qty;
-  }
+    for (const [name, item] of Object.entries(cart)) {
+      pesan += `- ${name} x${item.qty} = Rp${(
+        item.price * item.qty
+      ).toLocaleString()}\n`;
+      total += item.price * item.qty;
+    }
 
-  pesan += `\nTotal: Rp${total.toLocaleString()}`;
-  pesan += `\n\nTerima kasih!`;
+    pesan += `\nTotal: Rp${total.toLocaleString()}`;
+    pesan += `\n\nTerima kasih!`;
 
-  const nomor = "6282336881878"; // ganti dengan nomor kamu
-  const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+    const nomor = "6282336881878"; // Ganti dengan nomor WhatsApp kamu
+    const encodedPesan = encodeURIComponent(pesan);
 
-  window.open(url, "_blank");
+    // Deteksi perangkat (HP atau Desktop)
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    let waUrl = "";
 
-  // kosongkan keranjang setelah pesan
-  for (const key in cart) delete cart[key];
-  updateCart();
-  localStorage.removeItem("cart");
-});
+    if (isMobile) {
+      // === Untuk HP Android/iOS buka langsung aplikasi WhatsApp ===
+      waUrl = `intent://send?phone=${nomor}&text=${encodedPesan}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+    } else {
+      // === Untuk Desktop (Laptop/PC) ===
+      waUrl = `https://web.whatsapp.com/send?phone=${nomor}&text=${encodedPesan}`;
+    }
+
+    console.log("Link WA:", waUrl);
+
+    // Buka link WhatsApp
+    window.open(waUrl, "_blank");
+
+    // Kosongkan keranjang setelah checkout
+    cart = {};
+    updateCart();
+    localStorage.removeItem("cart");
+  });
+}
 
 // === Tombol Hapus Semua Isi Keranjang ===
 if (clearCartBtn) {
