@@ -982,6 +982,8 @@ a:focus {
   font-size: 16px;
 }
 
+/* Style untuk Cart Panel */
+/* === PANEL KERANJANG === */
 /* === PANEL KERANJANG === */
 .cart-panel {
   position: fixed;
@@ -1112,7 +1114,7 @@ a:focus {
 }
 
 /* === RESPONSIVE === */
-@media (max-width: 600px) {
+@media (max-width: px) {
   .cart-panel {
     width: 100%;
   }

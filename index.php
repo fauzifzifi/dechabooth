@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
                 <!-- Tombol ganti -->
                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                  data-price="<?php echo $row['harga']; ?>">
+                  data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
                   <button class="minus">−</button>
                   <span class="quantity-number">0</span>
                   <button class="plus">+</button>
@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
                 <!-- Tombol ganti -->
                 <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                  data-price="<?php echo $row['harga']; ?>">
+                  data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
                   <button class="minus">−</button>
                   <span class="quantity-number">0</span>
                   <button class="plus">+</button>
@@ -250,6 +250,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
       </div>
     </div>
+
+    <!-- Tambahkan ini ⬇️ -->
+    <div id="cartOverlay" class="cart-overlay"></div>
+
     <!-- panel cart -->
 
     <!-- contact section -->
@@ -399,6 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Google Map -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
