@@ -23,6 +23,28 @@ if (isset($_GET['hapus'])) {
 <html lang="id">
 
 <head>
+    <style>
+        .btn-primary {
+            background-color: #9c27b0 !important; /* Ungu gelap untuk "Tambah Item Baru" */
+            border-color: #9c27b0 !important;
+            color: #fff !important;
+            border-radius: 20px !important
+        }
+        .btn-primary:hover {
+            background-color: #ba68c8 !important; /* Ungu muda saat hover */
+            border-color: #ba68c8 !important;
+        }
+        .btn-danger {
+            background-color: #ff0000cf !important; /* Ungu muda untuk "Logout" (lebih soft dari primary) */
+            border-color: #ff0000cf !important;
+            color: #fff !important;
+            border-radius: 20px !important
+        }
+        .btn-danger:hover {
+            background-color: #dc2f2fff !important; /* Ungu lebih gelap saat hover */
+            border-color: #dc2f2fff !important;
+        }
+    </style>
     <!-- Basic -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
