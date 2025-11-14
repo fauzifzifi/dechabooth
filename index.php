@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.php">
+              <i class="bi bi-shop-window"></i>
               Decha Booth
             </a>
             </a>
@@ -110,25 +111,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
       <!-- end header section -->
 
       <!-- slider section -->
-      <section class="slider_section ">
+      <section class="slider_section"> <img src="images/slider-bg1.png" class="slider_bg" alt="">
         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="container">
-                <div class="row">
+                <div class="row align-items-center">
                   <div class="col-md-6">
                     <div class="detail_box">
-                      <h1>
-                        Decha Booth <br>
-                        <span>
-                        </span>
-                      </h1>
+                      <h1>Decha Booth</h1>
                     </div>
                   </div>
                   <div class="col-md-4 ml-auto">
-                    <div class="img-box">
-                      <img src="images/logo.png" alt="">
-                    </div>
+                    <div class="img-box"> <img src="images/logo.png" alt=""> </div>
                   </div>
                 </div>
               </div>
@@ -237,7 +232,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     <!-- panel cart -->
     <div id="cartPanel" class="cart-panel">
       <div class="cart-header">
-        <h3>Keranjang Belanja</h3>
+        <h3>
+          <i class="bi bi-cart4"></i>
+          Keranjang Belanja
+        </h3>
         <button id="closeCart" class="close-btn">×</button>
       </div>
 

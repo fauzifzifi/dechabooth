@@ -3,7 +3,11 @@ body {
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #f3e5f5, #e1bee7); /* Ungu muda gradient background */
+  background: linear-gradient(
+    135deg,
+    #f3e5f5,
+    #e1bee7
+  ); /* Ungu muda gradient background */
   color: #333;
 }
 
@@ -93,7 +97,7 @@ a:focus {
 
 /*header section*/
 .hero_area {
-  height: calc(100vh - 45px);
+  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -142,7 +146,6 @@ a:focus {
 .navbar-brand {
   font-size: 28px;
   font-weight: bold;
-  color: #ffffff;
   font-family: "Poppins", sans-serif;
   color: #000000;
 }
@@ -261,142 +264,63 @@ a:focus {
 /*end header section*/
 /* slider section */
 .slider_section {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   position: relative;
-  z-index: 2;
-  background-size: cover;
-  background-position: top;
-  color: #ffffff;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
-.slider_section .row {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.slider_section:before {
-  content: "";
+.slider_section .slider_bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  background-image: url(../images/slider-bg1.png);
-  background-size: 100% 100%;
-  z-index: 2;
-}
-
-.slider_section:after {
-  content: "";
-  position: absolute;
-  top: 25px;
-  right: 45px;
-  width: 550px;
-  height: 550px;
-  background-image: url(../images/slider-bg2.png);
-  background-size: cover;
-  background-position: bottom right;
   z-index: 1;
 }
 
-.slider_section .detail_box {
-  color: #ffffff;
-}
-
-.slider_section .detail_box h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 30px;
-  font-family: "Poppins", sans-serif;
-}
-
-.slider_section .detail_box h1 span {
-  font-size: 2.5em;
-}
-
-.slider_section .detail_box a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-  color: #ffffff;
-  font-weight: 500;
-  margin-top: 75px;
-  font-size: 20px;
-}
-
-.slider_section .detail_box a span {
-  margin-right: 5px;
-}
-
-.slider_section .detail_box a img {
-  width: 65px;
-}
-
-.slider_section .img-box img {
-  width: 300px;
-}
-
-.slider_section #customCarousel1 {
-  width: 100%;
+/* Content di atas background */
+.slider_section .carousel-inner,
+.slider_section .container,
+.slider_section .row {
   position: relative;
   z-index: 3;
+  margin-top: 6%;
 }
 
-.slider_section .carousel_btn-box {
-  position: absolute;
-  top: 45%;
-  left: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  z-index: 3;
+/* Heading */
+.slider_section .detail_box h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
 }
 
-.slider_section .carousel_btn-box .carousel-control-prev,
-.slider_section .carousel_btn-box .carousel-control-next {
-  position: unset;
-  width: 55px;
-  height: 55px;
-  font-size: 12px;
-  background-color: #ffffff;
-  opacity: 1;
-  color: #6f1089d0;
-  margin: 2.5px 0;
+/* Logo */
+.slider_section .img-box img {
+  width: 75%;
+  max-width: 280px;
 }
 
-.slider_section .carousel_btn-box .carousel-control-prev:hover,
-.slider_section .carousel_btn-box .carousel-control-next:hover {
-  color: #6f1089d0;
+/* Responsive */
+@media (max-width: 768px) {
+  .slider_section {
+    text-align: center;
+  }
+  .slider_section .img-box img {
+    width: 55%;
+  }
 }
 
 .about_section {
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparan putih untuk kontras */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparan putih untuk kontras */
   border-radius: 20px; /* Rounded corners */
-  margin: 0 20px 20px 20px;
+  margin: 20px 20px 20px 20px;
   padding: 50px;
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
@@ -428,18 +352,22 @@ a:focus {
 }
 
 .about_section .img-box img {
-  width: 600px;
-  height: 400px;
+  width: 115%;
+  height: 115%;
 }
 
 .chocolate_section {
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparan putih untuk kontras */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparan putih untuk kontras */
   border-radius: 20px; /* Rounded corners */
   margin: 20px;
   padding: 20px;
-  box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */ 
+  box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
-
 
 .chocolate_section .heading_container {
   -webkit-box-align: center;
@@ -450,8 +378,8 @@ a:focus {
 }
 
 .chocolate_section:first-of-type {
-     margin-top: 1px; /* jarak menu dan navbar */
-   }
+  margin-top: 1px; /* jarak menu dan navbar */
+}
 
 .chocolate_section .chocolate_container {
   padding-bottom: 75px;
@@ -811,7 +739,12 @@ a:focus {
 
 .contact_section {
   position: relative;
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparan putih untuk kontras */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparan putih untuk kontras */
   border-radius: 20px; /* Rounded corners */
   margin: 0 20px 20px 20px;
   padding: 20px;
@@ -1044,7 +977,6 @@ a:focus {
   color: #333;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(186, 104, 200, 0.3);
-
 }
 
 .cart-overlay {
@@ -1091,7 +1023,6 @@ a:focus {
   overflow-y: auto;
   border-radius: 0 0 0 15px;
 }
-
 
 .cart-item {
   display: flex;

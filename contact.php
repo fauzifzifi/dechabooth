@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.php">
+              <i class="bi bi-shop-window"></i>
               Decha Booth
             </a>
             </a>

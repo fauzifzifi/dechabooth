@@ -38,7 +38,10 @@
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.php">Decha Booth</a>
+            <a class="navbar-brand" href="index.php">
+              <i class="bi bi-shop-window"></i>
+              Decha Booth
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
               <span class=""> </span>
             </button>
@@ -86,67 +89,67 @@
 
   <!-- panel keranjang -->
 
-<!-- ====== MAKANAN SECTION ====== -->
-    <section class="chocolate_section">
-      <div class="container">
-        <div class="heading_container">
-          <h2>Makanan & Cemilan</h2>
-        </div>
-        <div class="chocolate_container">
-          <?php
-          $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan' LIMIT 5");
-          while ($row = mysqli_fetch_assoc($makanan)) { ?>
-            <div class="box">
-              <div class="img-box">
-                <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
-              </div>
-              <div class="detail-box">
-                <h6><?php echo $row['nama_menu']; ?></h6>
-                <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <!-- Tombol ganti -->
-                <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                  data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
-                  <button class="minus">−</button>
-                  <span class="quantity-number">0</span>
-                  <button class="plus">+</button>
-                </div>
+  <!-- ====== MAKANAN SECTION ====== -->
+  <section class="chocolate_section">
+    <div class="container">
+      <div class="heading_container">
+        <h2>Makanan & Cemilan</h2>
+      </div>
+      <div class="chocolate_container">
+        <?php
+        $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan' LIMIT 5");
+        while ($row = mysqli_fetch_assoc($makanan)) { ?>
+          <div class="box">
+            <div class="img-box">
+              <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
+            </div>
+            <div class="detail-box">
+              <h6><?php echo $row['nama_menu']; ?></h6>
+              <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
+              <!-- Tombol ganti -->
+              <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
+                data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
+                <button class="minus">−</button>
+                <span class="quantity-number">0</span>
+                <button class="plus">+</button>
               </div>
             </div>
-          <?php } ?>
-        </div>
+          </div>
+        <?php } ?>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ====== MINUMAN SECTION ====== -->
-    <section class="chocolate_section">
-      <div class="container">
-        <div class="heading_container">
-          <h2>Minuman</h2>
-        </div>
-        <div class="chocolate_container">
-          <?php
-          $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman' LIMIT 6");
-          while ($row = mysqli_fetch_assoc($minuman)) { ?>
-            <div class="box">
-              <div class="img-box">
-                <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
-              </div>
-              <div class="detail-box">
-                <h6><?php echo $row['nama_menu']; ?></h6>
-                <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <!-- Tombol ganti -->
-                <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                  data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
-                  <button class="minus">−</button>
-                  <span class="quantity-number">0</span>
-                  <button class="plus">+</button>
-                </div>
+  <!-- ====== MINUMAN SECTION ====== -->
+  <section class="chocolate_section">
+    <div class="container">
+      <div class="heading_container">
+        <h2>Minuman</h2>
+      </div>
+      <div class="chocolate_container">
+        <?php
+        $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman' LIMIT 6");
+        while ($row = mysqli_fetch_assoc($minuman)) { ?>
+          <div class="box">
+            <div class="img-box">
+              <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
+            </div>
+            <div class="detail-box">
+              <h6><?php echo $row['nama_menu']; ?></h6>
+              <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
+              <!-- Tombol ganti -->
+              <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
+                data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
+                <button class="minus">−</button>
+                <span class="quantity-number">0</span>
+                <button class="plus">+</button>
               </div>
             </div>
-          <?php } ?>
-        </div>
+          </div>
+        <?php } ?>
       </div>
-    </section>
+    </div>
+  </section>
 
   <!-- info section -->
   <section class="info_section layout_padding2">
