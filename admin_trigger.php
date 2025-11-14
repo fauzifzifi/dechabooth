@@ -22,9 +22,9 @@ include 'koneksi.php';
 
     <style>
         :root {
-            --primary: #6a0dad;
-            --primary-light: #7b2cbf;
-            --primary-dark: #5a0ca8;
+            --primary: #9c27b0;
+            --primary-light: #9c27b0;
+            --primary-dark: #9c27b0;
             --secondary: #9d4edd;
             --accent: #c77dff;
             --light: #f8f7fc;
