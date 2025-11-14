@@ -7,6 +7,10 @@ body {
   color: #333;
 }
 
+body.sub_page {
+  padding-top: 90px; /* Sesuaikan nilai ini berdasarkan tinggi navbar Anda (misal 80-100px). Jika navbar lebih tinggi, naikkan nilainya. */
+}
+
 .layout_padding {
   padding: 90px 0;
 }
@@ -445,6 +449,10 @@ a:focus {
   text-align: center;
   margin-bottom: 25px;
 }
+
+.chocolate_section:first-of-type {
+     margin-top: 5px; /* jarak menu dan navbar */
+   }
 
 .chocolate_section .chocolate_container {
   padding-bottom: 75px;
