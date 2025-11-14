@@ -396,7 +396,7 @@ a:focus {
 .about_section {
   background: rgba(255, 255, 255, 0.9); /* Semi-transparan putih untuk kontras */
   border-radius: 20px; /* Rounded corners */
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   padding: 50px;
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
@@ -450,7 +450,7 @@ a:focus {
 }
 
 .chocolate_section:first-of-type {
-     margin-top: 5px; /* jarak menu dan navbar */
+     margin-top: 1px; /* jarak menu dan navbar */
    }
 
 .chocolate_section .chocolate_container {
@@ -813,7 +813,7 @@ a:focus {
   position: relative;
   background: rgba(255, 255, 255, 0.9); /* Semi-transparan putih untuk kontras */
   border-radius: 20px; /* Rounded corners */
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   padding: 20px;
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
