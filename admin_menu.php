@@ -149,39 +149,78 @@ if (isset($_GET['hapus'])) {
             </div>
         </section>
 
-        <!-- info & footer -->
-        <section class="info_section layout_padding2">
-            <div class="container">
-                <div class="row info_main_row">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info_links">
-                            <h4>Menu Admin</h4>
-                            <div class="info_links_menu">
-                                <a href="index.php">Home</a>
-                                <a href="about.html">About</a>
-                                <a href="admin_menu.php">Menu Admin</a>
-                                <a href="contact.php">Contact us</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info_detail">
-                            <h4>Company</h4>
-                            <p class="mb-0">Decha Booth — Admin Panel untuk Mengelola Menu!</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- info section -->
+    <section class="info_section layout_padding2">
+      <div class="container">
+        <div class="row info_main_row">
+          <div class="col-md-6 col-lg-3">
+            <div class="info_links">
+              <h4>
+                Decha Booth
+              </h4>
+              <div class="info_links_menu">
+                <a href="index.php">
+                  Home
+                </a>
+                <a href="about.html">
+                  About
+                </a>
+                <a href="menu.php">
+                  Menu
+                </a>
+                <a href="contact.php">
+                  Contact us
+                </a>
+              </div>
             </div>
-        </section>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="info_detail">
+              <h4>
+                Company
+              </h4>
+              <p class="mb-0">
+                Decha Booth hadir untuk pelajar! Kami menyajikan berbagai makanan
+                dan minuman kekinian dengan rasa lezat dan harga bersahabat.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h4>
+              Contact Us
+            </h4>
+            <div class="info_contact">
+              <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Lokasi
+                </span>
+              </a>
+              <a href="https://wa.me/+6282336881878" target="_blank">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  WhatsApp +6282336881878
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end info_section -->
+  </div>
 
-        <footer class="container-fluid footer_section">
-            <div class="container">
-                <div class="col-md-11 col-lg-8 mx-auto">
-                    <p>&copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth</p>
-                </div>
-            </div>
-        </footer>
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <div class="container">
+      <div class="col-md-11 col-lg-8 mx-auto">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth
+        </p>
+      </div>
     </div>
+  </footer>
+  <!-- footer section -->
 
     <!-- JS -->
     <script src="js/jquery-3.4.1.min.js"></script>
