@@ -397,9 +397,8 @@ a:focus {
   background: rgba(255, 255, 255, 0.9); /* Semi-transparan putih untuk kontras */
   border-radius: 20px; /* Rounded corners */
   margin: 20px;
-  padding: 20px;
+  padding: 50px;
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
-  padding-top: 80px;
 }
 
 .about_section .detail-box p {
