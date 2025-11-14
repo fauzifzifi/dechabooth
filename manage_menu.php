@@ -92,9 +92,8 @@ if (isset($_SESSION['error'])) {
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/custom-style.css" />
     <style>
-        /* Custom CSS dengan dominan warna ungu tua (#4B0082) dan ungu muda (#DDA0DD), tanpa gradien */
         body {
-            background: #4B0082;
+            background: #6f1089d0;
             font-family: 'Arial', sans-serif;
             color: #333;
         }
@@ -111,7 +110,7 @@ if (isset($_SESSION['error'])) {
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #4B0082;
+            color: #6f1089d0;
             text-align: center;
             margin-bottom: 30px;
             font-weight: bold;
@@ -128,12 +127,12 @@ if (isset($_SESSION['error'])) {
             box-shadow: 0 5px 15px rgba(75, 0, 130, 0.4);
         }
         .btn-primary {
-            background: #4B0082;
+            background: #6f1089d0;
             color: white;
         }
         .btn-secondary {
             background: #DDA0DD;
-            color: #4B0082;
+            color: #6f1089d0;
         }
         .btn-danger {
             background: #8B0000;
@@ -141,7 +140,7 @@ if (isset($_SESSION['error'])) {
         }
         .btn-warning {
             background: #FFD700;
-            color: #4B0082;
+            color: #6f1089d0;
         }
         form {
             background: #F8F8FF;
@@ -152,7 +151,7 @@ if (isset($_SESSION['error'])) {
         }
         .form-group label {
             font-weight: bold;
-            color: #4B0082;
+            color: #6f1089d0;
         }
         .form-control {
             border-radius: 10px;
@@ -160,7 +159,7 @@ if (isset($_SESSION['error'])) {
             transition: border-color 0.3s ease;
         }
         .form-control:focus {
-            border-color: #4B0082;
+            border-color: #6f1089d0;
             box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
         }
         /* Styling khusus untuk input file agar tombol "Choose File" lebih kecil dan sesuai dengan kotak */
@@ -172,13 +171,13 @@ if (isset($_SESSION['error'])) {
             padding: 4px 8px;
             border-radius: 5px;
             background: #DDA0DD;
-            color: #4B0082;
+            color: #6f1089d0;
             border: none;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         input[type="file"]::-webkit-file-upload-button:hover {
-            background: #4B0082;
+            background: #6f1089d0;
             color: white;
         }
         input[type="file"]::-moz-file-upload-button {
@@ -186,13 +185,13 @@ if (isset($_SESSION['error'])) {
             padding: 4px 8px;
             border-radius: 5px;
             background: #DDA0DD;
-            color: #4B0082;
+            color: #6f1089d0;
             border: none;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         input[type="file"]::-moz-file-upload-button:hover {
-            background: #4B0082;
+            background: #6f1089d0;
             color: white;
         }
         .table {
@@ -202,7 +201,7 @@ if (isset($_SESSION['error'])) {
             box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
         }
         .table thead th {
-            background: #4B0082;
+            background: #6f1089d0;
             color: white;
             border: none;
             font-weight: bold;
