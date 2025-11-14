@@ -85,11 +85,11 @@ a:focus {
   box-shadow: none;
 }
 
-/* .main_body_content {
+.main_body_content {
   margin: 45px 45px 0 45px;
   -webkit-box-shadow: 0 0 95px 0 rgba(0, 0, 0, 0.07);
   box-shadow: 0 0 95px 0 rgba(0, 0, 0, 0.07);
-} */
+}
 
 /*header section*/
 .hero_area {
@@ -1026,8 +1026,6 @@ a:focus {
   font-size: 16px;
 }
 
-/* Style untuk Cart Panel */
-/* === PANEL KERANJANG === */
 /* === PANEL KERANJANG === */
 .cart-panel {
   position: fixed;
@@ -1057,7 +1055,7 @@ a:focus {
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   display: none;
-  z-index: 999998 !important; /* ⬅️ sedikit di bawah panel */
+  z-index: 999998 !important;
 }
 
 .cart-panel.active {
@@ -1075,6 +1073,7 @@ a:focus {
   background: #9c27b0;
   color: #fff;
   padding: 15px;
+  border-radius: 15px 0 0 0;
 }
 
 .cart-header button {
@@ -1083,18 +1082,27 @@ a:focus {
   font-size: 22px;
   color: #fff;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 .cart-items {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
+  border-radius: 0 0 0 15px;
 }
+
 
 .cart-item {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .cart-footer {
