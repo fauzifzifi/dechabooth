@@ -69,7 +69,7 @@ if (isset($_GET['hapus'])) {
 </head>
 
 <body class="sub_page">
-    <div class="main_body_content">
+    <div class="">
         <div class="hero_area">
             <!-- header section -->
             <header class="header_section">
