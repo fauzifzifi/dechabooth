@@ -84,10 +84,8 @@ if (isset($_GET['hapus'])) {
                         <div class="collapse navbar-collapse " id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item"><a class="nav-link" href="admin_trigger.php">trg</a></li>
-                                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                                 <li class="nav-item active"><a class="nav-link" href="admin_menu.php">Menu Admin</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
                             </ul>
                             <div class="quote_btn-container">
                                 <a href="manage_menu.php" class="btn btn-primary">Tambah Item Baru</a>
