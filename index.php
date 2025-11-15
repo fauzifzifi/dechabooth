@@ -183,25 +183,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <!-- Tombol ganti -->
-                <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                  data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
-                  <button class="minus">−</button>
-                  <span class="quantity-number">0</span>
-                  <button class="plus">+</button>
-                </div>
               </div>
             </div>
           <?php } ?>
         </div>
       </div>
-      <section class="pesan_section">
-          <div class="container_pesan">
-            <div class="text-center">
-              <a href="menu.php" class="btn-pesan">Pesan Sekarang</a>
-            </div>
-          </div>
-        </section>
+      <div class="text-center">
+        <a href="menu.php" class="btn-pesan">Pesan Sekarang</a>
+      </div>
     </section>
 
     <!-- ====== MINUMAN SECTION ====== -->
@@ -221,25 +210,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               <div class="detail-box">
                 <h6><?php echo $row['nama_menu']; ?></h6>
                 <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <!-- Tombol ganti -->
-                <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                  data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
-                  <button class="minus">−</button>
-                  <span class="quantity-number">0</span>
-                  <button class="plus">+</button>
-                </div>
               </div>
             </div>
           <?php } ?>
         </div>
       </div>
-      <section class="pesan_section">
-          <div class="container_pesan">
-            <div class="text-center">
-              <a href="menu.php" class="btn-pesan">Pesan Sekarang</a>
-            </div>
-          </div>
-        </section>
+      <div class="text-center">
+        <a href="menu.php" class="btn-pesan">Pesan Sekarang</a>
+      </div>
     </section>
 
     <!-- panel cart -->
