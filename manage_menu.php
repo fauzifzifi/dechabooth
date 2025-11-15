@@ -97,6 +97,7 @@ if (isset($_SESSION['error'])) {
             font-family: 'Arial', sans-serif;
             color: #333;
         }
+
         .container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -105,10 +106,19 @@ if (isset($_SESSION['error'])) {
             margin-top: 50px;
             animation: fadeIn 1s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         h1 {
             color: #6f1089d0;
             text-align: center;
@@ -116,32 +126,39 @@ if (isset($_SESSION['error'])) {
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(221, 160, 221, 0.5);
         }
+
         .btn {
             border-radius: 25px;
             transition: all 0.3s ease;
             font-weight: bold;
             border: none;
         }
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(75, 0, 130, 0.4);
         }
+
         .btn-primary {
             background: #6f1089d0;
             color: white;
         }
+
         .btn-secondary {
             background: #DDA0DD;
             color: #6f1089d0;
         }
+
         .btn-danger {
             background: #8B0000;
             color: white;
         }
+
         .btn-warning {
             background: #FFD700;
             color: #6f1089d0;
         }
+
         form {
             background: #F8F8FF;
             padding: 20px;
@@ -149,23 +166,28 @@ if (isset($_SESSION['error'])) {
             box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
             margin-bottom: 30px;
         }
+
         .form-group label {
             font-weight: bold;
             color: #6f1089d0;
         }
+
         .form-control {
             border-radius: 10px;
             border: 2px solid #DDA0DD;
             transition: border-color 0.3s ease;
         }
+
         .form-control:focus {
             border-color: #6f1089d0;
             box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
         }
+
         /* Styling khusus untuk input file agar tombol "Choose File" lebih kecil dan sesuai dengan kotak */
         input[type="file"] {
             padding: 5px;
         }
+
         input[type="file"]::-webkit-file-upload-button {
             font-size: 12px;
             padding: 4px 8px;
@@ -176,10 +198,12 @@ if (isset($_SESSION['error'])) {
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         input[type="file"]::-webkit-file-upload-button:hover {
             background: #6f1089d0;
             color: white;
         }
+
         input[type="file"]::-moz-file-upload-button {
             font-size: 12px;
             padding: 4px 8px;
@@ -190,58 +214,70 @@ if (isset($_SESSION['error'])) {
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         input[type="file"]::-moz-file-upload-button:hover {
             background: #6f1089d0;
             color: white;
         }
+
         .table {
             background: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
         }
+
         .table thead th {
             background: #6f1089d0;
             color: white;
             border: none;
             font-weight: bold;
         }
+
         .table tbody tr:nth-child(even) {
             background: #F8F8FF;
         }
+
         .table tbody tr:hover {
             background: #E6E6FA;
             transform: scale(1.02);
             transition: all 0.2s ease;
         }
+
         .table img {
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(75, 0, 130, 0.2);
         }
+
         .btn-sm {
             border-radius: 15px;
             margin: 2px;
         }
+
         /* Notifikasi */
         .alert {
             border-radius: 10px;
             animation: slideIn 0.5s ease-out;
         }
+
         .alert-success {
             background: #28a745;
             color: #fff;
             border: none;
         }
+
         .alert-danger {
             background: #dc3545;
             color: #fff;
             border: none;
         }
+
         @keyframes slideIn {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -332,9 +368,10 @@ if (isset($_SESSION['error'])) {
                             <?php } ?>
                         </td>
                         <td>
-                            <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="manage_menu.php?delete=<?php echo $row['id_menu']; ?>" class="btn btn-danger btn-sm" 
-                               onclick="return confirm('Yakin ingin menghapus menu ini?')">Delete</a>
+                            <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>"
+                                class="btn btn-warning btn-sm">Edit</a>
+                            <a href="manage_menu.php?delete=<?php echo $row['id_menu']; ?>" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin ingin menghapus menu ini?')">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -347,12 +384,12 @@ if (isset($_SESSION['error'])) {
     <script src="js/bootstrap.js"></script>
     <script>
         // Hilangkan notifikasi sukses otomatis setelah 3 detik
-        setTimeout(function() {
+        setTimeout(function () {
             $('#success-alert').fadeOut('slow');
         }, 3000);
 
         // Hilangkan notifikasi error otomatis setelah 3 detik
-        setTimeout(function() {
+        setTimeout(function () {
             $('#error-alert').fadeOut('slow');
         }, 3000);
     </script>

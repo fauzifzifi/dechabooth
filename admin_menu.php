@@ -23,35 +23,6 @@ if (isset($_GET['hapus'])) {
 <html lang="id">
 
 <head>
-  <style>
-    .btn-primary {
-      background-color: #9c27b0 !important;
-      /* Ungu gelap untuk "Tambah Item Baru" */
-      border-color: #9c27b0 !important;
-      color: #fff !important;
-      border-radius: 20px !important
-    }
-
-    .btn-primary:hover {
-      background-color: #ba68c8 !important;
-      /* Ungu muda saat hover */
-      border-color: #ba68c8 !important;
-    }
-
-    .btn-danger {
-      background-color: #ff0000cf !important;
-      /* Ungu muda untuk "Logout" (lebih soft dari primary) */
-      border-color: #ff0000cf !important;
-      color: #fff !important;
-      border-radius: 20px !important
-    }
-
-    .btn-danger:hover {
-      background-color: #dc2f2fff !important;
-      /* Ungu lebih gelap saat hover */
-      border-color: #dc2f2fff !important;
-    }
-  </style>
   <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -91,17 +62,33 @@ if (isset($_GET['hapus'])) {
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
               <span class=""> </span>
             </button>
-
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="admin_trigger.php">trg</a></li>
-                <li class="nav-item active"><a class="nav-link" href="admin_menu.php">Menu Admin</a>
+                <li class="nav-item">
+                  <a class="nav-link active" href="admin_menu.php">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="manage_menu.php">
+                    <i class="bi bi-box me-2"></i>
+                    Kelola Menu
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="admin_trigger.php">
+                    <i class="bi bi-clock-history me-2"></i>
+                    Riwayat Stok
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="logout.php">
+                    <i class="bi bi-box-arrow-right me-2"></i>
+                    Logout
+                  </a>
                 </li>
               </ul>
-              <div class="quote_btn-container">
-                <a href="manage_menu.php" class="btn btn-primary">Tambah Item Baru</a>
-                <a href="logout.php" class="btn btn-danger">Logout</a>
-              </div>
             </div>
           </nav>
         </div>
