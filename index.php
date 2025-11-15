@@ -196,6 +196,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
           <?php } ?>
         </div>
       </div>
+      <section class="pesan_section">
+          <div class="container_pesan">
+            <div class="text-center">
+              <a href="menu.php" class="btn-pesan">Pesan Sekarang</a>
+            </div>
+          </div>
+        </section>
     </section>
 
     <!-- ====== MINUMAN SECTION ====== -->
@@ -227,6 +234,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
           <?php } ?>
         </div>
       </div>
+      <section class="pesan_section">
+          <div class="container_pesan">
+            <div class="text-center">
+              <a href="menu.php" class="btn-pesan">Pesan Sekarang</a>
+            </div>
+          </div>
+        </section>
     </section>
 
     <!-- panel cart -->
