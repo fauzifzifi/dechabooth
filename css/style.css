@@ -692,8 +692,23 @@ border-bottom: none; }
 .info_section {
   background-color: #630181;
   color: #ffffff;
+  text-align: center;
 }
 
+/* Center seluruh row */
+.info_section .info_main_row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-lines: multiple;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+/* Untuk menu links: buat rata tengah */
 .info_section .info_links .info_links_menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -702,52 +717,53 @@ border-bottom: none; }
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
 }
 
 .info_section .info_links .info_links_menu a {
   color: #ffffff;
+  text-align: center;
 }
 
 .info_section .info_links .info_links_menu a:not(:nth-last-child(1)) {
   margin-bottom: 10px;
 }
 
-.info_section .info_insta .insta_box {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+/* Heading "Decha Booth" - ubah font ke Poppins */
+.info_section .info_links h4 {
+  font-family: 'Poppins', sans-serif;  /* Tambahkan ini untuk font Poppins */
+  font-weight: 600;  /* Opsional: buat lebih bold jika suka */
 }
 
-.info_section .info_insta .insta_box .img-box {
-  width: 65px;
-  min-width: 65px;
-  height: 65px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #ffffff;
-  margin-right: 10px;
+/* Untuk deskripsi perusahaan: buat rata tengah */
+.info_section .info_detail {
+  text-align: center;
 }
 
-.info_section .info_insta .insta_box .img-box img {
-  width: 45px;
+/* Heading "Company" - ubah font ke Poppins */
+.info_section .info_detail h4 {
+  font-family: 'Poppins', sans-serif;  /* Tambahkan ini */
+  font-weight: 600;
+  text-align: center;
 }
 
-.info_section .info_insta .insta_box p {
-  margin: 0;
+.info_section .info_detail p {
+  text-align: center;
 }
 
-.info_section .info_insta .insta_box:not(:nth-last-child(1)) {
-  margin-bottom: 15px;
+/* Heading "Contact Us" - ubah font ke Poppins */
+.info_section .info_contact h4 {
+  font-family: 'Poppins', sans-serif;  /* Tambahkan ini */
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Untuk kontak: sudah ada flex, tambahkan center */
+.info_section .info_contact {
+  text-align: center;
 }
 
 .info_section .info_contact a {
@@ -759,6 +775,9 @@ border-bottom: none; }
   align-items: center;
   color: #ffffff;
   margin-bottom: 10px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .info_section .info_contact a i {
