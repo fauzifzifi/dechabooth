@@ -348,9 +348,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <h4>
+            div class="info_contact">
+              <h4>
               Contact Us
             </h4>
+            </div>
             <div class="info_contact">
               <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
