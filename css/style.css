@@ -347,6 +347,7 @@ border-bottom: none; }
   }
 }
 
+/* about section */
 .about_section {
   background: rgba(
     255,
@@ -390,7 +391,9 @@ border-bottom: none; }
   width: 115%;
   height: 115%;
 }
+/* end about section */
 
+/* menu section */
 .menu_section {
   background: #ffffffe6;
   border-radius: 20px; /* Rounded corners */
@@ -562,6 +565,7 @@ border-bottom: none; }
     right: -50px !important;
   }
 }
+/* menu section */
 
 /* pesan sekarang section */
 /* Styling untuk tombol */
@@ -587,6 +591,7 @@ border-bottom: none; }
 }
 /* end pesan sekarang section */
 
+/* contact section */
 .contact_section {
   position: relative;
   background: rgba(
@@ -681,7 +686,9 @@ border-bottom: none; }
 .contact_section .map_container .map #googleMap {
   height: 100%;
 }
+/* end contact section */
 
+/* info section */
 .info_section {
   background-color: #630181;
   color: #ffffff;
@@ -762,6 +769,7 @@ border-bottom: none; }
 .info_section .info_contact a:hover p {
   color: #ffffff;
 }
+/* end info section */
 
 /* keranjang */
 .cart-count {
@@ -809,7 +817,7 @@ border-bottom: none; }
   font-size: 16px;
 }
 
-/* === PANEL KERANJANG === */
+/* panel keranjang/isi keranjang */
 .cart-panel {
   position: fixed;
   top: 0;
@@ -892,7 +900,7 @@ border-bottom: none; }
   font-weight: bold;
 }
 
-/* === TOMBOL CHECKOUT & CLEAR CART === */
+/* tombol checkout dan clear keranjang */
 .btn-checkout,
 .btn-clear {
   width: 100%;
@@ -964,6 +972,7 @@ border-bottom: none; }
     font-size: 20px;
   }
 }
+/* end keranjang */
 
 /* footer section*/
 .footer_section {
@@ -987,5 +996,6 @@ border-bottom: none; }
 .footer_section a {
   color: inherit;
 }
+/* end footer */
 
-/*# sourceMappingURL=style.css.map */
+
