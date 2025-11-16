@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         <div class="heading_container">
           <h2>Makanan & Cemilan</h2>
         </div>
-        <div class="chocolate_container">
+        <div class="menu_container">
           <?php
           $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan' LIMIT 5");
           while ($row = mysqli_fetch_assoc($makanan)) { ?>
@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         <div class="heading_container">
           <h2>Minuman</h2>
         </div>
-        <div class="chocolate_container">
+        <div class="menu_container">
           <?php
           $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman' LIMIT 6");
           while ($row = mysqli_fetch_assoc($minuman)) { ?>
