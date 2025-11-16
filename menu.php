@@ -188,10 +188,10 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
-          <h4>
-            Contact Us
-          </h4>
           <div class="info_contact">
+            <h4>
+            Contact Us
+            </h4>
             <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
               <span>
