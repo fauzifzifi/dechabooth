@@ -96,12 +96,12 @@ if (isset($_GET['hapus'])) {
     </div>
 
     <!-- ====== MAKANAN SECTION ====== -->
-    <section class="chocolate_section">
+    <section class="menu_section">
       <div class="container">
         <div class="heading_container">
           <h2>Makanan & Cemilan (Admin View)</h2>
         </div>
-        <div class="chocolate_container">
+        <div class="menu_container">
           <?php
           $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan'");
           while ($row = mysqli_fetch_assoc($makanan)) {
@@ -122,12 +122,12 @@ if (isset($_GET['hapus'])) {
     </section>
 
     <!-- ====== MINUMAN SECTION ====== -->
-    <section class="chocolate_section">
+    <section class="menu_section">
       <div class="container">
         <div class="heading_container">
           <h2>Minuman (Admin View)</h2>
         </div>
-        <div class="chocolate_container">
+        <div class="menu_container">
           <?php
           $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman'");
           while ($row = mysqli_fetch_assoc($minuman)) {
