@@ -411,7 +411,7 @@ border-bottom: none; }
   margin-top: 1px; /* jarak menu dan navbar */
 }
 
-.menu_section .chocolate_container {
+.menu_section .menu_container {
   display: grid;
   gap: 20px;
 }
