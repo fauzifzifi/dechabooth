@@ -361,6 +361,10 @@ border-bottom: none; }
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
 
+.about_section:first-of-type {
+  margin-top: 1px; /* jarak kotak dan navbar */
+}
+
 .about_section .detail-box p {
   color: #6c6c6c;
 }
@@ -608,6 +612,10 @@ border-bottom: none; }
 
 .contact_section form {
   margin-top: 25px;
+}
+
+.contact_section:first-of-type {
+  margin-top: 1px; /* jarak kotak dan navbar */
 }
 
 .contact_section input {
