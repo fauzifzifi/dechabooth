@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     <!-- end about section -->
 
     <!-- ====== MAKANAN SECTION ====== -->
-    <section class="chocolate_section">
+    <section class="menu_section">
       <div class="container">
         <div class="heading_container">
           <h2>Makanan & Cemilan</h2>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     </section>
 
     <!-- ====== MINUMAN SECTION ====== -->
-    <section class="chocolate_section">
+    <section class="menu_section">
       <div class="container">
         <div class="heading_container">
           <h2>Minuman</h2>
