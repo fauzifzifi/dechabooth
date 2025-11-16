@@ -391,7 +391,7 @@ border-bottom: none; }
   height: 115%;
 }
 
-.chocolate_section {
+.menu_section {
   background: #ffffffe6;
   border-radius: 20px; /* Rounded corners */
   margin: 20px;
@@ -399,7 +399,7 @@ border-bottom: none; }
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
 
-.chocolate_section .heading_container {
+.menu_section .heading_container {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -407,16 +407,16 @@ border-bottom: none; }
   margin-bottom: 25px;
 }
 
-.chocolate_section:first-of-type {
+.menu_section:first-of-type {
   margin-top: 1px; /* jarak menu dan navbar */
 }
 
-.chocolate_section .chocolate_container {
+.menu_section .chocolate_container {
   display: grid;
   gap: 20px;
 }
 
-.chocolate_section .box {
+.menu_section .box {
   text-align: center;
   margin: 20px;
   display: -webkit-box;
@@ -440,7 +440,7 @@ border-bottom: none; }
   border-radius: 20px !important;
 }
 
-.chocolate_section .box .img-box {
+.menu_section .box .img-box {
   width: 175px;
   height: 200px;
   display: -webkit-box;
@@ -454,12 +454,12 @@ border-bottom: none; }
   align-items: center;
 }
 
-.chocolate_section .box .img-box img {
+.menu_section .box .img-box img {
   width: 100%;
   height: auto;
 }
 
-.chocolate_section .box .detail-box {
+.menu_section .box .detail-box {
   width: 100%;
   background-color: #6f1089d0;
   color: #ffffff;
@@ -469,38 +469,38 @@ border-bottom: none; }
   visibility: hidden;
 }
 
-.chocolate_section .box .detail-box h6 {
+.menu_section .box .detail-box h6 {
   text-transform: uppercase;
   font-weight: 600;
 }
 
-.chocolate_section .box .detail-box h6 span {
+.menu_section .box .detail-box h6 span {
   color: #ffffff;
 }
 
-.chocolate_section .box .detail-box h5 {
+.menu_section .box .detail-box h5 {
   font-weight: 600;
 }
 
-.chocolate_section .box .detail-box a {
+.menu_section .box .detail-box a {
   color: #ffffff;
   font-size: 14px;
 }
 
-.chocolate_section .box:hover {
+.menu_section .box:hover {
   border-color: transparent;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.4);
 }
 
-.chocolate_section .box .detail-box {
+.menu_section .box .detail-box {
   opacity: 1 !important;
   visibility: visible !important;
 }
 
-.chocolate_section .slick-prev,
-.chocolate_section .slick-next {
+.menu_section .slick-prev,
+.menu_section .slick-next {
   position: absolute !important;
   bottom: 20px; /* posisi tombol di bawah makanan/minuman */
   top: 170px;
@@ -514,30 +514,30 @@ border-bottom: none; }
   transform: none !important;
 }
 
-.chocolate_section .slick-prev:hover,
-.chocolate_section .slick-next:hover {
+.menu_section .slick-prev:hover,
+.menu_section .slick-next:hover {
   background-color: #6f1089d0;
 }
 
-.chocolate_section .slick-prev:hover:before,
-.chocolate_section .slick-next:hover:before {
+.menu_section .slick-prev:hover:before,
+.menu_section .slick-next:hover:before {
   color: #ffffff;
 }
 
-.chocolate_section .slick-prev {
+.menu_section .slick-prev {
   left: -50px !important;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 
-.chocolate_section .slick-next {
+.menu_section .slick-next {
   right: -50px !important;
   -webkit-transform: translateX(50%);
   transform: translateX(50%);
 }
 
-.chocolate_section .slick-prev:before,
-.chocolate_section .slick-next:before {
+.menu_section .slick-prev:before,
+.menu_section .slick-next:before {
   font-family: "FontAwesome";
   position: relative;
   z-index: 2;
@@ -546,19 +546,19 @@ border-bottom: none; }
   opacity: 1;
 }
 
-.chocolate_section .slick-prev:before {
+.menu_section .slick-prev:before {
   content: "\f060";
 }
 
-.chocolate_section .slick-next:before {
+.menu_section .slick-next:before {
   content: "\f061";
 }
 
 @media (max-width: 768px) {
-  .chocolate_section .slick-prev {
+  .menu_section .slick-prev {
     left: -50px !important;
   }
-  .chocolate_section .slick-next {
+  .menu_section .slick-next {
     right: -50px !important;
   }
 }
