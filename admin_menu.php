@@ -6,16 +6,11 @@ if (!isset($_SESSION['admin_id'])) {
 }
 include 'koneksi.php';
 
-if (isset($_GET['hapus'])) {
-  $id = $_GET['hapus'];
-  $query = mysqli_query($koneksi, "DELETE FROM menu WHERE id_menu='$id'");
-
-  if ($query) {
-    echo "<script>alert('Menu berhasil dihapus!'); window.location='admin_menu.php';</script>";
-  } else {
-    echo "<script>alert('Gagal menghapus menu!');</script>";
-  }
-}
+// Ambil statistik
+$total_produk = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM menu"))['total'];
+$produk_tersedia = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM menu WHERE stok > 0"))['total'];
+$stok_sedikit = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(*) as total FROM menu WHERE stok < 10 AND stok > 0"))['total'];
+$total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTINCT jenis) as total FROM menu"))['total'];
 
 ?>
 
@@ -47,6 +42,59 @@ if (isset($_GET['hapus'])) {
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 </head>
+
+<style>
+  .stats-card {
+    color: white;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+  }
+
+  .stats-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .table-actions .btn {
+    margin: 2px;
+  }
+
+  .search-box {
+    border-radius: 25px;
+    border: 2px solid #e9ecef;
+    padding: 8px 15px;
+  }
+
+  .product_section {
+    background: #ffffffe6;
+    border-radius: 20px;
+    /* Rounded corners */
+    margin: 20px;
+    padding: 10px;
+    box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3);
+    /* Soft ungu shadow */
+  }
+
+  .table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
+  }
+
+  .table img {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(75, 0, 130, 0.2);
+  }
+
+  .table thead th {
+    background: #6f1089d0;
+    color: white;
+    border: none;
+    font-weight: bold;
+  }
+</style>
+
 
 <body class="sub_page">
   <div class="">
@@ -95,136 +143,168 @@ if (isset($_GET['hapus'])) {
       </header>
     </div>
 
-    <!-- ====== MAKANAN SECTION ====== -->
-    <section class="menu_section">
-      <div class="container">
-        <div class="heading_container">
-          <h2>Makanan & Cemilan (Admin View)</h2>
-        </div>
-        <div class="menu_container">
-          <?php
-          $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan'");
-          while ($row = mysqli_fetch_assoc($makanan)) {
-            ?>
-            <div class="box">
-              <div class="img-box">
-                <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
-              </div>
-              <div class="detail-box">
-                <h6><?php echo $row['nama_menu']; ?></h6>
-                <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <p>Stok: <?php echo $row['stok']; ?></p>
-              </div>
-            </div>
-          <?php } ?>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====== MINUMAN SECTION ====== -->
-    <section class="menu_section">
-      <div class="container">
-        <div class="heading_container">
-          <h2>Minuman (Admin View)</h2>
-        </div>
-        <div class="menu_container">
-          <?php
-          $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman'");
-          while ($row = mysqli_fetch_assoc($minuman)) {
-            ?>
-            <div class="box">
-              <div class="img-box">
-                <img src="images/<?php echo $row['gambar']; ?>" alt="<?php echo $row['nama_menu']; ?>">
-              </div>
-              <div class="detail-box">
-                <h6><?php echo $row['nama_menu']; ?></h6>
-                <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-                <p>Stok: <?php echo $row['stok']; ?></p>
-              </div>
-            </div>
-          <?php } ?>
-        </div>
-      </div>
-    </section>
-
-    <!-- info section -->
-    <section class="info_section layout_padding2">
-      <div class="container">
-        <div class="row info_main_row">
-          <div class="col-md-6 col-lg-3">
-            <div class="info_links">
-              <h4>
-                Decha Booth
-              </h4>
-              <div class="info_links_menu">
-                <a href="index.php">
-                  Home
-                </a>
-                <a href="about.html">
-                  About
-                </a>
-                <a href="menu.php">
-                  Menu
-                </a>
-                <a href="contact.php">
-                  Contact us
-                </a>
+    <!-- Main Content -->
+    <div class="container-fluid mt-3">
+      <!-- Stats Cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+          <div class="card stats-card bg-primary">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="card-title mb-1">Total Produk</h6>
+                  <h3 class="mb-0"><?php echo $total_produk; ?></h3>
+                </div>
+                <i class="bi bi-box display-6 opacity-75"></i>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_detail">
-              <h4>
-                Company
-              </h4>
-              <p class="mb-0">
-                Decha Booth hadir untuk pelajar! Kami menyajikan berbagai makanan
-                dan minuman kekinian dengan rasa lezat dan harga bersahabat.
-              </p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stats-card bg-success">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="card-title mb-1">Produk Tersedia</h6>
+                  <h3 class="mb-0"><?php echo $produk_tersedia; ?></h3>
+                </div>
+                <i class="bi bi-check-circle display-6 opacity-75"></i>
+              </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_contact">
-              <h4>
-              Contact Us
-              </h4>
-              <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Lokasi
-                </span>
-              </a>
-              <a href="https://wa.me/+6282336881878" target="_blank">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  WhatsApp +6282336881878
-                </span>
-              </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stats-card bg-warning">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="card-title mb-1">Stok Sedikit</h6>
+                  <h3 class="mb-0"><?php echo $stok_sedikit; ?></h3>
+                </div>
+                <i class="bi bi-exclamation-triangle display-6 opacity-75"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card stats-card bg-info">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="card-title mb-1">Kategori</h6>
+                  <h3 class="mb-0"><?php echo $total_kategori; ?></h3>
+                </div>
+                <i class="bi bi-tags display-6 opacity-75"></i>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- end info_section -->
-  </div>
 
-  <!-- footer section -->
-  <footer class="container-fluid footer_section">
-    <div class="container">
-      <div class="col-md-11 col-lg-8 mx-auto">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth
-        </p>
+      <!-- Products Table -->
+      <div class="product_section card mb-4">
+        <div
+          class="card-header bg-transparent d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+          <h5 class="card-title mb-2 mb-md-0">
+            Daftar Menu
+          </h5>
+          <div class="input-group ms-md-2" style="max-width: 400px;">
+            <input type="text" class="form-control search-box" placeholder="Cari menu..." id="searchInput">
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover" id="productTable">
+              <thead>
+                <tr>
+                  <th>Gambar</th>
+                  <th>Nama Menu</th>
+                  <th>Jenis</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $menus = mysqli_query($koneksi, "SELECT * FROM menu ORDER BY jenis, nama_menu");
+                while ($row = mysqli_fetch_assoc($menus)) {
+                  $status_badge = $row['stok'] > 0 ? 'bg-success' : 'bg-danger';
+                  $status_text = $row['stok'] > 0 ? 'Tersedia' : 'Habis';
+                  $stok_badge = $row['stok'] < 10 ? 'bg-warning' : 'bg-secondary';
+                  ?>
+                  <tr>
+                    <td>
+                      <?php if ($row['gambar']) { ?>
+                        <img src="images/<?php echo $row['gambar']; ?>" alt="gambar" width="50" />
+                      <?php } ?>
+                    </td>
+                    <td>
+                      <div class="fw-bold"><?php echo htmlspecialchars($row['nama_menu']); ?></div>
+                    </td>
+                    <td class="text-light">
+                      <span class="badge <?php echo $row['jenis'] == 'makanan' ? 'bg-primary' : 'bg-success'; ?>">
+                        <?php echo ucfirst($row['jenis']); ?>
+                      </span>
+                    </td>
+                    <td>Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
+                    <td class="text-light">
+                      <span class="badge <?php echo $stok_badge; ?>">
+                        <?php echo $row['stok']; ?>
+                      </span>
+                    </td>
+                    <td class="text-light">
+                      <span class="badge <?php echo $status_badge; ?>">
+                        <?php echo $status_text; ?>
+                      </span>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
-  <!-- footer section -->
 
-  <!-- JS -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
-  <script src="js/bootstrap.js"></script>
-  <script src="js/custom.js"></script>
+    <!-- footer section -->
+    <footer class="container-fluid footer_section">
+      <div class="container">
+        <div class="col-md-11 col-lg-8 mx-auto">
+          <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- footer section -->
+
+    <!-- JavaScript -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script>
+      // Search functionality
+      document.getElementById('searchInput').addEventListener('input', function (e) {
+        const value = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('#productTable tbody tr');
+
+        rows.forEach(row => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(value) ? '' : 'none';
+        });
+      });
+
+      // Mobile menu auto-close when clicking on link
+      document.querySelectorAll('.nav-link-custom').forEach(link => {
+        link.addEventListener('click', () => {
+          const navbarCollapse = document.querySelector('.navbar-collapse');
+          if (navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+          }
+        });
+      });
+    </script>
 </body>
 
 </html>
