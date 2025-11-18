@@ -86,27 +86,30 @@ if (isset($_SESSION['error'])) {
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Kelola Menu | Admin</title>
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/custom-style.css" />
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <title>Manage Menu</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- slick slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+    <!-- font awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
     <style>
-        body {
-            background: #6f1089d0;
-            font-family: 'Arial', sans-serif;
-            color: #333;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(75, 0, 130, 0.3);
-            padding: 30px;
-            margin-top: 50px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -287,10 +290,52 @@ if (isset($_SESSION['error'])) {
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1>Kelola Menu</h1>
-        <a href="admin_menu.php" class="btn btn-secondary mb-3">Kembali ke Menu Admin</a>
-        <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
+    <div class="sub_page">
+        <div class="hero_area">
+            <!-- header section -->
+            <header class="header_section">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg custom_nav-container ">
+                        <a class="navbar-brand" href="index.php">
+                            <i class="bi bi-person-gear"></i>
+                            Admin Pages
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent">
+                            <span class=""> </span>
+                        </button>
+                        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="admin_menu.php">
+                                        <i class="bi bi-speedometer2 me-2"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="manage_menu.php">
+                                        <i class="bi bi-box me-2"></i>
+                                        Kelola Menu
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="admin_trigger.php">
+                                        <i class="bi bi-clock-history me-2"></i>
+                                        Riwayat Stok
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="logout.php">
+                                        <i class="bi bi-box-arrow-right me-2"></i>
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+        </div>
 
         <!-- Notifikasi Sukses atau Error -->
         <?php if (!empty($success_message)): ?>
@@ -304,42 +349,50 @@ if (isset($_SESSION['error'])) {
             </div>
         <?php endif; ?>
 
+
         <!-- Form Tambah/Edit -->
-        <form method="POST" enctype="multipart/form-data" class="mb-5">
-            <input type="hidden" name="id_menu" value="<?php echo $edit_data ? $edit_data['id_menu'] : ''; ?>">
-            <div class="form-group">
-                <label>Nama Menu</label>
-                <input type="text" name="nama_menu" class="form-control" required
-                    value="<?php echo $edit_data ? htmlspecialchars($edit_data['nama_menu']) : ''; ?>">
+        <section class="menu_section" style="margin-bottom: 40px;">
+            <div class="container">
+                <form method="POST" enctype="multipart/form-data" class="mb-5">
+                    <input type="hidden" name="id_menu" value="<?php echo $edit_data ? $edit_data['id_menu'] : ''; ?>">
+                    <div class="form-group">
+                        <label>Nama Menu</label>
+                        <input type="text" name="nama_menu" class="form-control" required
+                            value="<?php echo $edit_data ? htmlspecialchars($edit_data['nama_menu']) : ''; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Harga</label>
+                        <input type="number" name="harga" class="form-control" required
+                            value="<?php echo $edit_data ? $edit_data['harga'] : ''; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis</label>
+                        <select name="jenis" class="form-control" required>
+                            <option value="makanan" <?php echo ($edit_data && $edit_data['jenis'] == 'makanan') ? 'selected' : ''; ?>>Makanan</option>
+                            <option value="minuman" <?php echo ($edit_data && $edit_data['jenis'] == 'minuman') ? 'selected' : ''; ?>>Minuman</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Stok</label>
+                        <input type="number" name="stok" class="form-control" required
+                            value="<?php echo $edit_data ? $edit_data['stok'] : ''; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Gambar</label>
+                        <input type="file" name="gambar" class="form-control" accept="image/*">
+                        <input type="hidden" name="gambar_lama"
+                            value="<?php echo $edit_data ? $edit_data['gambar'] : ''; ?>">
+                        <?php if ($edit_data && $edit_data['gambar']) { ?>
+                            <img src="images/<?php echo $edit_data['gambar']; ?>" alt="Gambar Lama" width="100"
+                                class="mt-2" />
+                        <?php } ?>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><?php echo $edit_data ? 'Update' : 'Tambah'; ?>
+                        Item</button>
+                    <a href="manage_menu.php" class="btn btn-secondary">Reset</a>
+                </form>
             </div>
-            <div class="form-group">
-                <label>Harga</label>
-                <input type="number" name="harga" class="form-control" required
-                    value="<?php echo $edit_data ? $edit_data['harga'] : ''; ?>">
-            </div>
-            <div class="form-group">
-                <label>Jenis</label>
-                <select name="jenis" class="form-control" required>
-                    <option value="makanan" <?php echo ($edit_data && $edit_data['jenis'] == 'makanan') ? 'selected' : ''; ?>>Makanan</option>
-                    <option value="minuman" <?php echo ($edit_data && $edit_data['jenis'] == 'minuman') ? 'selected' : ''; ?>>Minuman</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Stok</label>
-                <input type="number" name="stok" class="form-control" required
-                    value="<?php echo $edit_data ? $edit_data['stok'] : ''; ?>">
-            </div>
-            <div class="form-group">
-                <label>Gambar</label>
-                <input type="file" name="gambar" class="form-control" accept="image/*">
-                <input type="hidden" name="gambar_lama" value="<?php echo $edit_data ? $edit_data['gambar'] : ''; ?>">
-                <?php if ($edit_data && $edit_data['gambar']) { ?>
-                    <img src="images/<?php echo $edit_data['gambar']; ?>" alt="Gambar Lama" width="100" class="mt-2" />
-                <?php } ?>
-            </div>
-            <button type="submit" class="btn btn-primary"><?php echo $edit_data ? 'Update' : 'Tambah'; ?> Item</button>
-            <a href="manage_menu.php" class="btn btn-secondary">Reset</a>
-        </form>
+        </section>
 
         <!-- Tabel Daftar Menu -->
         <table class="table table-bordered">
