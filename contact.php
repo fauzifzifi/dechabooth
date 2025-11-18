@@ -58,201 +58,199 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
 <body class="sub_page">
 
-  <div class="">
-
-    <div class="hero_area">
-      <!-- header section strats -->
-      <header class="header_section">
-        <div class="container-fluid">
-          <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="index.php">
-              <i class="bi bi-shop-window"></i>
-              Decha Booth
-            </a>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class=""> </span>
-            </button>
-
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html"> About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="menu.php">Menu
-                  </a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="contact.php">Contact Us</a>
-                </li>
-              </ul>
-              <div class="quote_btn-container">
-                <a href="#" id="cartButton" class="cart-icon">
-                  <i class="bi bi-cart4"></i>
-                  <span class="cart-count" id="cartCount">0</span>
-                </a>
-                <a href="admin_login.php">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </header>
-    </div>
-    <!-- end header section -->
-
-    <!-- panel keranjang -->
-    <div id="cartPanel" class="cart-panel">
-      <div class="cart-header">
-        <h3>Keranjang Belanja</h3>
-        <button id="closeCart" class="close-btn">×</button>
-      </div>
-
-      <div id="cartItems" class="cart-items"></div>
-
-      <div class="cart-footer">
-        <p>Total: Rp<span id="cartTotal">0</span></p>
-
-        <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
-        <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
-      </div>
-    </div>
-
-    <!-- Tambahkan ini ⬇️ -->
-    <div id="cartOverlay" class="cart-overlay"></div>
-
-    <!-- panel keranjang -->
-
-    <!-- contact section -->
-    <section class="contact_section layout_padding">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5 col-lg-4 offset-md-1">
-            <div class="form_container">
-              <div class="heading_container">
-                <h2>
-                  Contact Us
-                </h2>
-              </div>
-              <form method="POST" action="">
-                <?php if (isset($msg)) { ?>
-                  <div id="notif" style="margin-bottom:15px;
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.php">
+            <i class="bi bi-shop-window"></i>
+            Decha Booth
+          </a>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item ">
+                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html"> About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="menu.php">Menu
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="contact.php">Contact Us</a>
+              </li>
+            </ul>
+            <div class="quote_btn-container">
+              <a href="#" id="cartButton" class="cart-icon">
+                <i class="bi bi-cart4"></i>
+                <span class="cart-count" id="cartCount">0</span>
+              </a>
+              <a href="admin_login.php">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+  <!-- end header section -->
+
+  <!-- panel keranjang -->
+  <div id="cartPanel" class="cart-panel">
+    <div class="cart-header">
+      <h3>Keranjang Belanja</h3>
+      <button id="closeCart" class="close-btn">×</button>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <p>Total: Rp<span id="cartTotal">0</span></p>
+
+      <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
+      <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
+    </div>
+  </div>
+
+  <!-- Tambahkan ini ⬇️ -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <!-- panel keranjang -->
+
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-5 col-lg-4 offset-md-1">
+          <div class="form_container">
+            <div class="heading_container">
+              <h2>
+                Contact Us
+              </h2>
+            </div>
+            <form method="POST" action="">
+              <?php if (isset($msg)) { ?>
+                <div id="notif" style="margin-bottom:15px;
                 padding:10px 15px;
                 border-radius:8px;
                 font-weight:500;
                 color:#fff;
                 background-color:<?php echo ($msg_type == 'success') ? '#4CAF50' : '#f44336'; ?>;
                 transition:opacity 0.5s ease;">
-                    <?php echo $msg; ?>
-                  </div>
-                  <script>
-                    setTimeout(() => {
-                      const notif = document.getElementById("notif");
-                      if (notif) {
-                        notif.style.opacity = "0";
-                        setTimeout(() => notif.remove(), 500); // hapus elemen setelah efek fade out
-                      }
-                    }, 3000); // hilang setelah 3 detik
-                  </script>
-                <?php } ?>
+                  <?php echo $msg; ?>
+                </div>
+                <script>
+                  setTimeout(() => {
+                    const notif = document.getElementById("notif");
+                    if (notif) {
+                      notif.style.opacity = "0";
+                      setTimeout(() => notif.remove(), 500); // hapus elemen setelah efek fade out
+                    }
+                  }, 3000); // hilang setelah 3 detik
+                </script>
+              <?php } ?>
 
-                <div>
-                  <input type="text" name="nama" placeholder="Nama" required />
-                </div>
-                <div>
-                  <input type="text" name="telepon" placeholder="Nomor Telepon" required />
-                </div>
-                <div>
-                  <input type="email" name="email" placeholder="Email" required />
-                </div>
-                <div>
-                  <textarea name="pesan" placeholder="Pesan" required></textarea>
-                </div>
-                <div class="d-flex">
-                  <button type="submit" name="kirim_pesan">KIRIM</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="map_container">
-              <div class="map">
-                <div id="googleMap"></div>
+              <div>
+                <input type="text" name="nama" placeholder="Nama" required />
               </div>
+              <div>
+                <input type="text" name="telepon" placeholder="Nomor Telepon" required />
+              </div>
+              <div>
+                <input type="email" name="email" placeholder="Email" required />
+              </div>
+              <div>
+                <textarea name="pesan" placeholder="Pesan" required></textarea>
+              </div>
+              <div class="d-flex">
+                <button type="submit" name="kirim_pesan">KIRIM</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="map_container">
+            <div class="map">
+              <div id="googleMap"></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- end contact section -->
+  <!-- end contact section -->
 
 
-    <!-- info section -->
-    <section class="info_section layout_padding2">
-      <div class="container">
-        <div class="row info_main_row">
-          <div class="col-md-6 col-lg-3">
-            <div class="info_links">
-              <h4>
-                Decha Booth
-              </h4>
-              <div class="info_links_menu">
-                <a href="index.php">
-                  Home
-                </a>
-                <a href="about.html">
-                  About
-                </a>
-                <a href="menu.php">
-                  Menu
-                </a>
-                <a href="contact.php">
-                  Contact us
-                </a>
-              </div>
+  <!-- info section -->
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row info_main_row">
+        <div class="col-md-6 col-lg-3">
+          <div class="info_links">
+            <h4>
+              Decha Booth
+            </h4>
+            <div class="info_links_menu">
+              <a href="index.php">
+                Home
+              </a>
+              <a href="about.html">
+                About
+              </a>
+              <a href="menu.php">
+                Menu
+              </a>
+              <a href="contact.php">
+                Contact us
+              </a>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_detail">
-              <h4>
-                Company
-              </h4>
-              <p class="mb-0">
-                Decha Booth hadir untuk pelajar! Kami menyajikan berbagai makanan
-                dan minuman kekinian dengan rasa lezat dan harga bersahabat.
-              </p>
-            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_detail">
+            <h4>
+              Company
+            </h4>
+            <p class="mb-0">
+              Decha Booth hadir untuk pelajar! Kami menyajikan berbagai makanan
+              dan minuman kekinian dengan rasa lezat dan harga bersahabat.
+            </p>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_contact">
-              <h4>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_contact">
+            <h4>
               Contact Us
-              </h4>
-              <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Lokasi
-                </span>
-              </a>
-              <a href="https://wa.me/+6282336881878" target="_blank">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  WhatsApp +6282336881878
-                </span>
-              </a>
-            </div>
+            </h4>
+            <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Lokasi
+              </span>
+            </a>
+            <a href="https://wa.me/+6282336881878" target="_blank">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                WhatsApp +6282336881878
+              </span>
+            </a>
           </div>
         </div>
       </div>
-    </section>
-    <!-- end info_section -->
+    </div>
+  </section>
+  <!-- end info_section -->
 
   </div>
 

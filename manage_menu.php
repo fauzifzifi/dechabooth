@@ -109,6 +109,7 @@ if (isset($_SESSION['error'])) {
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
     <style>
         @keyframes fadeIn {
             from {
@@ -122,13 +123,23 @@ if (isset($_SESSION['error'])) {
             }
         }
 
-        h1 {
-            color: #6f1089d0;
+        .dashboard-header {
             text-align: center;
-            margin-bottom: 30px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(221, 160, 221, 0.5);
+            margin-bottom: 40px;
         }
+
+        .dashboard-title {
+            color: #9c27b0;
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
 
         .btn {
             border-radius: 25px;
@@ -159,15 +170,12 @@ if (isset($_SESSION['error'])) {
 
         .btn-warning {
             background: #FFD700;
-            color: #6f1089d0;
+            color: white;
         }
 
-        form {
-            background: #F8F8FF;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
-            margin-bottom: 30px;
+        .btn-warning:hover {
+            background: #e0a800;
+            color: white;
         }
 
         .form-group label {
@@ -286,74 +294,80 @@ if (isset($_SESSION['error'])) {
                 transform: translateY(0);
             }
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .table-container {
+                padding: 15px;
+            }
+
+            .table thead th,
+            .table td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
-<body>
-    <div class="sub_page">
-        <div class="hero_area">
-            <!-- header section -->
-            <header class="header_section">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-expand-lg custom_nav-container ">
-                        <a class="navbar-brand" href="index.php">
-                            <i class="bi bi-person-gear"></i>
-                            Admin Pages
-                        </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent">
-                            <span class=""> </span>
-                        </button>
-                        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="admin_menu.php">
-                                        <i class="bi bi-speedometer2 me-2"></i>
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="manage_menu.php">
-                                        <i class="bi bi-box me-2"></i>
-                                        Kelola Menu
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="admin_trigger.php">
-                                        <i class="bi bi-clock-history me-2"></i>
-                                        Riwayat Stok
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="logout.php">
-                                        <i class="bi bi-box-arrow-right me-2"></i>
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </header>
-        </div>
+<body class="sub_page">
 
-        <!-- Notifikasi Sukses atau Error -->
-        <?php if (!empty($success_message)): ?>
-            <div class="alert alert-success fade show" role="alert" id="success-alert">
-                <?php echo htmlspecialchars($success_message); ?>
+    <div class="hero_area">
+        <!-- header section -->
+        <header class="header_section">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand">
+                        <i class="bi bi-person-gear"></i>
+                        Admin Pages
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent">
+                        <span class=""> </span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin_menu.php">
+                                    <i class="bi bi-speedometer2 me-2"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="manage_menu.php">
+                                    <i class="bi bi-box me-2"></i>
+                                    Kelola Menu
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin_trigger.php">
+                                    <i class="bi bi-clock-history me-2"></i>
+                                    Riwayat Stok
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="logout.php">
+                                    <i class="bi bi-box-arrow-right me-2"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-        <?php endif; ?>
-        <?php if (!empty($error_message)): ?>
-            <div class="alert alert-danger fade show" role="alert" id="error-alert">
-                <?php echo htmlspecialchars($error_message); ?>
-            </div>
-        <?php endif; ?>
+        </header>
+    </div>
 
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">Manajemen Menu</h1>
+        <p class="dashboard-subtitle">Kelola seluruh menu dengan cepat dan terstruktur</p>
+    </div>
 
-        <!-- Form Tambah/Edit -->
-        <section class="menu_section" style="margin-bottom: 40px;">
-            <div class="container">
-                <form method="POST" enctype="multipart/form-data" class="mb-5">
+    <!-- Form Tambah/Edit -->
+    <section class="menu_section layout_padding">
+        <div class="container container-fluid">
+            <div class="container-fluid">
+                <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id_menu" value="<?php echo $edit_data ? $edit_data['id_menu'] : ''; ?>">
                     <div class="form-group">
                         <label>Nama Menu</label>
@@ -387,54 +401,85 @@ if (isset($_SESSION['error'])) {
                                 class="mt-2" />
                         <?php } ?>
                     </div>
-                    <button type="submit" class="btn btn-primary"><?php echo $edit_data ? 'Update' : 'Tambah'; ?>
+                    <button type="submit" class="btn btn-secondary"><?php echo $edit_data ? 'Update' : 'Tambah'; ?>
                         Item</button>
                     <a href="manage_menu.php" class="btn btn-secondary">Reset</a>
                 </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Tabel Daftar Menu -->
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID Menu</th>
-                    <th>Nama Menu</th>
-                    <th>Jenis</th>
-                    <th>Harga</th>
-                    <th>Stok</th>
-                    <th>Gambar</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($menus)) { ?>
+    <!-- Notifikasi Sukses atau Error -->
+    <?php if (!empty($success_message)): ?>
+        <div class="alert alert-success fade show" role="alert" id="success-alert">
+            <?php echo htmlspecialchars($success_message); ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($error_message)): ?>
+        <div class="alert alert-danger fade show" role="alert" id="error-alert">
+            <?php echo htmlspecialchars($error_message); ?>
+        </div>
+    <?php endif; ?>
+
+
+    <!-- Tabel Daftar Menu -->
+    <div class="menu_section layout_padding">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td><?php echo $row['id_menu']; ?></td>
-                        <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
-                        <td><?php echo htmlspecialchars($row['jenis']); ?></td>
-                        <td>Rp <?php echo number_format($row['harga']); ?></td>
-                        <td><?php echo $row['stok']; ?></td>
-                        <td>
-                            <?php if ($row['gambar']) { ?>
-                                <img src="images/<?php echo $row['gambar']; ?>" alt="gambar" width="50" />
-                            <?php } ?>
-                        </td>
-                        <td>
-                            <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>"
-                                class="btn btn-warning btn-sm">Edit</a>
-                            <a href="manage_menu.php?delete=<?php echo $row['id_menu']; ?>" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Yakin ingin menghapus menu ini?')">Delete</a>
-                        </td>
+                        <th>ID Menu</th>
+                        <th>Nama Menu</th>
+                        <th>Jenis</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Gambar</th>
+                        <th>Aksi</th>
                     </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($menus)) { ?>
+                        <tr>
+                            <td><?php echo $row['id_menu']; ?></td>
+                            <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
+                            <td><?php echo htmlspecialchars($row['jenis']); ?></td>
+                            <td>Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
+                            <td><?php echo $row['stok']; ?></td>
+                            <td>
+                                <?php if ($row['gambar']) { ?>
+                                    <img src="images/<?php echo $row['gambar']; ?>" alt="gambar" width="50" />
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <a href="manage_menu.php?delete=<?php echo $row['id_menu']; ?>"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin ingin menghapus menu ini?')">Delete</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- footer section -->
+    <footer class="container-fluid footer_section">
+        <div class="container">
+            <div class="col-md-11 col-lg-8 mx-auto">
+                <p>
+                    &copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- footer section -->
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
     <script>
         // Hilangkan notifikasi sukses otomatis setelah 3 detik
         setTimeout(function () {

@@ -59,11 +59,17 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
     margin: 2px;
   }
 
-  .search-box {
-    border-radius: 25px;
-    border: 2px solid #e9ecef;
-    padding: 8px 15px;
+  .form-control {
+    border-radius: 10px;
+    border: 2px solid #DDA0DD;
+    transition: border-color 0.3s ease;
   }
+
+  .form-control:focus {
+    border-color: #6f1089d0;
+    box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
+  }
+
 
   .product_section {
     background: #ffffffe6;
@@ -93,6 +99,29 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
     border: none;
     font-weight: bold;
   }
+
+  .table tbody tr:nth-child(even) {
+    background: #F8F8FF;
+  }
+
+  .table tbody tr:hover {
+    background: #E6E6FA;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .table-container {
+      padding: 15px;
+    }
+
+    .table thead th,
+    .table td {
+      padding: 10px 8px;
+      font-size: 0.9rem;
+    }
+  }
 </style>
 
 
@@ -102,7 +131,7 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.php">
+          <a class="navbar-brand">
             <i class="bi bi-person-gear"></i>
             Admin Pages
           </a>
@@ -202,18 +231,14 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
 
     <!-- Products Table -->
     <div class="product_section card mb-4">
-      <div
-        class="card-header bg-transparent d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-        <h5 class="card-title mb-2 mb-md-0">
-          Daftar Menu
-        </h5>
-        <div class="input-group ms-md-2" style="max-width: 400px;">
-          <input type="text" class="form-control search-box" placeholder="Cari menu..." id="searchInput">
+      <div class="card-header bg-transparent align-items-md-center">
+        <div class="form-group">
+          <input type="text" placeholder="Cari menu..." id="searchInput" class="form-control">
         </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-striped table-hover" id="productTable">
+          <table class="table table-bordered" id="productTable">
             <thead>
               <tr>
                 <th>Gambar</th>
@@ -281,6 +306,8 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
   <!-- JavaScript -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
+  <!-- custom js -->
+  <script src="js/custom.js"></script>
   <script>
     // Search functionality
     document.getElementById('searchInput').addEventListener('input', function (e) {
@@ -293,16 +320,6 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
       });
     });
 
-    // Mobile menu auto-close when clicking on link
-    document.querySelectorAll('.nav-link-custom').forEach(link => {
-      link.addEventListener('click', () => {
-        const navbarCollapse = document.querySelector('.navbar-collapse');
-        if (navbarCollapse.classList.contains('show')) {
-          const bsCollapse = new bootstrap.Collapse(navbarCollapse);
-          bsCollapse.hide();
-        }
-      });
-    });
   </script>
 </body>
 
