@@ -44,11 +44,17 @@ include 'koneksi.php';
 
         body {
             font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             margin: 0;
             padding: 0;
+        }
+
+        .btn {
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            border: none;
         }
 
         /* Main Content */
@@ -225,7 +231,7 @@ include 'koneksi.php';
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout.php">
+                                <a class="btn btn-danger" href="logout.php">
                                     <i class="bi bi-box-arrow-right me-2"></i>
                                     Logout
                                 </a>
@@ -267,7 +273,7 @@ include 'koneksi.php';
             <div class="table-container">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="logTable">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>ID</th>
                                 <th>Nama Menu</th>
@@ -279,7 +285,7 @@ include 'koneksi.php';
                                 <th>Tanggal</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <?php
                             $log = mysqli_query($koneksi, "SELECT * FROM log_stok ORDER BY tanggal DESC");
                             $rowCount = mysqli_num_rows($log);

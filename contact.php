@@ -193,9 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
 
   <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row info_main_row">
+  <section class="info_section layout_padding">
+    <div class="container-fluid">
+      <div class="row">
         <div class="col-md-6 col-lg-3">
           <div class="info_links">
             <h4>
@@ -225,6 +225,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
             <p class="mb-0">
               Decha Booth hadir untuk pelajar! Kami menyajikan berbagai makanan
               dan minuman kekinian dengan rasa lezat dan harga bersahabat.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_detail">
+            <h4>
+              Operating Hours
+            </h4>
+            <p class="mb-0">
+              Buka setiap hari (jika mood). tutup sak wayah wayah
             </p>
           </div>
         </div>

@@ -3,11 +3,7 @@ body {
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
-  background: linear-gradient(
-    135deg,
-    #f3e5f5,
-    #e1bee7
-  ); 
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
 }
 
 body.sub_page {
@@ -133,22 +129,23 @@ a:focus {
 }
 
 .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-color: #6f1089d0; 
-font-weight: bold; 
-border-bottom: 2px solid #6f1089d0; 
-transition: all 0.3s ease; 
-width: auto;
-display: inline-block;
+  color: #6f1089d0;
+  font-weight: bold;
+  border-bottom: 2px solid #6f1089d0;
+  transition: all 0.3s ease;
+  width: auto;
+  display: inline-block;
 }
 
 .custom_nav-container .navbar-nav .nav-item:not(.active) .nav-link {
-color: #000000; 
-border-bottom: none; }
+  color: #000000;
+  border-bottom: none;
+}
 
 @media (max-width: 991px) {
   .custom_nav-container .navbar-nav .nav-link {
-    display: inline-block !important;  /* supaya border ikut panjang teks */
-    width: auto !important;            /* hilangkan lebar full */
+    display: inline-block !important; /* supaya border ikut panjang teks */
+    width: auto !important; /* hilangkan lebar full */
     border-bottom: 2px solid transparent;
     padding-bottom: 5px;
   }
@@ -570,16 +567,10 @@ border-bottom: none; }
 
 /* contact section */
 .contact_section {
-  position: relative;
-  background: rgba(
-    255,
-    255,
-    255,
-    0.9
-  ); /* Semi-transparan putih untuk kontras */
+  background: #ffffffe6;
   border-radius: 20px; /* Rounded corners */
-  margin: 0 20px 20px 20px;
-  padding: 20px;
+  margin: 20px;
+  padding: 50px;
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3); /* Soft ungu shadow */
 }
 
@@ -654,6 +645,7 @@ border-bottom: none; }
 .contact_section .map_container .map #googleMap {
   height: 100%;
 }
+
 /* end contact section */
 
 /* info section */
@@ -663,100 +655,49 @@ border-bottom: none; }
   text-align: center;
 }
 
-/* Center seluruh row */
-.info_section .info_main_row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-lines: multiple;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-
-/* Untuk menu links: buat rata tengah */
+/* Menu links rata tengah */
 .info_section .info_links .info_links_menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   text-align: center;
 }
 
 .info_section .info_links .info_links_menu a {
   color: #ffffff;
-  text-align: center;
 }
 
 .info_section .info_links .info_links_menu a:not(:nth-last-child(1)) {
   margin-bottom: 10px;
 }
 
-/* Heading "Decha Booth" - ubah font ke Poppins */
-.info_section .info_links h4 {
-  font-family: 'Poppins', sans-serif;  /* Tambahkan ini untuk font Poppins */
-  font-weight: 600;  /* Opsional: buat lebih bold jika suka */
+/* Heading h4 */
+.info_section h4 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* Untuk deskripsi perusahaan: buat rata tengah */
+/* Detail rata tengah */
 .info_section .info_detail {
   text-align: center;
 }
 
-/* Heading "Company" - ubah font ke Poppins */
-.info_section .info_detail h4 {
-  font-family: 'Poppins', sans-serif;  /* Tambahkan ini */
-  font-weight: 600;
-  text-align: center;
-}
-
-.info_section .info_detail p {
-  text-align: center;
-}
-
-/* Heading "Contact Us" - ubah font ke Poppins */
-.info_section .info_contact h4 {
-  font-family: 'Poppins', sans-serif;  /* Tambahkan ini */
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Untuk kontak: sudah ada flex, tambahkan center */
 .info_section .info_contact {
   text-align: center;
 }
 
 .info_section .info_contact a {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  color: #ffffff;
-  margin-bottom: 10px;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
+  color: #ffffff;
 }
 
 .info_section .info_contact a i {
   margin-right: 5px;
   width: 25px;
 }
-
-.info_section .info_contact a:hover p {
-  color: #ffffff;
-}
-/* end info section */
 
 /* keranjang */
 .cart-count {
@@ -984,5 +925,3 @@ border-bottom: none; }
   color: inherit;
 }
 /* end footer */
-
-

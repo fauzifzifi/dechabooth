@@ -148,11 +148,6 @@ if (isset($_SESSION['error'])) {
             border: none;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(75, 0, 130, 0.4);
-        }
-
         .btn-primary {
             background: #6f1089d0;
             color: white;
@@ -161,11 +156,6 @@ if (isset($_SESSION['error'])) {
         .btn-secondary {
             background: #DDA0DD;
             color: #6f1089d0;
-        }
-
-        .btn-danger {
-            background: #8B0000;
-            color: white;
         }
 
         .btn-warning {
@@ -346,7 +336,7 @@ if (isset($_SESSION['error'])) {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout.php">
+                                <a class="btn btn-danger" href="logout.php"> <!--update logout-->
                                     <i class="bi bi-box-arrow-right me-2"></i>
                                     Logout
                                 </a>
@@ -426,7 +416,7 @@ if (isset($_SESSION['error'])) {
     <div class="menu_section layout_padding">
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead>
+                <thead class="text-center">
                     <tr>
                         <th>ID Menu</th>
                         <th>Nama Menu</th>
@@ -439,7 +429,7 @@ if (isset($_SESSION['error'])) {
                 </thead>
                 <tbody>
                     <?php while ($row = mysqli_fetch_assoc($menus)) { ?>
-                        <tr>
+                        <tr class="text-center">
                             <td><?php echo $row['id_menu']; ?></td>
                             <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
                             <td><?php echo htmlspecialchars($row['jenis']); ?></td>

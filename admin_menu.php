@@ -81,9 +81,13 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
     /* Soft ungu shadow */
   }
 
-  .btn-danger {
-    border-radius: 13px;
+  .btn {
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    border: none;
   }
+
 
   .table {
     background: white;
@@ -163,7 +167,7 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
                 </a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-danger" href="logout.php"> <!--update logout-->
+                <a class="btn btn-danger" href="logout.php">
                   <i class="bi bi-box-arrow-right me-2"></i>
                   Logout
                 </a>
@@ -261,8 +265,8 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
                 $status_text = $row['stok'] > 0 ? 'Tersedia' : 'Habis';
                 $stok_badge = $row['stok'] < 10 ? 'bg-warning' : 'bg-secondary';
                 ?>
-                <tr>
-                  <td class="text-center"> <!--update text-center-->
+                <tr class="text-center">
+                  <td>
                     <?php if ($row['gambar']) { ?>
                       <img src="images/<?php echo $row['gambar']; ?>" alt="gambar" width="50" />
                     <?php } ?>

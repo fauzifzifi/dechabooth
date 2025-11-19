@@ -153,8 +153,8 @@
 
   <!-- info section -->
   <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row info_main_row">
+    <div class="container-fluid">
+      <div class="row">
         <div class="col-md-6 col-lg-3">
           <div class="info_links">
             <h4>
@@ -188,9 +188,19 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
+          <div class="info_detail">
+            <h4>
+              Operating Hours
+            </h4>
+            <p class="mb-0">
+              Buka setiap hari (jika mood). tutup sak wayah wayah
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
           <div class="info_contact">
             <h4>
-            Contact Us
+              Contact Us
             </h4>
             <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -209,6 +219,9 @@
       </div>
     </div>
   </section>
+  <!-- end info_section -->
+
+
   <!-- end info_section -->
 
   <footer class="container-fluid footer_section">
