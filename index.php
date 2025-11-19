@@ -367,6 +367,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
             </div>
           </div>
         </div>
+        <div class="info_operasional">
+        <h4>
+          Operating Hours
+        </h4>
+        <p class="mb-0">
+          Buka setiap hari (jika mood). tutup sak wayah wayah
+        </p>
+      </div>
       </div>
     </section>
     <!-- end info_section -->
