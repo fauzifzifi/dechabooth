@@ -55,6 +55,7 @@ include 'koneksi.php';
             transition: all 0.3s ease;
             font-weight: bold;
             border: none;
+            margin-top: 5px;
         }
 
         /* Main Content */
