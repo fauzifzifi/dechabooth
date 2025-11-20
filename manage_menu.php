@@ -296,6 +296,7 @@ if (isset($_SESSION['error'])) {
             .table td {
                 padding: 10px 8px;
                 font-size: 0.9rem;
+                vertical-align: middle;
             }
         }
     </style>

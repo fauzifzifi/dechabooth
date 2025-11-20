@@ -129,6 +129,7 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
     .table td {
       padding: 10px 8px;
       font-size: 0.9rem;
+      vertical-align: middle;
     }
   }
 </style>
