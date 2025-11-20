@@ -1,7 +1,8 @@
 @media (max-width: 991px) {
   .hero_area {
     height: auto;
-    
+  }
+  
   .quote_btn-container {
     flex-direction: column;
     align-items: center;
