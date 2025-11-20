@@ -691,11 +691,6 @@ a:focus {
   color: #ffffff;
 }
 
-.info_section .info_contact a i {
-  margin-right: 5px;
-  width: 25px;
-}
-
 /* keranjang */
 .cart-count {
   position: absolute;
@@ -884,9 +879,11 @@ a:focus {
 }
 
 /* === RESPONSIVE === */
-@media (max-width: px) {
+@media (max-width: 400px) {
   .cart-panel {
     width: 100%;
+    height: auto;
+    max-height: 100%;
   }
 
   .cart-button {

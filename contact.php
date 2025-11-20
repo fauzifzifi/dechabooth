@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
 
   <!-- info section -->
-  <section class="info_section layout_padding">
+  <section class="info_section layout_padding2">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-lg-3">
@@ -234,7 +234,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               Operating Hours
             </h4>
             <p class="mb-0">
-              Buka setiap hari (jika mood). tutup sak wayah wayah
+              Buka setiap hari Senin s/d Sabtu
+            </p>
+            <p class="mb-0">
+              Jam 07.00 s/d 16.00
             </p>
           </div>
         </div>
@@ -244,14 +247,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
               Contact Us
             </h4>
             <a href="https://maps.app.goo.gl/wChnMDa6as9zeXYLA?g_st=aw" target="_blank">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
               <span>
+                <i class="fa fa-map-marker"></i>
                 Lokasi
               </span>
             </a>
             <a href="https://wa.me/+6282336881878" target="_blank">
-              <i class="fa fa-phone" aria-hidden="true"></i>
               <span>
+                <i class="fa fa-phone"></i>
                 WhatsApp +6282336881878
               </span>
             </a>

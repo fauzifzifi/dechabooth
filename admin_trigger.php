@@ -158,6 +158,7 @@ include 'koneksi.php';
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
+            align-items: center;
         }
 
         .badge-penjualan {
