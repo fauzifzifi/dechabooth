@@ -131,7 +131,6 @@ a:focus {
 .custom_nav-container .navbar-nav .nav-item.active .nav-link {
   color: #6f1089d0;
   font-weight: bold;
-  border-bottom: 2px solid #6f1089d0;
   transition: all 0.3s ease;
   width: auto;
   display: inline-block;
@@ -144,14 +143,11 @@ a:focus {
 
 @media (max-width: 991px) {
   .custom_nav-container .navbar-nav .nav-link {
-    display: inline-block !important; /* supaya border ikut panjang teks */
     width: auto !important; /* hilangkan lebar full */
-    border-bottom: 2px solid transparent;
     padding-bottom: 5px;
   }
 
   .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-    border-bottom-color: #6f1089d0;
     color: #6f1089d0;
     font-weight: bold;
   }
