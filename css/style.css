@@ -141,19 +141,6 @@ a:focus {
   border-bottom: none;
 }
 
-@media (max-width: 991px) {
-  .custom_nav-container .navbar-nav .nav-link {
-    width: auto !important; /* hilangkan lebar full */
-    display: inline-block !important; /* supaya border ikut panjang teks */
-    padding-bottom: 5px;
-  }
-
-  .custom_nav-container .navbar-nav .nav-item.active .nav-link {
-    color: #6f1089d0;
-    font-weight: bold;
-  }
-}
-
 .navbar-brand {
   font-size: 28px;
   font-weight: bold;
@@ -517,15 +504,6 @@ a:focus {
 .menu_section .slick-next:before {
   content: "\f061";
 }
-
-@media (max-width: 768px) {
-  .menu_section .slick-prev {
-    left: -50px !important;
-  }
-  .menu_section .slick-next {
-    right: -50px !important;
-  }
-}
 /* menu section */
 
 /* pesan sekarang section */
@@ -866,23 +844,6 @@ a:focus {
   position: absolute;
   top: -5px;
   right: -5px;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 400px) {
-  .cart-panel {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-  }
-
-  .cart-button {
-    bottom: 20px;
-    right: 20px;
-    width: 55px;
-    height: 55px;
-    font-size: 20px;
-  }
 }
 /* end keranjang */
 
