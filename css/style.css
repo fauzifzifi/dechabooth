@@ -144,6 +144,7 @@ a:focus {
 @media (max-width: 991px) {
   .custom_nav-container .navbar-nav .nav-link {
     width: auto !important; /* hilangkan lebar full */
+    display: inline-block !important; /* supaya border ikut panjang teks */
     padding-bottom: 5px;
   }
 

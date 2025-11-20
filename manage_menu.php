@@ -146,6 +146,7 @@ if (isset($_SESSION['error'])) {
             transition: all 0.3s ease;
             font-weight: bold;
             border: none;
+            margin-top: 5px;
         }
 
         .btn-primary {
@@ -393,7 +394,7 @@ if (isset($_SESSION['error'])) {
                     </div>
                     <button type="submit" class="btn btn-secondary"><?php echo $edit_data ? 'Update' : 'Tambah'; ?>
                         Item</button>
-                    <a href="manage_menu.php" class="btn btn-secondary">Reset</a>
+                    <button type="reset" href="manage_menu.php" class="btn btn-secondary">Reset</button>
                 </form>
             </div>
         </div>
