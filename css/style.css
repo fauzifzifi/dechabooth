@@ -305,16 +305,6 @@ a:focus {
   max-width: 280px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .slider_section {
-    text-align: center;
-  }
-  .slider_section .img-box img {
-    width: 55%;
-  }
-}
-
 /* about section */
 .about_section {
   background: rgba(
