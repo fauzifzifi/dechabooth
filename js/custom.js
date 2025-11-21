@@ -50,3 +50,25 @@ function myMap() {
     title: "Lokasi Decha Booth", // teks yang muncul saat marker diklik
   });
 }
+
+// ==== VALIDASI INPUT CONTACT US SEBELUM SUBMIT ====
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  const nama = document.querySelector("input[name='nama']").value.trim();
+  const telepon = document.querySelector("input[name='telepon']").value.trim();
+  const email = document.querySelector("input[name='email']").value.trim();
+  const pesan = document.querySelector("textarea[name='pesan']").value.trim();
+
+  // Cek jika salah satu kosong
+  if (!nama || !telepon || !email || !pesan) {
+    e.preventDefault(); // >>>>>>>>>> HENTIKAN SUBMIT KE PHP
+
+    Swal.fire({
+      icon: "warning",
+      title: "Form kosong!",
+      text: "Isi form sebelum mengirim pesan.",
+      confirmButtonColor: "#7b2cbf",
+    });
+
+    return false;
+  }
+});

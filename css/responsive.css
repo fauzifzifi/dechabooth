@@ -2,7 +2,7 @@
   .hero_area {
     height: auto;
   }
-  
+
   .quote_btn-container {
     flex-direction: column;
     align-items: center;
@@ -19,6 +19,7 @@
     text-align: center;
     padding: 45px 0 60px 0; /* Kurangi padding atas-bawah */
     height: 400px; /* Batasi tinggi slider */
+    margin-bottom: 20px;
   }
 
   .slider_section .slider_bg {
@@ -55,15 +56,14 @@
   }
 
   .slider_section .detail_box {
-    padding-left: 15px;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
   }
 
   .slider_section .detail_box a {
     justify-content: center;
     margin-top: 75px;
   }
-/* end header */
+  /* end header */
 }
 
 /* responsive.css - SIMPLE FIX */
@@ -73,7 +73,7 @@
   .menu_section .menu_container {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .menu_section .box {
     margin: 10px;
   }
@@ -85,11 +85,11 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
-  
+
   .menu_section .box {
     margin: 0;
   }
-  
+
   .menu_section .box .img-box {
     width: 140px;
     height: 160px;
@@ -101,10 +101,9 @@
   .menu_section .menu_container {
     grid-template-columns: 1fr;
   }
-  
+
   .menu_section .box {
     max-width: 280px;
     margin: 5px; /* jarak antar menu */
   }
 }
-

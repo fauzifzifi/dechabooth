@@ -1,4 +1,6 @@
-<?php include "koneksi.php";
+<?php
+session_start();
+include "koneksi.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
@@ -22,20 +24,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     $insertContact = mysqli_query($koneksi, $query_contact);
 
     if ($insertContact) {
-      $msg = "Pesan kamu berhasil dikirim!";
-      $msg_type = "success";
+      // NOTIFIKASI SUKSES UNTUK SWEETALERT
+      $_SESSION['msg'] = "Pesan kamu berhasil dikirim!";
+      $_SESSION['msg_type'] = "success";
+
+      header("Location: contact.php");
+      exit;
     } else {
-      $msg = "Gagal simpan contact_us: " . mysqli_error($koneksi);
-      $msg_type = "error";
+      $_SESSION['msg'] = "Gagal simpan contact_us: " . mysqli_error($koneksi);
+      $_SESSION['msg_type'] = "error";
+      header("Location: contact.php");
+      exit;
     }
 
   } else {
-    $msg = "Gagal simpan pembeli: " . mysqli_error($koneksi);
-    $msg_type = "error";
+    $_SESSION['msg'] = "Gagal simpan pembeli: " . mysqli_error($koneksi);
+    $_SESSION['msg_type'] = "error";
+    header("Location: contact.php");
+    exit;
   }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -53,30 +62,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
 
   <title>Decha Booth</title>
 
-
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   <!--slick slider stylesheet -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
-  <!-- slick slider -->
 
+  <!-- slick slider -->
   <link rel="stylesheet" href="css/slick-theme.css" />
+
   <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
+
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
+
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+
+  <!-- alert js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
 <body class="sub_page">
+
+  <!-- alert contact us -->
+  <?php if (isset($_SESSION['msg'])): ?>
+    <script>
+      Swal.fire({
+        icon: "<?php echo ($_SESSION['msg_type'] === 'success') ? 'success' : 'error'; ?>",
+        title: "<?php echo ($_SESSION['msg_type'] === 'success') ? 'Berhasil!' : 'Gagal!'; ?>",
+        text: "<?php echo $_SESSION['msg']; ?>",
+        iconColor: "<?php echo ($_SESSION['msg_type'] === 'success') ? '#7ed957' : '#ff4d4d'; ?>",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#7b2cbf"
+      }).then(() => {
+        document.getElementById("contactForm").reset();
+      });
+    </script>
+    <?php
+    unset($_SESSION['msg']);
+    unset($_SESSION['msg_type']);
+  endif; ?>
+  <!-- end alert contcact us -->
 
   <div class="hero_area">
     <!-- header section strats -->
@@ -158,39 +194,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 Contact Us
               </h2>
             </div>
-            <form method="POST" action="">
-              <?php if (isset($msg)) { ?>
-                <div id="notif" style="margin-bottom:15px;
-                padding:10px 15px;
-                border-radius:8px;
-                font-weight:500;
-                color:#fff;
-                background-color:<?php echo ($msg_type == 'success') ? '#4CAF50' : '#f44336'; ?>;
-                transition:opacity 0.5s ease;">
-                  <?php echo $msg; ?>
-                </div>
-                <script>
-                  setTimeout(() => {
-                    const notif = document.getElementById("notif");
-                    if (notif) {
-                      notif.style.opacity = "0";
-                      setTimeout(() => notif.remove(), 500); // hapus elemen setelah efek fade out
-                    }
-                  }, 3000); // hilang setelah 3 detik
-                </script>
-              <?php } ?>
-
+            <form method="POST" action="" id="contactForm">
               <div>
-                <input type="text" name="nama" placeholder="Nama" required />
+                <input type="text" name="nama" id="nama" placeholder="Nama" />
               </div>
               <div>
-                <input type="text" name="telepon" placeholder="Nomor Telepon" required />
+                <input type="text" name="telepon" id="telepon" placeholder="Nomor Telepon" />
               </div>
               <div>
-                <input type="email" name="email" placeholder="Email" required />
+                <input type="email" name="email" id="email" placeholder="Email" />
               </div>
               <div>
-                <textarea name="pesan" placeholder="Pesan" required></textarea>
+                <textarea name="pesan" id="pesan" placeholder="Pesan"></textarea>
               </div>
               <div class="d-flex">
                 <button type="submit" name="kirim_pesan">KIRIM</button>
@@ -313,7 +328,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <!-- End Google Map -->
   <!-- cart js -->
   <script src="js/cart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

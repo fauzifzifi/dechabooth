@@ -1,4 +1,6 @@
-<?php include "koneksi.php";
+<?php
+session_start();
+include "koneksi.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
@@ -22,16 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     $insertContact = mysqli_query($koneksi, $query_contact);
 
     if ($insertContact) {
-      $msg = "Pesan kamu berhasil dikirim!";
-      $msg_type = "success";
+      $_SESSION['msg'] = "Pesan kamu berhasil dikirim!";
+      $_SESSION['msg_type'] = "success";
+      header("Location: index.php#contactIndex");
+      exit;
     } else {
-      $msg = "Gagal simpan contact_us: " . mysqli_error($koneksi);
-      $msg_type = "error";
+      $_SESSION['msg'] = "Gagal simpan contact_us: " . mysqli_error($koneksi);
+      $_SESSION['msg_type'] = "error";
+      header("Location: index.php#contactIndex");
+      exit;
     }
-
   } else {
-    $msg = "Gagal simpan pembeli: " . mysqli_error($koneksi);
-    $msg_type = "error";
+    $_SESSION['msg'] = "Gagal simpan pembeli: " . mysqli_error($koneksi);
+    $_SESSION['msg_type'] = "error";
+    header("Location: index.php#contactIndex");
+    exit;
   }
 }
 ?>
@@ -51,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <meta name="author" content="" />
 
   <title>Decha Booth</title>
-
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -78,11 +84,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <!-- sweet allert js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
 
   <div class="">
+
+    <!-- alert contact us -->
+    <?php if (isset($_SESSION['msg'])): ?>
+      <script>
+        Swal.fire({
+          icon: "<?php echo ($_SESSION['msg_type'] === 'success') ? 'success' : 'error'; ?>",
+          title: "<?php echo ($_SESSION['msg_type'] === 'success') ? 'Berhasil!' : 'Gagal!'; ?>",
+          text: "<?php echo $_SESSION['msg']; ?>",
+          iconColor: "<?php echo ($_SESSION['msg_type'] === 'success') ? '#7ed957' : '#ff4d4d'; ?>",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#7b2cbf"
+        }).then(() => {
+          document.getElementById("contactForm").reset();
+        });
+      </script>
+      <?php
+      unset($_SESSION['msg']);
+      unset($_SESSION['msg_type']);
+    endif; ?>
+    <!-- end alert contcact us -->
 
     <div class="hero_area">
       <!-- header section strats -->
@@ -258,15 +287,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
       </div>
     </div>
-
-    <!-- Tambahkan ini ⬇️ -->
     <div id="cartOverlay" class="cart-overlay"></div>
-
-    <!-- panel cart -->
+    <!-- end panel cart -->
 
     <!-- contact section -->
-
-    <section class="contact_section layout_padding">
+    <section id="contactIndex" class="contact_section layout_padding">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-5 col-lg-4 offset-md-1">
@@ -276,39 +301,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                   Contact Us
                 </h2>
               </div>
-              <form method="POST" action="">
-                <?php if (isset($msg)) { ?>
-                  <div id="notif" style="margin-bottom:15px;
-                padding:10px 15px;
-                border-radius:8px;
-                font-weight:500;
-                color:#fff;
-                background-color:<?php echo ($msg_type == 'success') ? '#4CAF50' : '#f44336'; ?>;
-                transition:opacity 0.5s ease;">
-                    <?php echo $msg; ?>
-                  </div>
-                  <script>
-                    setTimeout(() => {
-                      const notif = document.getElementById("notif");
-                      if (notif) {
-                        notif.style.opacity = "0";
-                        setTimeout(() => notif.remove(), 500); // hapus elemen setelah efek fade out
-                      }
-                    }, 3000); // hilang setelah 3 detik
-                  </script>
-                <?php } ?>
+              <form method="POST" action="" id="contactForm">
+                <!-- WAJIB DITAMBAHKAN untuk menjaga posisi halaman -->
+                <input type="hidden" name="from" value="index">
 
                 <div>
-                  <input type="text" name="nama" placeholder="Nama" required />
+                  <input type="text" name="nama" id="nama" placeholder="Nama" />
                 </div>
                 <div>
-                  <input type="text" name="telepon" placeholder="Nomor Telepon" required />
+                  <input type="text" name="telepon" id="telepon" placeholder="Nomor Telepon" />
                 </div>
                 <div>
-                  <input type="email" name="email" placeholder="Email" required />
+                  <input type="email" name="email" id="email" placeholder="Email" />
                 </div>
                 <div>
-                  <textarea name="pesan" placeholder="Pesan" required></textarea>
+                  <textarea name="pesan" id="pesan" placeholder="Pesan"></textarea>
                 </div>
                 <div class="d-flex">
                   <button type="submit" name="kirim_pesan">KIRIM</button>
@@ -326,9 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
         </div>
       </div>
     </section>
-
     <!-- end contact section -->
-
 
     <!-- info section -->
     <section class="info_section layout_padding2">
@@ -430,7 +435,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   <!-- End Google Map -->
   <!-- cart js -->
   <script src="js/cart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
