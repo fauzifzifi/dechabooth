@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     <!-- end slider section -->
 
     <!-- about section -->
-    <section class="about_section layout_padding ">
+    <section class="about_section">
       <div class="container  ">
         <div class="row">
           <div class="col-md-6">
@@ -291,7 +291,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
     <!-- end panel cart -->
 
     <!-- contact section -->
-    <section id="contactIndex" class="contact_section layout_padding">
+    <section id="contactIndex" class="contact_section">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-5 col-lg-4 offset-md-1">

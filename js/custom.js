@@ -52,23 +52,28 @@ function myMap() {
 }
 
 // ==== VALIDASI INPUT CONTACT US SEBELUM SUBMIT ====
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  const nama = document.querySelector("input[name='nama']").value.trim();
-  const telepon = document.querySelector("input[name='telepon']").value.trim();
-  const email = document.querySelector("input[name='email']").value.trim();
-  const pesan = document.querySelector("textarea[name='pesan']").value.trim();
+const contactForm = document.getElementById("contactForm");
 
-  // Cek jika salah satu kosong
-  if (!nama || !telepon || !email || !pesan) {
-    e.preventDefault(); // >>>>>>>>>> HENTIKAN SUBMIT KE PHP
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    const nama = document.querySelector("input[name='nama']").value.trim();
+    const telepon = document
+      .querySelector("input[name='telepon']")
+      .value.trim();
+    const email = document.querySelector("input[name='email']").value.trim();
+    const pesan = document.querySelector("textarea[name='pesan']").value.trim();
 
-    Swal.fire({
-      icon: "warning",
-      title: "Form kosong!",
-      text: "Isi form sebelum mengirim pesan.",
-      confirmButtonColor: "#7b2cbf",
-    });
+    if (!nama || !telepon || !email || !pesan) {
+      e.preventDefault();
 
-    return false;
-  }
-});
+      Swal.fire({
+        icon: "warning",
+        title: "Form kosong!",
+        text: "Isi form sebelum mengirim pesan.",
+        confirmButtonColor: "#7b2cbf",
+      });
+
+      return false;
+    }
+  });
+}

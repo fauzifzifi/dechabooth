@@ -38,102 +38,10 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
   <!-- font awesome -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/admin.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 </head>
-
-<style>
-  .stats-card {
-    color: white;
-    border-radius: 15px;
-    transition: transform 0.3s ease;
-    margin-bottom: 1rem;
-  }
-
-  .stats-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .table-actions .btn {
-    margin: 2px;
-  }
-
-  .form-control {
-    border-radius: 10px;
-    border: 2px solid #DDA0DD;
-    transition: border-color 0.3s ease;
-  }
-
-  .form-control:focus {
-    border-color: #6f1089d0;
-    box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
-  }
-
-
-  .product_section {
-    background: #ffffffe6;
-    border-radius: 20px;
-    /* Rounded corners */
-    margin: 20px;
-    padding: 10px;
-    box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3);
-    /* Soft ungu shadow */
-  }
-
-  .btn {
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    border: none;
-    margin-top: 5px;
-  }
-
-
-  .table {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
-  }
-
-  .table img {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(75, 0, 130, 0.2);
-  }
-
-  .table thead th {
-    background: #6f1089d0;
-    color: white;
-    border: none;
-    font-weight: bold;
-  }
-
-  .table tbody tr:nth-child(even) {
-    background: #F8F8FF;
-  }
-
-  .table tbody tr:hover {
-    background: #E6E6FA;
-    transform: scale(1.02);
-    transition: all 0.2s ease;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .table-container {
-      padding: 15px;
-    }
-
-    .table thead th,
-    .table td {
-      padding: 10px 8px;
-      font-size: 0.9rem;
-      vertical-align: middle;
-    }
-  }
-</style>
-
 
 <body class="sub_page">
   <div class="hero_area">

@@ -353,7 +353,7 @@ function attachCheckoutAndClearListeners() {
             confirmButtonText: "Ya, hapus",
             cancelButtonText: "Batal",
             confirmButtonColor: "#7b2cbf",
-            cancelButtonColor: "#aaa",
+            cancelButtonColor: "#6c757d",
           }).then((result) => {
             if (result.isConfirmed) {
               clearCartAndResetCounters();

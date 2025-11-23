@@ -8,11 +8,19 @@ include 'koneksi.php';
 
 // Proses Tambah/Edit Menu
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    //Tombol kembali
+    if (isset($_POST['kembali'])) {
+        header("Location: manage_menu.php");
+        exit;
+    }
+
+    //Lanjutan Proses Edit/Tambah Menu
     $nama_menu = mysqli_real_escape_string($koneksi, $_POST['nama_menu']);
     $harga = (int) $_POST['harga'];
     $jenis = mysqli_real_escape_string($koneksi, $_POST['jenis']);
     $stok = (int) $_POST['stok'];
-    $gambar = $_POST['gambar_lama'];
+    $gambar = isset($_POST['gambar_lama']) ? $_POST['gambar_lama'] : '';
 
     // Upload gambar baru jika ada
     if (!empty($_FILES['gambar']['name'])) {
@@ -22,7 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $gambar = uniqid() . "." . $file_ext;
             move_uploaded_file($_FILES['gambar']['tmp_name'], 'images/' . $gambar);
         } else {
-            die("Format gambar tidak didukung. Harus jpg, jpeg, png, atau gif.");
+            $_SESSION['error'] = "Format gambar tidak didukung. Harus jpg, jpeg, png, atau gif.";
+            header('Location: manage_menu.php');
+            exit;
         }
     }
 
@@ -69,17 +79,10 @@ if (isset($_GET['edit'])) {
 // Ambil semua data menu
 $menus = mysqli_query($koneksi, "SELECT * FROM menu ORDER BY jenis, nama_menu");
 
-// Cek notifikasi dari session
-$success_message = '';
-$error_message = '';
-if (isset($_SESSION['success'])) {
-    $success_message = $_SESSION['success'];
-    unset($_SESSION['success']);
-}
-if (isset($_SESSION['error'])) {
-    $error_message = $_SESSION['error'];
-    unset($_SESSION['error']);
-}
+// Cek notifikasi dari session (ambil lalu hapus session supaya tidak muncul berulang)
+$success_message = isset($_SESSION['success']) ? $_SESSION['success'] : '';
+$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+unset($_SESSION['success'], $_SESSION['error']);
 ?>
 
 <!DOCTYPE html>
@@ -106,203 +109,16 @@ if (isset($_SESSION['error'])) {
     <!-- font awesome -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <!-- Custom styles -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/admin.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .dashboard-title {
-            color: #9c27b0;
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-
-        .dashboard-subtitle {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-
-        .btn {
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            border: none;
-            margin-top: 5px;
-        }
-
-        .btn-primary {
-            background: #6f1089d0;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #DDA0DD;
-            color: #6f1089d0;
-        }
-
-        .btn-warning {
-            background: #FFD700;
-            color: white;
-        }
-
-        .btn-warning:hover {
-            background: #e0a800;
-            color: white;
-        }
-
-        .form-group label {
-            font-weight: bold;
-            color: #6f1089d0;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #DDA0DD;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #6f1089d0;
-            box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
-        }
-
-        /* Styling khusus untuk input file agar tombol "Choose File" lebih kecil dan sesuai dengan kotak */
-        input[type="file"] {
-            padding: 5px;
-        }
-
-        input[type="file"]::-webkit-file-upload-button {
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 5px;
-            background: #DDA0DD;
-            color: #6f1089d0;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        input[type="file"]::-webkit-file-upload-button:hover {
-            background: #6f1089d0;
-            color: white;
-        }
-
-        input[type="file"]::-moz-file-upload-button {
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 5px;
-            background: #DDA0DD;
-            color: #6f1089d0;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        input[type="file"]::-moz-file-upload-button:hover {
-            background: #6f1089d0;
-            color: white;
-        }
-
-        .table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
-        }
-
-        .table thead th {
-            background: #6f1089d0;
-            color: white;
-            border: none;
-            font-weight: bold;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background: #F8F8FF;
-        }
-
-        .table tbody tr:hover {
-            background: #E6E6FA;
-            transform: scale(1.02);
-            transition: all 0.2s ease;
-        }
-
-        .table img {
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(75, 0, 130, 0.2);
-        }
-
-        .btn-sm {
-            border-radius: 15px;
-            margin: 2px;
-        }
-
-        /* Notifikasi */
-        .alert {
-            border-radius: 10px;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .alert-success {
-            background: #28a745;
-            color: #fff;
-            border: none;
-        }
-
-        .alert-danger {
-            background: #dc3545;
-            color: #fff;
-            border: none;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .table-container {
-                padding: 15px;
-            }
-
-            .table thead th,
-            .table td {
-                padding: 10px 8px;
-                font-size: 0.9rem;
-                vertical-align: middle;
-            }
-        }
-    </style>
 </head>
 
-<body class="sub_page">
+<body class="sub_page" data-success="<?php echo htmlspecialchars($success_message, ENT_QUOTES); ?>"
+    data-error="<?php echo htmlspecialchars($error_message, ENT_QUOTES); ?>">
 
     <div class="hero_area">
         <!-- header section -->
@@ -356,31 +172,31 @@ if (isset($_SESSION['error'])) {
     </div>
 
     <!-- Form Tambah/Edit -->
-    <section class="menu_section layout_padding">
+    <section class="product_section">
         <div class="container container-fluid">
             <div class="container-fluid">
                 <form method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id_menu" value="<?php echo $edit_data ? $edit_data['id_menu'] : ''; ?>">
                     <div class="form-group">
                         <label>Nama Menu</label>
-                        <input type="text" name="nama_menu" class="form-control" required
+                        <input type="text" name="nama_menu" class="form-control"
                             value="<?php echo $edit_data ? htmlspecialchars($edit_data['nama_menu']) : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label>Harga</label>
-                        <input type="number" name="harga" class="form-control" required
+                        <input type="number" name="harga" class="form-control"
                             value="<?php echo $edit_data ? $edit_data['harga'] : ''; ?>">
                     </div>
                     <div class="form-group">
                         <label>Jenis</label>
-                        <select name="jenis" class="form-control" required>
+                        <select name="jenis" class="form-control">
                             <option value="makanan" <?php echo ($edit_data && $edit_data['jenis'] == 'makanan') ? 'selected' : ''; ?>>Makanan</option>
                             <option value="minuman" <?php echo ($edit_data && $edit_data['jenis'] == 'minuman') ? 'selected' : ''; ?>>Minuman</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Stok</label>
-                        <input type="number" name="stok" class="form-control" required
+                        <input type="number" name="stok" class="form-control"
                             value="<?php echo $edit_data ? $edit_data['stok'] : ''; ?>">
                     </div>
                     <div class="form-group">
@@ -393,29 +209,21 @@ if (isset($_SESSION['error'])) {
                                 class="mt-2" />
                         <?php } ?>
                     </div>
-                    <button type="submit" class="btn btn-secondary"><?php echo $edit_data ? 'Update' : 'Tambah'; ?>
-                        Item</button>
-                    <button type="reset" href="manage_menu.php" class="btn btn-secondary">Reset</button>
+                    <button type="button" onclick="validasiForm()" class="btn btn-secondary">
+                        <?php echo $edit_data ? 'Update' : 'Tambah'; ?> Item
+                    </button>
+
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <button type="submit" name="kembali" class="btn btn-secondary" <?php echo $edit_data ? '' : 'hidden'; ?>>
+                        Kembali
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Notifikasi Sukses atau Error -->
-    <?php if (!empty($success_message)): ?>
-        <div class="alert alert-success fade show" role="alert" id="success-alert">
-            <?php echo htmlspecialchars($success_message); ?>
-        </div>
-    <?php endif; ?>
-    <?php if (!empty($error_message)): ?>
-        <div class="alert alert-danger fade show" role="alert" id="error-alert">
-            <?php echo htmlspecialchars($error_message); ?>
-        </div>
-    <?php endif; ?>
-
-
     <!-- Tabel Daftar Menu -->
-    <div class="menu_section layout_padding">
+    <div class="product_section">
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead class="text-center">
@@ -445,9 +253,8 @@ if (isset($_SESSION['error'])) {
                             <td>
                                 <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>"
                                     class="btn btn-warning btn-sm">Edit</a>
-                                <a href="manage_menu.php?delete=<?php echo $row['id_menu']; ?>"
-                                    class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus menu ini?')">Delete</a>
+                                <button class="btn btn-danger btn-sm"
+                                    onclick="hapusMenu(<?php echo $row['id_menu']; ?>)">Delete</button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -470,19 +277,8 @@ if (isset($_SESSION['error'])) {
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <!-- custom js -->
-    <script src="js/custom.js"></script>
-    <script>
-        // Hilangkan notifikasi sukses otomatis setelah 3 detik
-        setTimeout(function () {
-            $('#success-alert').fadeOut('slow');
-        }, 3000);
-
-        // Hilangkan notifikasi error otomatis setelah 3 detik
-        setTimeout(function () {
-            $('#error-alert').fadeOut('slow');
-        }, 3000);
-    </script>
+    <!-- custom js-->
+    <script src="js/manage_menu.js"></script>
 </body>
 
 </html>

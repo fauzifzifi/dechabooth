@@ -27,176 +27,10 @@ include 'koneksi.php';
     <!-- font awesome -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <!-- Custom styles -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/admin.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 
-    <style>
-        :root {
-            --primary: #9c27b0;
-            --primary-light: #9c27b0;
-            --primary-dark: #9c27b0;
-            --secondary: #9d4edd;
-            --accent: #c77dff;
-            --light: #f8f7fc;
-            --dark: #333333;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            padding: 0;
-        }
-
-        .btn {
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            border: none;
-            margin-top: 5px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-
-        }
-
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .dashboard-title {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-
-        .dashboard-subtitle {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        /* Controls */
-        .controls-section {
-            background: #ffffffe6;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3);
-            margin-bottom: 25px;
-        }
-
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #DDA0DD;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #6f1089d0;
-            box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
-        }
-
-        .filter-dropdown {
-            border-radius: 10px;
-            border: 2px solid #DDA0DD;
-            transition: border-color 0.3s ease;
-            font-size: 1rem;
-        }
-
-        .filter-dropdown:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
-        }
-
-        /* Table */
-        .table-container {
-            background: #ffffffe6;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
-        }
-
-        .table thead th {
-            background: #6f1089d0;
-            color: white;
-            border: none;
-            font-weight: bold;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background: #F8F8FF;
-        }
-
-        .table tbody tr:hover {
-            background: #E6E6FA;
-            transform: scale(1.02);
-            transition: all 0.2s ease;
-        }
-
-        /* Badges */
-        .badge-perubahan {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            align-items: center;
-        }
-
-        .badge-penjualan {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #c8e6c9;
-        }
-
-        .badge-admin {
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 1px solid #bbdefb;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .table-container {
-                padding: 15px;
-            }
-
-            .table thead th,
-            .table td {
-                padding: 10px 8px;
-                font-size: 0.9rem;
-                vertical-align: middle;
-            }
-
-            .controls-section {
-                padding: 20px;
-            }
-
-            .filter-dropdown {
-                min-width: 100%;
-                margin-top: 15px;
-            }
-        }
-    </style>
 </head>
 
 <body class="sub_page">
@@ -246,58 +80,55 @@ include 'koneksi.php';
         </header>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="dashboard-container">
-            <!-- Header -->
-            <div class="dashboard-header">
-                <h1 class="dashboard-title">Riwayat Perubahan Stok</h1>
-                <p class="dashboard-subtitle">Pantau semua perubahan stok produk dengan detail lengkap</p>
+    <!-- Header -->
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">Riwayat Perubahan Stok</h1>
+        <p class="dashboard-subtitle">Pantau semua perubahan stok produk dengan detail lengkap</p>
+    </div>
+
+    <!-- Controls -->
+    <div class="product_section">
+        <div class="row align-items-center">
+            <div class="col-md-8 mb-3 mb-md-0 form-group">
+                <input type="text" id="searchInput" class="form-control"
+                    placeholder="Cari menu, tanggal, jenis perubahan...">
             </div>
-
-            <!-- Controls -->
-            <div class="controls-section">
-                <div class="row align-items-center">
-                    <div class="col-md-8 mb-3 mb-md-0 form-group">
-                        <input type="text" id="searchInput" class="form-control"
-                            placeholder="Cari menu, tanggal, jenis perubahan...">
-                    </div>
-                    <div class="col-md-4">
-                        <select id="filterChange" class="form-control filter-dropdown">
-                            <option value="">Semua Perubahan</option>
-                            <option value="penjualan">Perubahan Penjualan</option>
-                            <option value="admin">Perubahan Admin</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                <select id="filterChange" class="form-control">
+                    <option value="">Semua Perubahan</option>
+                    <option value="penjualan">Perubahan Penjualan</option>
+                    <option value="admin">Perubahan Admin</option>
+                </select>
             </div>
+        </div>
+    </div>
 
-            <!-- Table -->
-            <div class="table-container">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="logTable">
-                        <thead class="text-center">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama Menu</th>
-                                <th>Stok Lama</th>
-                                <th>Stok Baru</th>
-                                <th>Perubahan</th>
-                                <th>Qty</th>
-                                <th>Harga (Rp)</th>
-                                <th>Tanggal</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            <?php
-                            $log = mysqli_query($koneksi, "SELECT * FROM log_stok ORDER BY tanggal DESC");
-                            $rowCount = mysqli_num_rows($log);
+    <!-- Table -->
+    <div class="product_section">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="logTable">
+                <thead class="text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Menu</th>
+                        <th>Stok Lama</th>
+                        <th>Stok Baru</th>
+                        <th>Perubahan</th>
+                        <th>Qty</th>
+                        <th>Harga (Rp)</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <?php
+                    $log = mysqli_query($koneksi, "SELECT * FROM log_stok ORDER BY tanggal DESC");
+                    $rowCount = mysqli_num_rows($log);
 
-                            if ($rowCount > 0) {
-                                while ($row = mysqli_fetch_assoc($log)) {
-                                    $badgeClass = $row['perubahan'] == 'penjualan' ? 'badge-penjualan' : 'badge-admin';
-                                    $perubahanText = $row['perubahan'] == 'penjualan' ? 'Penjualan' : 'Admin';
-                                    echo "<tr>
+                    if ($rowCount > 0) {
+                        while ($row = mysqli_fetch_assoc($log)) {
+                            $badgeClass = $row['perubahan'] == 'penjualan' ? 'badge-penjualan' : 'badge-admin';
+                            $perubahanText = $row['perubahan'] == 'penjualan' ? 'Penjualan' : 'Admin';
+                            echo "<tr>
                                         <td><strong>#{$row['id']}</strong></td>
                                         <td>{$row['nama_menu']}</td>
                                         <td>{$row['stok_lama']}</td>
@@ -307,20 +138,19 @@ include 'koneksi.php';
                                         <td>" . number_format($row['harga'], 0, ',', '.') . "</td>
                                         <td>{$row['tanggal']}</td>
                                     </tr>";
-                                }
-                            } else {
-                                echo '<tr><td colspan="8" class="text-center py-4">
+                        }
+                    } else {
+                        echo '<tr><td colspan="8" class="text-center py-4">
                                     <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
                                     <p class="text-muted">Belum ada riwayat perubahan stok</p>
                                 </td></tr>';
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </div>
+
 
     <!-- footer section -->
     <footer class="container-fluid footer_section">

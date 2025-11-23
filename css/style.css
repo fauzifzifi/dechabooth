@@ -10,10 +10,6 @@ body.sub_page {
   padding-top: 90px; /* Sesuaikan nilai ini berdasarkan tinggi navbar Anda (misal 80-100px). Jika navbar lebih tinggi, naikkan nilainya. */
 }
 
-.layout_padding {
-  padding: 90px 0;
-}
-
 .layout_padding2 {
   padding: 45px 0;
 }
@@ -24,14 +20,6 @@ body.sub_page {
 
 .layout_padding2-bottom {
   padding-bottom: 45px;
-}
-
-.layout_padding-top {
-  padding-top: 90px;
-}
-
-.layout_padding-bottom {
-  padding-bottom: 90px;
 }
 
 .heading_container {
