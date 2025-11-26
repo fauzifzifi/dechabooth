@@ -97,7 +97,7 @@
       </div>
       <div class="menu_container">
         <?php
-        $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan' LIMIT 5");
+        $makanan = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='makanan'");
         while ($row = mysqli_fetch_assoc($makanan)) { ?>
           <div class="box">
             <div class="img-box">
@@ -128,7 +128,7 @@
       </div>
       <div class="menu_container">
         <?php
-        $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman' LIMIT 6");
+        $minuman = mysqli_query($koneksi, "SELECT * FROM menu WHERE jenis='minuman'");
         while ($row = mysqli_fetch_assoc($minuman)) { ?>
           <div class="box">
             <div class="img-box">
