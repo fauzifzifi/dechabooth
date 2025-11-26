@@ -1,113 +1,322 @@
+/* ===========================
+   ADMIN LAYOUT - FINAL (768px)
+   =========================== */
+
+/* Base */
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
 }
 
-/* --- Layout & page offsets --- */
-body.sub_page {
-  padding-top: 90px;
+* {
+  box-sizing: border-box;
 }
 
-/* --- Header / Navbar used by admin pages --- */
-.hero_area {
+:root {
+  --az-sidebar-width: 260px;
+  --az-purple: #6f1089;
+  --az-purple-dark: #5a0d71;
+  --az-text: #ffffff;
+  --az-overlay: rgba(0, 0, 0, 0.45);
+  --az-transition: 0.35s ease;
+  --az-mobile-nav-height: 60px;
+}
+
+/* Reset old bootstrap/nav rules */
+.sidebar,
+.navbar,
+.header_section,
+.hero_area,
+.custom_nav-container {
+  all: unset !important;
+}
+
+/* ===========================
+   SIDEBAR (Desktop default)
+   =========================== */
+.az-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--az-sidebar-width);
   height: 100vh;
+  background: linear-gradient(180deg, var(--az-purple-dark), var(--az-purple));
+  padding: 22px 18px;
+  color: var(--az-text);
+  overflow-y: auto;
+  z-index: 1200;
+  transition: transform var(--az-transition);
+  transform: translateX(0);
+  box-shadow: 2px 0 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Sidebar header */
+.az-sidebar-header {
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.az-brand {
   display: flex;
   flex-direction: column;
-  position: relative;
-}
-.sub_page .hero_area {
-  height: auto;
+  align-items: center;
+  gap: 10px;
 }
 
-.header_section {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.az-brand-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  background: #fff;
+  padding: 6px;
+}
+
+.az-brand-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--az-text);
+}
+
+/* Nav menu */
+.az-nav ul {
+  list-style: none;
+  padding: 12px 0 40px;
+  margin: 0;
+}
+
+.az-nav li {
+  margin-bottom: 8px;
+}
+
+.az-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--az-text);
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.az-nav a:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===========================
+   ACTIVE MENU (NO GARIS BAWAH)
+   =========================== */
+.az-nav li.active a {
+  background: rgba(255, 255, 255, 0.16); /* soft white glow */
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+/* icon ikut putih */
+.az-nav li.active a i {
+  color: #ffffff;
+}
+
+.az-btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #e03a3a;
+  border-radius: 10px;
+  color: #fff;
+}
+
+/* ===========================
+   SIDEBAR CLOSE BUTTON (Fix)
+   =========================== */
+.az-sidebar-close {
+  display: none;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none; /* hilangkan background kotak putih */
+  border: none; /* hilangkan border */
+  font-size: 30px;
+  color: #ffffff; /* X warna putih */
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  z-index: 1600;
+}
+
+.az-sidebar-close i {
+  font-size: 30px;
+  color: white;
+  pointer-events: none; /* biar klik tetap kena tombol */
+}
+
+/* ===========================
+   MOBILE NAVBAR
+   =========================== */
+.az-mobile-navbar {
   position: fixed;
   top: 0;
   width: 100%;
+  height: var(--az-mobile-nav-height);
+  background-color: rgba(255, 255, 255, 0.96);
   z-index: 1000;
-  transition: all 0.3s ease;
-}
-.header_section .container-fluid {
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 0 22px;
+  display: none; /* <-- default hidden untuk desktop */
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* navbar layout used by admin pages */
-.navbar-nav {
+.az-mobile-brand {
+  font-size: 25px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* ===========================
+   MOBILE TOGGLER (Fix ukuran)
+   =========================== */
+.az-toggler {
+  width: 34px; /* lebih panjang */
+  height: 22px; /* lebih pendek */
+  border: none;
+  background: transparent;
+  cursor: pointer;
   display: flex;
-  justify-content: right;
-  width: 100%;
-  text-align: center;
-}
-
-.custom_nav-container {
-  z-index: 99999;
-}
-.custom_nav-container .navbar-nav .nav-item .nav-link {
-  padding: 10px 30px;
-  color: #000;
-  text-transform: uppercase;
-}
-.custom_nav-container .navbar-nav .nav-item.active .nav-link {
-  color: #6f1089d0;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-.custom_nav-container .navbar-toggler {
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0;
-  width: 37px;
-  height: 42px;
-  transition: all 0.3s;
-  outline: none;
-}
-.custom_nav-container .navbar-toggler span,
-.custom_nav-container .navbar-toggler span::before,
-.custom_nav-container .navbar-toggler span::after {
-  display: block;
-  width: 35px;
-  height: 4px;
-  background: #6f1089d0;
-  border-radius: 5px;
-  transition: all 0.3s;
-  content: "";
-}
-.custom_nav-container .navbar-toggler span {
-  margin: 7px 0;
-  position: relative;
-}
-.custom_nav-container .navbar-toggler span::before {
-  top: -10px;
-  position: absolute;
-}
-.custom_nav-container .navbar-toggler span::after {
-  top: 10px;
-  position: absolute;
-}
-.custom_nav-container .navbar-toggler[aria-expanded="true"] {
-  transform: rotate(360deg);
-}
-.custom_nav-container .navbar-toggler[aria-expanded="true"] span {
-  transform: rotate(45deg);
-}
-.custom_nav-container .navbar-toggler[aria-expanded="true"] span::before,
-.custom_nav-container .navbar-toggler[aria-expanded="true"] span::after {
-  transform: rotate(90deg);
-  top: 0;
 }
 
-.navbar-brand {
-  font-size: 28px;
-  font-weight: bold;
-  font-family: "Poppins", sans-serif;
-  color: #000;
+.az-toggler-line {
+  width: 100%;
+  height: 3px; /* tipis */
+  background: #7d2bae; /* warna ungu sesuai contoh */
+  border-radius: 4px;
 }
 
-/* --- Shared form/button/table styles that admin pages rely on --- */
+/* ===========================
+   OVERLAY MOBILE
+   =========================== */
+.az-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--az-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+  z-index: 1190;
+}
+
+.az-sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===========================
+   MAIN CONTENT
+   =========================== */
+.az-main-content {
+  min-height: 100vh;
+  padding: 22px;
+  margin-left: var(--az-sidebar-width);
+  transition: margin-left var(--az-transition);
+  background: linear-gradient(135deg, #f3e5f5, #eee1f7);
+}
+
+/* =====================================================
+   MOBILE RULES (≤768px) — INI YANG PENTING!
+   ===================================================== */
+@media (max-width: 768px) {
+  .az-sidebar {
+    transform: translateX(-110%);
+  }
+
+  .az-sidebar.mobile-open {
+    transform: translateX(0);
+    z-index: 1500;
+  }
+
+  .az-sidebar-close {
+    display: block;
+  }
+
+  .az-mobile-navbar {
+    display: flex;
+  }
+
+  .az-main-content {
+    margin-left: 0;
+    padding-top: calc(var(--az-mobile-nav-height) + 20px);
+  }
+
+  body.az-no-scroll {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  /* Hilangkan kotak saat tombol toggler & close ditekan */
+  #menu-toggle,
+  #menu-close {
+    outline: none !important;
+    border: none !important;
+  }
+
+  #menu-toggle:focus,
+  #menu-close:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  button:focus,
+  button:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ===========================
+   DESKTOP RULES (≥769px)
+   =========================== */
+@media (min-width: 769px) {
+  .az-sidebar-close {
+    display: none;
+  }
+
+  /* IMPORTANT: navbar mobile tidak muncul */
+  .az-mobile-navbar {
+    display: none;
+  }
+
+  /* Sidebar full normal */
+  .az-sidebar {
+    transform: translateX(0) !important;
+  }
+
+  .az-main-content {
+    margin-left: var(--az-sidebar-width);
+  }
+}
+
+/* ===========================
+   Scrollbar
+   =========================== */
+.az-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.az-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+}
+
+/* buttons */
 .btn {
   border-radius: 25px;
   transition: all 0.3s ease;
@@ -128,14 +337,17 @@ body.sub_page {
   background: #6f1089d0;
   color: #fff;
 }
+
 .btn-secondary {
   background: #dda0dd;
   color: #6f1089d0;
 }
+
 .btn-warning {
   background: #ffd700;
   color: #fff;
 }
+
 .btn-warning:hover {
   background: #e0a800;
   color: #fff;
@@ -151,6 +363,7 @@ body.sub_page {
   border: 2px solid #dda0dd;
   transition: border-color 0.3s ease;
 }
+
 .form-control:focus {
   border-color: #6f1089d0;
   box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
@@ -200,6 +413,7 @@ input[type="file"]::-moz-file-upload-button:hover {
   transition: transform 0.3s ease;
   margin-bottom: 1rem;
 }
+
 .stats-card:hover {
   transform: translateY(-5px);
 }
@@ -207,6 +421,7 @@ input[type="file"]::-moz-file-upload-button:hover {
 .card {
   border-radius: 10px;
 }
+
 .card .card-body {
   padding: 1rem;
 }
@@ -215,8 +430,7 @@ input[type="file"]::-moz-file-upload-button:hover {
 .product_section {
   background: #ffffffe6;
   border-radius: 20px;
-  margin: 20px;
-  padding: 35px;
+  padding: 20px;
   box-shadow: 0 8px 20px rgba(186, 104, 200, 0.3);
 }
 
@@ -226,19 +440,23 @@ input[type="file"]::-moz-file-upload-button:hover {
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(221, 160, 221, 0.2);
 }
+
 .table img {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(75, 0, 130, 0.2);
 }
+
 .table thead th {
   background: #6f1089d0;
   color: #fff;
   border: none;
   font-weight: bold;
 }
+
 .table tbody tr:nth-child(even) {
   background: #f8f8ff;
 }
+
 .table tbody tr:hover {
   background: #e6e6fa;
   transform: scale(1.02);
@@ -253,7 +471,6 @@ input[type="file"]::-moz-file-upload-button:hover {
 @media (max-width: 768px) {
   .table thead th,
   .table td {
-    padding: 10px 8px;
     font-size: 0.9rem;
     vertical-align: middle;
   }
@@ -266,12 +483,14 @@ input[type="file"]::-moz-file-upload-button:hover {
   position: relative;
   background-color: #fff;
 }
+
 .footer_section p {
   color: #000;
   margin: 0 auto;
   text-align: center;
   padding: 25px 0;
 }
+
 .footer_section a {
   color: inherit;
 }
@@ -279,14 +498,16 @@ input[type="file"]::-moz-file-upload-button:hover {
 /* --- Admin-specific dashboard styles (extracted from inline CSS of manage_menu.php & admin_trigger.php) --- */
 .dashboard-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
+
 .dashboard-title {
   color: #9c27b0;
   font-weight: 700;
   font-size: 2.2rem;
   margin-bottom: 15px;
 }
+
 .dashboard-subtitle {
   color: #666;
   font-size: 1.1rem;
@@ -296,16 +517,19 @@ input[type="file"]::-moz-file-upload-button:hover {
   border-radius: 10px;
   animation: slideIn 0.5s ease-out;
 }
+
 .alert-success {
   background: #28a745;
   color: #fff;
   border: none;
 }
+
 .alert-danger {
   background: #dc3545;
   color: #fff;
   border: none;
 }
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -331,11 +555,13 @@ input[type="file"]::-moz-file-upload-button:hover {
   display: inline-flex;
   align-items: center;
 }
+
 .badge-penjualan {
   background: #e8f5e9;
   color: #2e7d32;
   border: 1px solid #c8e6c9;
 }
+
 .badge-admin {
   background: #e3f2fd;
   color: #1565c0;

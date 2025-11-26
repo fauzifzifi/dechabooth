@@ -193,8 +193,8 @@ function attachQuantityListeners() {
             if (typeof Swal !== "undefined") {
               Swal.fire({
                 icon: "error",
-                title: "Stok Habis",
-                text: `Aduh.. ${name} habis nih, maaf yaa :)`,
+                title: "Stok Tidak Cukup",
+                text: `Stok ${name} hanya ${stok} tersedia.`,
                 confirmButtonColor: "#7b2cbf",
               });
             } else {
