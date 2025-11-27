@@ -244,9 +244,7 @@ unset($_SESSION['success'], $_SESSION['error']);
         <footer class="container-fluid footer_section">
             <div class="container">
                 <div class="col-md-11 col-lg-8 mx-auto">
-                    <p>
-                        &copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth
-                    </p>
+                    <p>&copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth</p>
                 </div>
             </div>
         </footer>
@@ -256,6 +254,11 @@ unset($_SESSION['success'], $_SESSION['error']);
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/admin.js"></script>
+
+    <script>
+        // display year
+        document.getElementById('displayYear').textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>

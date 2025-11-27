@@ -149,9 +149,7 @@ include 'koneksi.php';
         <footer class="container-fluid footer_section">
             <div class="container">
                 <div class="col-md-11 col-lg-8 mx-auto">
-                    <p>
-                        &copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth
-                    </p>
+                    <p>&copy; <span id="displayYear"></span> All Rights Reserved By Decha Booth</p>
                 </div>
             </div>
         </footer>
@@ -180,6 +178,9 @@ include 'koneksi.php';
                 $(this).toggle(filter === "" || perubahan.includes(filter));
             });
         });
+
+        // display year
+        document.getElementById('displayYear').textContent = new Date().getFullYear();
     </script>
 
 </body>
