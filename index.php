@@ -8,38 +8,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   $email = mysqli_real_escape_string($koneksi, $_POST['email']);
   $pesan = mysqli_real_escape_string($koneksi, $_POST['pesan']);
 
-  // Insert dulu ke tabel pembeli
-  $query_pembeli = "INSERT INTO pembeli (nama_pembeli, no_telp)
-                    VALUES ('$nama', '$telepon')";
-  $insertPembeli = mysqli_query($koneksi, $query_pembeli);
 
-  if ($insertPembeli) {
-    // Ambil ID pembeli yang barusan di insert
-    $id_pembeli = mysqli_insert_id($koneksi);
+  // Ambil ID pembeli yang barusan di insert
+  $id_pembeli = mysqli_insert_id($koneksi);
 
-    // Insert ke contact_us pake id pembeli tadi
-    $query_contact = "INSERT INTO contact_us (nama, telepon, email, pesan, id_pembeli)
+  // Insert ke contact_us pake id pembeli tadi
+  $query_contact = "INSERT INTO contact_us (nama, telepon, email, pesan, id_pembeli)
                       VALUES ('$nama', '$telepon', '$email', '$pesan', '$id_pembeli')";
 
-    $insertContact = mysqli_query($koneksi, $query_contact);
+  $insertContact = mysqli_query($koneksi, $query_contact);
 
-    if ($insertContact) {
-      $_SESSION['msg'] = "Pesan kamu berhasil dikirim!";
-      $_SESSION['msg_type'] = "success";
-      header("Location: index.php#contactIndex");
-      exit;
-    } else {
-      $_SESSION['msg'] = "Gagal simpan contact_us: " . mysqli_error($koneksi);
-      $_SESSION['msg_type'] = "error";
-      header("Location: index.php#contactIndex");
-      exit;
-    }
+  if ($insertContact) {
+    $_SESSION['msg'] = "Pesan kamu berhasil dikirim!";
+    $_SESSION['msg_type'] = "success";
+    header("Location: index.php#contactIndex");
+    exit;
   } else {
-    $_SESSION['msg'] = "Gagal simpan pembeli: " . mysqli_error($koneksi);
+    $_SESSION['msg'] = "Gagal simpan contact_us: " . mysqli_error($koneksi);
     $_SESSION['msg_type'] = "error";
     header("Location: index.php#contactIndex");
     exit;
   }
+
 }
 ?>
 
