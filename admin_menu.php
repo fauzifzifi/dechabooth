@@ -20,7 +20,7 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Admin Pages | Decha Booth</title>
+  <title>Dashboard | Admin</title>
 
   <!-- bootstrap core css (your local file) -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -85,7 +85,7 @@ $total_kategori = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT COUNT(DISTIN
 
   <!-- MAIN CONTENT -->
   <main class="az-main-content" id="azMainContent" role="main">
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-3 main-wrapper">
       <!-- Stats Cards -->
       <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">

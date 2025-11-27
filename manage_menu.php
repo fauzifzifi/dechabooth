@@ -142,102 +142,104 @@ unset($_SESSION['success'], $_SESSION['error']);
 
     <!-- MAIN CONTENT -->
     <main class="az-main-content" id="azMainContent">
+        <div class="container-fluid mt-3 main-wrapper">
 
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">Manajemen Menu</h1>
-            <p class="dashboard-subtitle">Kelola seluruh menu dengan cepat dan terstruktur</p>
-        </div>
-
-        <!-- Form Tambah/Edit -->
-        <section class="product_section card mb-4 container-fluid mt-3">
-            <div class="container container-fluid">
-                <div class="container-fluid">
-                    <form method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="id_menu"
-                            value="<?php echo $edit_data ? $edit_data['id_menu'] : ''; ?>">
-                        <div class="form-group">
-                            <label>Nama Menu</label>
-                            <input type="text" name="nama_menu" class="form-control"
-                                value="<?php echo $edit_data ? htmlspecialchars($edit_data['nama_menu']) : ''; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Harga</label>
-                            <input type="number" name="harga" class="form-control"
-                                value="<?php echo $edit_data ? $edit_data['harga'] : ''; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Jenis</label>
-                            <select name="jenis" class="form-control">
-                                <option value="makanan" <?php echo ($edit_data && $edit_data['jenis'] == 'makanan') ? 'selected' : ''; ?>>Makanan</option>
-                                <option value="minuman" <?php echo ($edit_data && $edit_data['jenis'] == 'minuman') ? 'selected' : ''; ?>>Minuman</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Stok</label>
-                            <input type="number" name="stok" class="form-control"
-                                value="<?php echo $edit_data ? $edit_data['stok'] : ''; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Gambar</label>
-                            <input type="file" name="gambar" class="form-control" accept="image/*">
-                            <input type="hidden" name="gambar_lama"
-                                value="<?php echo $edit_data ? $edit_data['gambar'] : ''; ?>">
-                            <?php if ($edit_data && $edit_data['gambar']) { ?>
-                                <img src="images/<?php echo $edit_data['gambar']; ?>" alt="Gambar Lama" width="100"
-                                    class="mt-2" />
-                            <?php } ?>
-                        </div>
-                        <button type="button" onclick="validasiForm()" class="btn btn-secondary">
-                            <?php echo $edit_data ? 'Update' : 'Tambah'; ?> Item
-                        </button>
-
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                        <button type="submit" name="kembali" class="btn btn-secondary" <?php echo $edit_data ? '' : 'hidden'; ?>>
-                            Kembali
-                        </button>
-                    </form>
-                </div>
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Manajemen Menu</h1>
+                <p class="dashboard-subtitle">Kelola seluruh menu dengan cepat dan terstruktur</p>
             </div>
-        </section>
 
-        <!-- Tabel Daftar Menu -->
-        <div class="product_section card mb-4 container-fluid mt-3">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="text-center">
-                        <tr>
-                            <th>ID Menu</th>
-                            <th>Nama Menu</th>
-                            <th>Jenis</th>
-                            <th>Harga</th>
-                            <th>Stok</th>
-                            <th>Gambar</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($row = mysqli_fetch_assoc($menus)) { ?>
-                            <tr class="text-center">
-                                <td><?php echo $row['id_menu']; ?></td>
-                                <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
-                                <td><?php echo htmlspecialchars($row['jenis']); ?></td>
-                                <td>Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
-                                <td><?php echo $row['stok']; ?></td>
-                                <td>
-                                    <?php if ($row['gambar']) { ?>
-                                        <img src="images/<?php echo $row['gambar']; ?>" alt="gambar" width="50" />
-                                    <?php } ?>
-                                </td>
-                                <td>
-                                    <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="hapusMenu(<?php echo $row['id_menu']; ?>)">Delete</button>
-                                </td>
+            <!-- Form Tambah/Edit -->
+            <section class="product_section card mb-4 container-fluid mt-3">
+                <div class="container container-fluid">
+                    <div class="container-fluid">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="id_menu"
+                                value="<?php echo $edit_data ? $edit_data['id_menu'] : ''; ?>">
+                            <div class="form-group">
+                                <label>Nama Menu</label>
+                                <input type="text" name="nama_menu" class="form-control"
+                                    value="<?php echo $edit_data ? htmlspecialchars($edit_data['nama_menu']) : ''; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Harga</label>
+                                <input type="number" name="harga" class="form-control"
+                                    value="<?php echo $edit_data ? $edit_data['harga'] : ''; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis</label>
+                                <select name="jenis" class="form-control">
+                                    <option value="makanan" <?php echo ($edit_data && $edit_data['jenis'] == 'makanan') ? 'selected' : ''; ?>>Makanan</option>
+                                    <option value="minuman" <?php echo ($edit_data && $edit_data['jenis'] == 'minuman') ? 'selected' : ''; ?>>Minuman</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Stok</label>
+                                <input type="number" name="stok" class="form-control"
+                                    value="<?php echo $edit_data ? $edit_data['stok'] : ''; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Gambar</label>
+                                <input type="file" name="gambar" class="form-control" accept="image/*">
+                                <input type="hidden" name="gambar_lama"
+                                    value="<?php echo $edit_data ? $edit_data['gambar'] : ''; ?>">
+                                <?php if ($edit_data && $edit_data['gambar']) { ?>
+                                    <img src="images/<?php echo $edit_data['gambar']; ?>" alt="Gambar Lama" width="100"
+                                        class="mt-2" />
+                                <?php } ?>
+                            </div>
+                            <button type="button" onclick="validasiForm()" class="btn btn-secondary">
+                                <?php echo $edit_data ? 'Update' : 'Tambah'; ?> Item
+                            </button>
+
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button type="submit" name="kembali" class="btn btn-secondary" <?php echo $edit_data ? '' : 'hidden'; ?>>
+                                Kembali
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tabel Daftar Menu -->
+            <div class="product_section card mb-4 container-fluid mt-3">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>ID Menu</th>
+                                <th>Nama Menu</th>
+                                <th>Jenis</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Gambar</th>
+                                <th>Aksi</th>
                             </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = mysqli_fetch_assoc($menus)) { ?>
+                                <tr class="text-center">
+                                    <td><?php echo $row['id_menu']; ?></td>
+                                    <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['jenis']); ?></td>
+                                    <td>Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
+                                    <td><?php echo $row['stok']; ?></td>
+                                    <td>
+                                        <?php if ($row['gambar']) { ?>
+                                            <img src="images/<?php echo $row['gambar']; ?>" alt="gambar" width="50" />
+                                        <?php } ?>
+                                    </td>
+                                    <td>
+                                        <a href="manage_menu.php?edit=<?php echo $row['id_menu']; ?>"
+                                            class="btn btn-warning btn-sm">Edit</a>
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="hapusMenu(<?php echo $row['id_menu']; ?>)">Delete</button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- footer section -->

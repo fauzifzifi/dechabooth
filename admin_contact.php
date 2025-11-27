@@ -13,7 +13,7 @@ include 'koneksi.php';
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard | Riwayat Pesan</title>
+    <title>Riwayat Pesan | Admin</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -86,48 +86,48 @@ include 'koneksi.php';
 
     <!-- MAIN CONTENT -->
     <main class="az-main-content" id="azMainContent">
+        <div class="container-fluid mt-3 main-wrapper">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Riwayat Pesan Pengguna</h1>
+                <p class="dashboard-subtitle">Semua pesan dari pengguna akan ditampilkan di sini</p>
+            </div>
 
-        <!-- Header -->
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">Riwayat Pesan Pengguna</h1>
-            <p class="dashboard-subtitle">Semua pesan dari pengguna akan ditampilkan di sini</p>
-        </div>
-
-        <!-- Controls -->
-        <div class="product_section card mb-4 container-fluid mt-3">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <input type="text" id="searchInput" class="form-control"
-                        placeholder="Cari nama, email, nomor telepon, tanggal, pesan...">
+            <!-- Controls -->
+            <div class="product_section card mb-4 container-fluid mt-3">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <input type="text" id="searchInput" class="form-control"
+                            placeholder="Cari nama, email, nomor telepon, tanggal, pesan...">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Table -->
-        <div class="product_section card mb-4 container-fluid mt-3">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="contactTable">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Nama</th>
-                            <th>Telepon</th>
-                            <th>Email</th>
-                            <th>Pesan</th>
-                            <th>Tanggal</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
+            <!-- Table -->
+            <div class="product_section card mb-4 container-fluid mt-3">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="contactTable">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Nama</th>
+                                <th>Telepon</th>
+                                <th>Email</th>
+                                <th>Pesan</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
 
-                    <tbody class="text-center">
-                        <?php
-                        $get = mysqli_query($koneksi, "SELECT * FROM contact_us ORDER BY tanggal DESC");
-                        $count = mysqli_num_rows($get);
+                        <tbody class="text-center">
+                            <?php
+                            $get = mysqli_query($koneksi, "SELECT * FROM contact_us ORDER BY tanggal DESC");
+                            $count = mysqli_num_rows($get);
 
-                        if ($count > 0) {
-                            while ($row = mysqli_fetch_assoc($get)) {
-                                $pesanPendek = strlen($row['pesan']) > 40 ? substr($row['pesan'], 0, 40) . "..." : $row['pesan'];
+                            if ($count > 0) {
+                                while ($row = mysqli_fetch_assoc($get)) {
+                                    $pesanPendek = strlen($row['pesan']) > 40 ? substr($row['pesan'], 0, 40) . "..." : $row['pesan'];
 
-                                echo "
+                                    echo "
                                 <tr>
                                     <td>{$row['nama']}</td>
                                     <td>{$row['telepon']}</td>
@@ -146,40 +146,41 @@ include 'koneksi.php';
                                     </td>
                                 </tr>
                             ";
-                            }
-                        } else {
-                            echo "<tr><td colspan='6' class='py-4 text-muted'>
+                                }
+                            } else {
+                                echo "<tr><td colspan='6' class='py-4 text-muted'>
                                 <i class='bi bi-inbox fs-2 mb-2'></i><br>
                                 Belum ada pesan dari pengguna
                               </td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <!-- Modal Detail Pesan -->
-        <div class="modal fade" id="detailModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content p-3">
+            <!-- Modal Detail Pesan -->
+            <div class="modal fade" id="detailModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content p-3">
 
-                    <div class="modal-header">
-                        <h4 class="modal-title"><i class="bi bi-envelope-open"></i> Detail Pesan</h4>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
+                        <div class="modal-header">
+                            <h4 class="modal-title"><i class="bi bi-envelope-open"></i> Detail Pesan</h4>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p><strong>Nama:</strong> <span id="detailNama"></span></p>
+                            <p><strong>Telepon:</strong> <span id="detailTelepon"></span></p>
+                            <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+                            <p><strong>Tanggal:</strong> <span id="detailTanggal"></span></p>
+                            <p><strong>Pesan:</strong></p>
+                            <p id="detailPesan" class="border p-2 rounded bg-light"></p>
+                        </div>
+
                     </div>
-
-                    <div class="modal-body">
-                        <p><strong>Nama:</strong> <span id="detailNama"></span></p>
-                        <p><strong>Telepon:</strong> <span id="detailTelepon"></span></p>
-                        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
-                        <p><strong>Tanggal:</strong> <span id="detailTanggal"></span></p>
-                        <p><strong>Pesan:</strong></p>
-                        <p id="detailPesan" class="border p-2 rounded bg-light"></p>
-                    </div>
-
                 </div>
             </div>
         </div>

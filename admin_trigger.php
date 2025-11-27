@@ -74,56 +74,56 @@ include 'koneksi.php';
 
     <!-- MAIN CONTENT -->
     <main class="az-main-content" id="azMainContent">
+        <div class="container-fluid mt-3 main-wrapper">
+            <!-- HEADER -->
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Riwayat Perubahan Stok</h1>
+                <p class="dashboard-subtitle">Pantau semua perubahan stok produk dengan detail lengkap</p>
+            </div>
 
-        <!-- HEADER -->
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">Riwayat Perubahan Stok</h1>
-            <p class="dashboard-subtitle">Pantau semua perubahan stok produk dengan detail lengkap</p>
-        </div>
-
-        <!-- SEARCH + FILTER -->
-        <div class="product_section card mb-4 container-fluid mt-3">
-            <div class="row align-items-center">
-                <div class="col-md-8 mb-3 mb-md-0 form-group">
-                    <input type="text" id="searchInput" class="form-control"
-                        placeholder="Cari menu, tanggal, jenis perubahan...">
-                </div>
-                <div class="col-md-4">
-                    <select id="filterChange" class="form-control">
-                        <option value="">Semua Perubahan</option>
-                        <option value="penjualan">Perubahan Penjualan</option>
-                        <option value="admin">Perubahan Admin</option>
-                    </select>
+            <!-- SEARCH + FILTER -->
+            <div class="product_section card mb-4 container-fluid mt-3">
+                <div class="row align-items-center">
+                    <div class="col-md-8 mb-3 mb-md-0 form-group">
+                        <input type="text" id="searchInput" class="form-control"
+                            placeholder="Cari menu, tanggal, jenis perubahan...">
+                    </div>
+                    <div class="col-md-4">
+                        <select id="filterChange" class="form-control">
+                            <option value="">Semua Perubahan</option>
+                            <option value="penjualan">Perubahan Penjualan</option>
+                            <option value="admin">Perubahan Admin</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- TABLE -->
-        <div class="product_section card mb-4 container-fluid mt-3">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="logTable">
-                    <thead class="text-center">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama Menu</th>
-                            <th>Stok Lama</th>
-                            <th>Stok Baru</th>
-                            <th>Perubahan</th>
-                            <th>Qty</th>
-                            <th>Harga (Rp)</th>
-                            <th>Tanggal</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <?php
-                        $log = mysqli_query($koneksi, "SELECT * FROM log_stok ORDER BY tanggal DESC");
-                        $rowCount = mysqli_num_rows($log);
+            <!-- TABLE -->
+            <div class="product_section card mb-4 container-fluid mt-3">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="logTable">
+                        <thead class="text-center">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Menu</th>
+                                <th>Stok Lama</th>
+                                <th>Stok Baru</th>
+                                <th>Perubahan</th>
+                                <th>Qty</th>
+                                <th>Harga (Rp)</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                            $log = mysqli_query($koneksi, "SELECT * FROM log_stok ORDER BY tanggal DESC");
+                            $rowCount = mysqli_num_rows($log);
 
-                        if ($rowCount > 0) {
-                            while ($row = mysqli_fetch_assoc($log)) {
-                                $badgeClass = $row['perubahan'] == 'penjualan' ? 'badge-penjualan' : 'badge-admin';
-                                $perubahanText = $row['perubahan'] == 'penjualan' ? 'Penjualan' : 'Admin';
-                                echo "<tr>
+                            if ($rowCount > 0) {
+                                while ($row = mysqli_fetch_assoc($log)) {
+                                    $badgeClass = $row['perubahan'] == 'penjualan' ? 'badge-penjualan' : 'badge-admin';
+                                    $perubahanText = $row['perubahan'] == 'penjualan' ? 'Penjualan' : 'Admin';
+                                    echo "<tr>
                                         <td><strong>#{$row['id']}</strong></td>
                                         <td>{$row['nama_menu']}</td>
                                         <td>{$row['stok_lama']}</td>
@@ -133,16 +133,17 @@ include 'koneksi.php';
                                         <td>" . number_format($row['harga'], 0, ',', '.') . "</td>
                                         <td>{$row['tanggal']}</td>
                                     </tr>";
-                            }
-                        } else {
-                            echo '<tr><td colspan="8" class="text-center py-4">
+                                }
+                            } else {
+                                echo '<tr><td colspan="8" class="text-center py-4">
                                     <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
                                     <p class="text-muted">Belum ada riwayat perubahan stok</p>
                                 </td></tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- footer section -->
