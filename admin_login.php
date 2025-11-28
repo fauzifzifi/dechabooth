@@ -1,3 +1,8 @@
+<?php
+session_start();
+include "koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -19,6 +24,9 @@
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <!-- sweet allert js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <style>
     /* (Style CSS tetap sama seperti yang Anda berikan) */
     * {
@@ -34,7 +42,7 @@
       font-family: "Poppins", sans-serif;
       background: url("images/login_bg.png") no-repeat center center fixed;
       background-size: cover;
-      color: #333;
+      color: black;
     }
 
     .login-wrapper {
@@ -73,6 +81,17 @@
       font-size: 22px;
       margin-bottom: 25px;
       color: #6a11cb;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 2px solid #dda0dd;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #6f1089d0;
+      box-shadow: 0 0 10px rgba(75, 0, 130, 0.3);
     }
 
     .btn-primary {
@@ -122,6 +141,7 @@
 </head>
 
 <body>
+
   <!-- Tombol kembali ke home -->
   <a href="index.php" class="back-home">
     <i class="bi bi-arrow-left-circle-fill"></i> Kembali ke Home
@@ -134,26 +154,14 @@
         <img src="images/logo.png" alt="Logo Decha Booth" style="width: 80px; margin-bottom: 10px" />
         <h2><i class="bi bi-person-lock"></i> Admin Login</h2>
       </div>
-
-      <!-- Tampilkan pesan error jika ada -->
-      <?php
-      session_start();
-      if (isset($_SESSION['error'])) {
-        echo '<div class="alert alert-danger">' . htmlspecialchars($_SESSION['error']) . '</div>';
-        unset($_SESSION['error']);  // Hapus setelah ditampilkan
-      }
-      ?>
-
       <form action="admin_login_process.php" method="POST">
         <div class="form-group mb-3 text-start">
           <label for="username"><i class="bi bi-person-fill"></i> Username</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username"
-            required />
+          <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" />
         </div>
         <div class="form-group mb-4 text-start">
           <label for="password"><i class="bi bi-lock-fill"></i> Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password"
-            required />
+          <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" />
         </div>
         <button type="submit" class="btn btn-primary w-100 py-2">
           <i class="bi bi-box-arrow-in-right"></i> Login
@@ -175,6 +183,25 @@
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/custom.js"></script>
+
+  <!-- Alert JS -->
+  <?php if (isset($_SESSION['sweet_alert'])): ?>
+    <script>
+      Swal.fire({
+        title: "<?php echo $_SESSION['sweet_alert']['title']; ?>",
+        text: "<?php echo $_SESSION['sweet_alert']['text']; ?>",
+        icon: "<?php echo $_SESSION['sweet_alert']['icon']; ?>",
+        confirmButtonText: "<?php echo $_SESSION['sweet_alert']['confirmButtonText']; ?>",
+        confirmButtonColor: "<?php echo $_SESSION['sweet_alert']['confirmButtonColor']; ?>"
+      }).then(() => {
+        <?php if (isset($_SESSION['sweet_alert']['redirect'])) { ?>
+          window.location.href = "<?php echo $_SESSION['sweet_alert']['redirect']; ?>";
+        <?php } ?>
+      });
+    </script>
+    <?php unset($_SESSION['sweet_alert']); endif; ?>
+  <!-- End Alert JS -->
+
 </body>
 
 </html>

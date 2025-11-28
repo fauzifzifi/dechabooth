@@ -194,7 +194,7 @@ function attachQuantityListeners() {
               Swal.fire({
                 icon: "error",
                 title: "Stok Tidak Cukup",
-                text: `Stok ${name} hanya ${stok} tersedia.`,
+                text: `Stok ${name} lagi habis nihh, maaf yaaa :)`,
                 confirmButtonColor: "#7b2cbf",
               });
             } else {
@@ -245,12 +245,12 @@ function attachCheckoutAndClearListeners() {
             Swal.fire({
               icon: "warning",
               title: "Keranjang Kosong!",
-              text: "Silakan tambahkan item terlebih dahulu sebelum checkout.",
+              text: "Silhakan tambahkan item terlebih dahulu sebelum checkout.",
               confirmButtonColor: "#7b2cbf",
             });
           } else {
             alert(
-              "Keranjang kosong! Silakan tambahkan item terlebih dahulu sebelum checkout."
+              "Keranjang kosong! Silhakan tambahkan item terlebih dahulu sebelum checkout."
             );
           }
         });
@@ -348,7 +348,7 @@ function attachCheckoutAndClearListeners() {
           Swal.fire({
             icon: "question",
             title: "Hapus Semua?",
-            text: "Apakah Anda yakin ingin menghapus semua isi keranjang?",
+            text: "Apakah yakin ingin menghapus semua isi keranjang?",
             showCancelButton: true,
             confirmButtonText: "Ya, hapus",
             cancelButtonText: "Batal",
