@@ -167,3 +167,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// Admin Contact Us - Hapus Pesan
+function hapusPesan(id) {
+  Swal.fire({
+    title: "Hapus pesan ini?",
+    text: "Data tidak dapat dikembalikan!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Ya, hapus!",
+    cancelButtonText: "Batal",
+    confirmButtonColor: "#7b2cbf",
+    cancelButtonColor: "#6c757d",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "admin_contact.php?delete=" + id;
+    }
+  });
+}
+
+// Admin Contact Us - Lihat Pesan
+$(".viewDetail").click(function () {
+  $("#detailNama").text($(this).data("nama"));
+  $("#detailTelepon").text($(this).data("telepon"));
+  $("#detailEmail").text($(this).data("email"));
+  $("#detailPesan").text($(this).data("pesan"));
+  $("#detailTanggal").text($(this).data("tanggal"));
+
+  $("#detailModal").modal("show");
+});

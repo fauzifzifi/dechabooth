@@ -5,6 +5,22 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 include 'koneksi.php';
+
+$contact = mysqli_query($koneksi, "SELECT * FROM contact_us ORDER BY tanggal DESC");
+
+if (isset($_GET['delete'])) {
+    $id_contact_us = (int) $_GET['delete'];
+    mysqli_query($koneksi, "DELETE FROM contact_us WHERE id_contact_us=$id_contact_us") ?
+        $_SESSION['success'] = "Pesan berhasil dihapus!" :
+        $_SESSION['error'] = "Gagal menghapus pesan!";
+    header('Location: admin_contact.php');
+    exit;
+}
+
+$success_message = isset($_SESSION['success']) ? $_SESSION['success'] : '';
+$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+
+unset($_SESSION['success'], $_SESSION['error']);
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +48,14 @@ include 'koneksi.php';
 
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+
+    <!-- Alert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
-<body>
+<body data-success="<?php echo htmlspecialchars($success_message); ?>"
+    data-error="<?php echo htmlspecialchars($error_message); ?>">
 
     <!-- SIDEBAR -->
     <aside class="az-sidebar" id="azSidebar" aria-label="Sidebar Admin">
@@ -119,41 +140,42 @@ include 'koneksi.php';
                         </thead>
 
                         <tbody class="text-center">
-                            <?php
-                            $get = mysqli_query($koneksi, "SELECT * FROM contact_us ORDER BY tanggal DESC");
-                            $count = mysqli_num_rows($get);
-
-                            if ($count > 0) {
-                                while ($row = mysqli_fetch_assoc($get)) {
-                                    $pesanPendek = strlen($row['pesan']) > 40 ? substr($row['pesan'], 0, 40) . "..." : $row['pesan'];
-
-                                    echo "
+                            <?php while ($row = mysqli_fetch_assoc($contact)) {
+                                $pesanPendek = strlen($row['pesan']) > 40
+                                    ? substr($row['pesan'], 0, 40) . "..."
+                                    : $row['pesan'];
+                                ?>
                                 <tr>
-                                    <td>{$row['nama']}</td>
-                                    <td>{$row['telepon']}</td>
-                                    <td>{$row['email']}</td>
-                                    <td>{$pesanPendek}</td>
-                                    <td>{$row['tanggal']}</td>
+                                    <td><?= htmlspecialchars($row['nama']); ?></td>
+                                    <td><?= htmlspecialchars($row['telepon']); ?></td>
+                                    <td><?= htmlspecialchars($row['email']); ?></td>
+                                    <td><?= htmlspecialchars($pesanPendek); ?></td>
+                                    <td><?= $row['tanggal']; ?></td>
+
                                     <td>
-                                        <button class='btn btn-secondary btn-sm viewDetail'
-                                            data-nama='{$row['nama']}'
-                                            data-telepon='{$row['telepon']}'
-                                            data-email='{$row['email']}'
-                                            data-pesan='{$row['pesan']}'
-                                            data-tanggal='{$row['tanggal']}'>
-                                            <i class='bi bi-eye'></i> Lihat
+                                        <button class="btn btn-warning btn-sm viewDetail"
+                                            data-nama="<?= htmlspecialchars($row['nama']); ?>"
+                                            data-telepon="<?= htmlspecialchars($row['telepon']); ?>"
+                                            data-email="<?= htmlspecialchars($row['email']); ?>"
+                                            data-pesan="<?= htmlspecialchars($row['pesan']); ?>"
+                                            data-tanggal="<?= $row['tanggal']; ?>">
+                                            Lihat
                                         </button>
+
+                                        <button class="btn btn-danger btn-sm"
+                                            onclick="hapusPesan(<?php echo $row['id_contact_us']; ?>)">Delete</button>
                                     </td>
                                 </tr>
-                            ";
-                                }
-                            } else {
-                                echo "<tr><td colspan='6' class='py-4 text-muted'>
-                                <i class='bi bi-inbox fs-2 mb-2'></i><br>
-                                Belum ada pesan dari pengguna
-                              </td></tr>";
-                            }
-                            ?>
+                            <?php } ?>
+
+                            <?php if (mysqli_num_rows($contact) == 0) { ?>
+                                <tr>
+                                    <td colspan="6" class="py-4">
+                                        <i class="bi bi-inbox fs-2"></i><br>
+                                        Belum ada pesan
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -206,17 +228,6 @@ include 'koneksi.php';
             $('#contactTable tbody tr').filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
-        });
-
-        // MODAL DETAIL
-        $(".viewDetail").click(function () {
-            $("#detailNama").text($(this).data("nama"));
-            $("#detailTelepon").text($(this).data("telepon"));
-            $("#detailEmail").text($(this).data("email"));
-            $("#detailPesan").text($(this).data("pesan"));
-            $("#detailTanggal").text($(this).data("tanggal"));
-
-            $("#detailModal").modal("show");
         });
 
         // display year
