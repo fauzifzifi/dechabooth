@@ -104,7 +104,6 @@ include 'koneksi.php';
                     <table class="table table-bordered" id="logTable">
                         <thead class="text-center">
                             <tr>
-                                <th>ID</th>
                                 <th>Nama Menu</th>
                                 <th>Stok Lama</th>
                                 <th>Stok Baru</th>
@@ -124,7 +123,6 @@ include 'koneksi.php';
                                     $badgeClass = $row['perubahan'] == 'penjualan' ? 'badge-penjualan' : 'badge-admin';
                                     $perubahanText = $row['perubahan'] == 'penjualan' ? 'Penjualan' : 'Admin';
                                     echo "<tr>
-                                        <td><strong>#{$row['id']}</strong></td>
                                         <td>{$row['nama_menu']}</td>
                                         <td>{$row['stok_lama']}</td>
                                         <td><strong>{$row['stok_baru']}</strong></td>

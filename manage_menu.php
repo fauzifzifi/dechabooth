@@ -207,7 +207,6 @@ unset($_SESSION['success'], $_SESSION['error']);
                     <table class="table table-bordered">
                         <thead class="text-center">
                             <tr>
-                                <th>ID Menu</th>
                                 <th>Nama Menu</th>
                                 <th>Jenis</th>
                                 <th>Harga</th>
@@ -219,10 +218,9 @@ unset($_SESSION['success'], $_SESSION['error']);
                         <tbody>
                             <?php while ($row = mysqli_fetch_assoc($menus)) { ?>
                                 <tr class="text-center">
-                                    <td><?php echo $row['id_menu']; ?></td>
                                     <td><?php echo htmlspecialchars($row['nama_menu']); ?></td>
                                     <td><?php echo htmlspecialchars($row['jenis']); ?></td>
-                                    <td>Rp <?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
+                                    <td>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></td>
                                     <td><?php echo $row['stok']; ?></td>
                                     <td>
                                         <?php if ($row['gambar']) { ?>
