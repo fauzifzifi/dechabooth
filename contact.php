@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 </a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="contact.php">Contact Us</a>
+                <a class="nav-link" href="contact.php">Suggestion</a>
               </li>
             </ul>
             <div class="quote_btn-container">
@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
           <div class="form_container">
             <div class="heading_container">
               <h2>
-                Contact Us
+                Suggestion
               </h2>
             </div>
             <form method="POST" action="" id="contactForm">
@@ -232,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
                 Menu
               </a>
               <a href="contact.php">
-                Contact us
+                Suggestion
               </a>
             </div>
           </div>
@@ -274,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
             </a>
             <a href="https://wa.me/+6282336881878" target="_blank">
               <span>
-                <i class="fa fa-phone"></i>
+                <i class="fa fa-whatsapp"></i>
                 WhatsApp +6282336881878
               </span>
             </a>

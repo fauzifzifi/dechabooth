@@ -113,8 +113,8 @@ unset($_SESSION['success'], $_SESSION['error']);
                 </li>
                 <li><a href="admin_trigger.php"><i class="bi bi-clock-history me-2"></i><span>Riwayat Stok</span></a>
                 </li>
-                <li><a href="admin_contact.php"><i class="bi bi-envelope-paper me-2"></i><span>Riwayat
-                            Pesan</span></a></li>
+                <li><a href="admin_contact.php"><i class="bi bi-envelope-paper me-2"></i><span>Ulasan
+                            Pelanggan</span></a></li>
                 <li><a class="az-btn-logout" href="logout.php"><i
                             class="bi bi-box-arrow-right me-2"></i><span>Logout</span></a>
                 </li>

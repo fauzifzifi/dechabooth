@@ -51,7 +51,7 @@
                 <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                 <li class="nav-item active"><a class="nav-link" href="menu.php">Menu</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.php">Suggestion</a></li>
               </ul>
               <div class="quote_btn-container">
                 <a href="#" id="cartButton" class="cart-icon">
@@ -171,7 +171,7 @@
                 Menu
               </a>
               <a href="contact.php">
-                Contact us
+                Suggestion
               </a>
             </div>
           </div>
@@ -213,7 +213,7 @@
             </a>
             <a href="https://wa.me/+6282336881878" target="_blank">
               <span>
-                <i class="fa fa-phone"></i>
+                <i class="fa fa-whatsapp"></i>
                 WhatsApp +6282336881878
               </span>
             </a>
