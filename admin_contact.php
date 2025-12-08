@@ -78,8 +78,10 @@ unset($_SESSION['success'], $_SESSION['error']);
                 <li><a href="admin_trigger.php"><i class="bi bi-clock-history me-2"></i><span>Riwayat
                             Stok</span></a>
                 </li>
-                <li class="active"><a href="admin_contact.php"><i class="bi bi-envelope-paper me-2"></i><span>Riwayat
-                            Pesan</span></a></li>
+                <li class="active"><a href="admin_contact.php"><i class="bi bi-envelope me-2"></i><span>Ulasan
+                            Pelanggan</span></a></li>
+                <li><a href="admin_order.php"><i class="bi bi-receipt-cutoff me-2"></i><span>Riwayat Order</span></a>
+                </li>
                 <li><a class="az-btn-logout" href="logout.php"><i
                             class="bi bi-box-arrow-right me-2"></i><span>Logout</span></a>
                 </li>
@@ -110,8 +112,8 @@ unset($_SESSION['success'], $_SESSION['error']);
         <div class="container-fluid mt-3 main-wrapper">
             <!-- Header -->
             <div class="dashboard-header">
-                <h1 class="dashboard-title">Riwayat Pesan Pengguna</h1>
-                <p class="dashboard-subtitle">Semua pesan dari pengguna akan ditampilkan di sini</p>
+                <h1 class="dashboard-title">Riwayat Ulasan</h1>
+                <p class="dashboard-subtitle">Semua ulasan dari pelanggan akan ditampilkan di sini</p>
             </div>
 
             <!-- Controls -->

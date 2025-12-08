@@ -34,7 +34,8 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
+  <!-- Alert JS -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="sub_page">
@@ -86,27 +87,43 @@
       </header>
       <!-- end header section -->
     </div>
-<!-- panel keranjang -->
-  <div id="cartPanel" class="cart-panel">
-    <div class="cart-header">
-      <h3>Keranjang Belanja</h3>
-      <button id="closeCart" class="close-btn">×</button>
-    </div>
 
-    <div id="cartItems" class="cart-items"></div>
-
-    <div class="cart-footer">
-      <p>Total: Rp<span id="cartTotal">0</span></p>
-
-      <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
-      <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
-    </div>
-  </div>
-
-  <!-- Tambahkan ini ⬇️ -->
+ <!-- ===== CART OVERLAY ===== -->
   <div id="cartOverlay" class="cart-overlay"></div>
 
-  <!-- panel keranjang -->
+  <!-- ===== CART PANEL ===== -->
+  <div id="cartPanel" class="cart-panel">
+
+    <!-- Header -->
+    <div class="cart-header">
+      <h3>
+        <i class="bi bi-cart4"></i>
+        Keranjang Belanja
+      </h3>
+      <button id="closeCart">×</button>
+    </div>
+
+    <!-- Isi Keranjang -->
+    <div class="cart-items" id="cartItems">
+      <p id="emptyCartMessage">Keranjang masih kosong</p>
+    </div>
+
+    <!-- Form Checkout (HANYA DI SINI) -->
+    <div class="cart-footer">
+      <input type="text" id="buyerName" placeholder="Masukkan nama Anda" class="cart-input">
+
+      <h4>Total: Rp<span id="cartTotal">0</span></h4>
+
+      <button id="checkoutBtn" class="btn-checkout">
+        Checkout via WhatsApp
+      </button>
+
+      <button id="clearCartBtn" class="btn-clear">
+        Hapus Semua
+      </button>
+    </div>
+  </div>
+  
     <!-- about section -->
 
     <section class="about_section layout_padding ">
@@ -246,7 +263,6 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
   <script src="js/cart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

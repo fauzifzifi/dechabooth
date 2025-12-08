@@ -1,83 +1,102 @@
 <?php
 include 'koneksi.php';
 
-// Ambil data JSON dari fetch()
+// Ambil JSON dari request
 $data = json_decode(file_get_contents("php://input"), true);
+
+// Jika tidak ada data → hentikan
+if (empty($data)) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Tidak ada data dikirim"
+    ]);
+    exit;
+}
+
+/*
+FORMAT DATA YANG DIHARAPKAN DARI ADMIN:
+
+[
+  { "id_menu": 1, "qty": 5, "action": "tambah" },
+  { "id_menu": 2, "qty": 2, "action": "kurangi" }
+]
+
+action:
+- tambah  -> stok bertambah (restock)
+- kurangi -> stok dikurangi (untuk koreksi stok admin)
+*/
 
 $response = [];
 
-if (!empty($data)) {
-    // Siapkan prepared statement untuk mengurangi stok
-    $stmtKurangi = $koneksi->prepare("UPDATE menu SET stok = stok - ? WHERE nama_menu = ? AND stok >= ?");
-    if (!$stmtKurangi) {
-        echo json_encode(["status" => "error", "message" => "Prepare failed: " . $koneksi->error]);
-        exit;
+foreach ($data as $item) {
+
+    $id_menu = (int) $item['id_menu'];
+    $qty = (int) $item['qty'];
+    $action = $item['action'] ?? 'kurangi';
+
+    if ($qty <= 0) {
+        $response[] = [
+            "id_menu" => $id_menu,
+            "qty" => $qty,
+            "status" => "failed",
+            "message" => "Qty tidak valid"
+        ];
+        continue;
     }
 
-    // Siapkan prepared statement untuk menambah stok
-    $stmtTambah = $koneksi->prepare("UPDATE menu SET stok = stok + ? WHERE nama_menu = ?");
-    if (!$stmtTambah) {
-        echo json_encode(["status" => "error", "message" => "Prepare failed (tambah): " . $koneksi->error]);
-        exit;
+    // Ambil stok sekarang
+    $query = $koneksi->query("SELECT stok FROM menu WHERE id_menu = $id_menu");
+    if ($query->num_rows === 0) {
+        $response[] = [
+            "id_menu" => $id_menu,
+            "qty" => $qty,
+            "status" => "failed",
+            "message" => "Menu tidak ditemukan"
+        ];
+        continue;
     }
 
-    foreach ($data as $item) {
-        $nama_menu = $item['name'];
-        $qty = (int) $item['qty'];
-        $action = $item['action'] ?? 'kurangi'; // default: kurangi
+    $current_stok = (int) $query->fetch_assoc()['stok'];
 
-        if ($action === 'tambah') {
-            $stmtTambah->bind_param("is", $qty, $nama_menu);
-            $stmtTambah->execute();
+    // Tentukan update stok
+    if ($action === "tambah") {
+        $new_stok = $current_stok + $qty;
+        $koneksi->query("UPDATE menu SET stok = $new_stok WHERE id_menu = $id_menu");
 
-            if ($stmtTambah->affected_rows > 0) {
-                $response[] = [
-                    "name" => $nama_menu,
-                    "qty" => $qty,
-                    "status" => "success",
-                    "action" => "tambah"
-                ];
-            } else {
-                $response[] = [
-                    "name" => $nama_menu,
-                    "qty" => $qty,
-                    "status" => "failed",
-                    "action" => "tambah",
-                    "message" => "Menu tidak ditemukan"
-                ];
-            }
-        } else {
-            // Kurangi stok
-            $stmtKurangi->bind_param("isi", $qty, $nama_menu, $qty);
-            $stmtKurangi->execute();
+        $response[] = [
+            "id_menu" => $id_menu,
+            "qty" => $qty,
+            "status" => "success",
+            "action" => "tambah"
+        ];
 
-            if ($stmtKurangi->affected_rows > 0) {
-                $response[] = [
-                    "name" => $nama_menu,
-                    "qty" => $qty,
-                    "status" => "success",
-                    "action" => "kurangi"
-                ];
-            } else {
-                $response[] = [
-                    "name" => $nama_menu,
-                    "qty" => $qty,
-                    "status" => "failed",
-                    "action" => "kurangi",
-                    "message" => "Stok tidak cukup atau menu tidak ditemukan"
-                ];
-            }
+    } else { // kurangi
+
+        // Cegah stok negatif
+        if ($qty > $current_stok) {
+            $response[] = [
+                "id_menu" => $id_menu,
+                "qty" => $qty,
+                "status" => "failed",
+                "message" => "Stok tidak mencukupi"
+            ];
+            continue;
         }
+
+        $new_stok = $current_stok - $qty;
+        $koneksi->query("UPDATE menu SET stok = $new_stok WHERE id_menu = $id_menu");
+
+        $response[] = [
+            "id_menu" => $id_menu,
+            "qty" => $qty,
+            "status" => "success",
+            "action" => "kurangi"
+        ];
     }
-
-    $stmtKurangi->close();
-    $stmtTambah->close();
-
-    echo json_encode([
-        "status" => "completed",
-        "results" => $response
-    ]);
-} else {
-    echo json_encode(["status" => "no_data"]);
 }
+
+echo json_encode([
+    "status" => "completed",
+    "results" => $response
+]);
 ?>

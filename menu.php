@@ -26,7 +26,8 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
+  <!-- allert js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="sub_page">
@@ -67,27 +68,42 @@
     </header>
   </div>
 
-  <!-- panel keranjang -->
+  <!-- ===== CART OVERLAY ===== -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <!-- ===== CART PANEL ===== -->
   <div id="cartPanel" class="cart-panel">
+
+    <!-- Header -->
     <div class="cart-header">
-      <h3>Keranjang Belanja</h3>
-      <button id="closeCart" class="close-btn">×</button>
+      <h3>
+        <i class="bi bi-cart4"></i>
+        Keranjang Belanja
+      </h3>
+      <button id="closeCart">×</button>
     </div>
 
-    <div id="cartItems" class="cart-items"></div>
+    <!-- Isi Keranjang -->
+    <div class="cart-items" id="cartItems">
+      <p id="emptyCartMessage">Keranjang masih kosong</p>
+    </div>
 
+    <!-- Form Checkout (HANYA DI SINI) -->
     <div class="cart-footer">
-      <p>Total: Rp<span id="cartTotal">0</span></p>
+      <input type="text" id="buyerName" placeholder="Masukkan nama Anda" class="cart-input">
 
-      <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
-      <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
+      <h4>Total: Rp<span id="cartTotal">0</span></h4>
+
+      <button id="checkoutBtn" class="btn-checkout">
+        Checkout via WhatsApp
+      </button>
+
+      <button id="clearCartBtn" class="btn-clear">
+        Hapus Semua
+      </button>
     </div>
   </div>
 
-  <!-- Tambahkan ini ⬇️ -->
-  <div id="cartOverlay" class="cart-overlay"></div>
-
-  <!-- panel keranjang -->
 
   <!-- ====== MAKANAN SECTION ====== -->
   <section class="menu_section">
@@ -106,13 +122,17 @@
             <div class="detail-box">
               <h6><?php echo $row['nama_menu']; ?></h6>
               <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-              <!-- Tombol ganti -->
-              <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
+
+              <!-- Tombol ganti (sudah ditambahkan data-id) -->
+              <div class="quantity-controls" data-id="<?php echo $row['id_menu']; ?>"
+                data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>"
+                data-stok="<?php echo $row['stok']; ?>">
+
                 <button class="minus">−</button>
                 <span class="quantity-number">0</span>
                 <button class="plus">+</button>
               </div>
+
             </div>
           </div>
         <?php } ?>
@@ -137,19 +157,24 @@
             <div class="detail-box">
               <h6><?php echo $row['nama_menu']; ?></h6>
               <h5>Rp. <?php echo number_format($row['harga'], 0, ',', '.'); ?></h5>
-              <!-- Tombol ganti -->
-              <div class="quantity-controls" data-name="<?php echo $row['nama_menu']; ?>"
-                data-price="<?php echo $row['harga']; ?>" data-stok="<?php echo $row['stok']; ?>">
+
+              <!-- Tombol ganti (sudah ditambahkan data-id) -->
+              <div class="quantity-controls" data-id="<?php echo $row['id_menu']; ?>"
+                data-name="<?php echo $row['nama_menu']; ?>" data-price="<?php echo $row['harga']; ?>"
+                data-stok="<?php echo $row['stok']; ?>">
+
                 <button class="minus">−</button>
                 <span class="quantity-number">0</span>
                 <button class="plus">+</button>
               </div>
+
             </div>
           </div>
         <?php } ?>
       </div>
     </div>
   </section>
+
 
   <!-- info section -->
   <section class="info_section layout_padding2">
@@ -236,13 +261,16 @@
   </footer>
   </div>
 
-  <!-- JS -->
+  <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- bootstrap js -->
   <script src="js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+  <!-- custom js -->
   <script src="js/custom.js"></script>
+  <!-- cart js -->
   <script src="js/cart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>

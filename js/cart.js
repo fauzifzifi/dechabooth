@@ -1,7 +1,7 @@
 // === Inisialisasi keranjang dari localStorage ===
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-// Elemen DOM (akan diambil saat DOMContentLoaded)
+// Elemen DOM
 let cartCount,
   cartPanel,
   cartItems,
@@ -11,13 +11,10 @@ let cartCount,
   checkoutBtn,
   clearCartBtn,
   cartOverlay,
-  emptyCartMessage;
+  emptyCartMessage,
+  buyerNameInput;
 
-// ===== Helper: tunggu elemen DOM siap dan pasang semua listener di sini =====
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM Content Loaded - Initializing cart...");
-
-  // Ambil elemen (sesuaikan id di HTML)
   cartCount = document.getElementById("cartCount");
   cartPanel = document.getElementById("cartPanel");
   cartItems = document.getElementById("cartItems");
@@ -28,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   clearCartBtn = document.getElementById("clearCartBtn");
   cartOverlay = document.getElementById("cartOverlay");
   emptyCartMessage = document.getElementById("emptyCartMessage");
+  buyerNameInput = document.getElementById("buyerName");
 
-  // Pasang event listeners & update awal
   attachQuantityListeners();
   attachPanelListeners();
   attachCheckoutAndClearListeners();
@@ -41,28 +38,26 @@ function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// === Fungsi menambah/mengupdate item ke keranjang ===
-function addToCart(name, price, qty) {
-  if (qty === 0) {
-    delete cart[name];
-  } else {
-    cart[name] = { price, qty };
-  }
+// === Tambah / Update Cart ===
+function addToCart(id, name, price, qty) {
+  if (qty === 0) delete cart[id];
+  else cart[id] = { name, price, qty };
   updateCart();
 }
 
-// === Fungsi untuk mengosongkan keranjang dan reset counter ===
+// === Kosongkan Cart ===
 function clearCartAndResetCounters() {
   cart = {};
   localStorage.removeItem("cart");
+
   document
     .querySelectorAll(".quantity-number")
     .forEach((el) => (el.textContent = "0"));
+
   updateCart();
-  console.log("Keranjang telah dikosongkan");
 }
 
-// === Fungsi update keranjang (isi + total) ===
+// === Update UI Cart ===
 function updateCart() {
   let totalQty = 0;
   let totalHarga = 0;
@@ -70,7 +65,7 @@ function updateCart() {
 
   cartItems.innerHTML = "";
 
-  for (const [name, item] of Object.entries(cart)) {
+  Object.entries(cart).forEach(([id, item]) => {
     const subtotal = item.price * item.qty;
     totalHarga += subtotal;
     totalQty += item.qty;
@@ -78,11 +73,11 @@ function updateCart() {
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-      <span>${name} x${item.qty}</span>
+      <span>${item.name} x${item.qty}</span>
       <span>Rp${subtotal.toLocaleString("id-ID")}</span>
     `;
     cartItems.appendChild(div);
-  }
+  });
 
   if (emptyCartMessage) {
     if (Object.keys(cart).length === 0) {
@@ -98,22 +93,16 @@ function updateCart() {
 
   document.querySelectorAll(".quantity-controls").forEach((box) => {
     const qtyText = box.querySelector(".quantity-number");
-    const name = box.dataset.name;
-    if (cart[name] && cart[name].qty > 0) qtyText.textContent = cart[name].qty;
-    else qtyText.textContent = "0";
+    const id = box.dataset.id;
+    qtyText.textContent = cart[id] ? cart[id].qty : "0";
   });
 
-  // PERBAIKAN: Ubah styling tombol checkout berdasarkan isi keranjang
   if (checkoutBtn) {
     if (Object.keys(cart).length === 0) {
-      // Keranjang kosong - tombol aktif tapi dengan style disabled
-      checkoutBtn.disabled = false; // Biarkan bisa diklik
       checkoutBtn.classList.add("disabled");
       checkoutBtn.style.opacity = "0.6";
       checkoutBtn.style.cursor = "not-allowed";
     } else {
-      // Keranjang ada isi - tombol aktif penuh
-      checkoutBtn.disabled = false;
       checkoutBtn.classList.remove("disabled");
       checkoutBtn.style.opacity = "1";
       checkoutBtn.style.cursor = "pointer";
@@ -123,256 +112,225 @@ function updateCart() {
   saveCart();
 }
 
-// ===== Tutup panel dengan callback =====
+// === Tutup Cart Panel (dengan animasi) ===
 function closeCartPanel(callback) {
-  if (!cartPanel || !cartOverlay) {
-    if (typeof callback === "function") callback();
-    return;
-  }
+  if (!cartPanel || !cartOverlay) return;
 
   cartPanel.classList.remove("active");
   cartOverlay.classList.remove("active");
   document.body.classList.remove("no-scroll");
 
-  let fired = false;
-  const onTransitionEnd = (ev) => {
-    if (ev.target === cartPanel) {
-      fired = true;
-      cartPanel.removeEventListener("transitionend", onTransitionEnd);
-      if (typeof callback === "function") callback();
-    }
-  };
-
-  cartPanel.addEventListener("transitionend", onTransitionEnd);
-
   setTimeout(() => {
-    if (!fired) {
-      cartPanel.removeEventListener("transitionend", onTransitionEnd);
-      if (typeof callback === "function") callback();
-    }
-  }, 500);
+    if (callback) callback();
+  }, 300);
 }
 
-// ===== Pasang listener panel (buka/tutup) =====
+// === Buka / Tutup Panel ===
 function attachPanelListeners() {
   if (cartButton && cartPanel && cartOverlay) {
-    cartButton.addEventListener("click", (e) => {
+    cartButton.onclick = (e) => {
       e.preventDefault();
       cartPanel.classList.add("active");
       cartOverlay.classList.add("active");
       document.body.classList.add("no-scroll");
-    });
+    };
   }
 
-  if (closeCartBtn) {
-    closeCartBtn.addEventListener("click", () => closeCartPanel());
-  }
-
-  if (cartOverlay) {
-    cartOverlay.addEventListener("click", () => closeCartPanel());
-  }
+  if (closeCartBtn) closeCartBtn.onclick = () => closeCartPanel();
+  if (cartOverlay) cartOverlay.onclick = () => closeCartPanel();
 }
 
-// ===== Pasang listener pada tombol + / - produk =====
+// === Tombol + / - ===
 function attachQuantityListeners() {
   document.querySelectorAll(".quantity-controls").forEach((box) => {
     const plus = box.querySelector(".plus");
     const minus = box.querySelector(".minus");
     const qtyText = box.querySelector(".quantity-number");
+
+    const id = box.dataset.id;
     const name = box.dataset.name;
     const price = parseInt(box.dataset.price || "0", 10);
     const stok = parseInt(box.dataset.stok || "9999", 10);
 
-    if (cart[name]) qtyText.textContent = cart[name].qty;
+    if (cart[id]) qtyText.textContent = cart[id].qty;
 
-    if (plus) {
-      plus.addEventListener("click", () => {
-        let qty = parseInt(qtyText.textContent || "0", 10) + 1;
-        if (qty > stok) {
-          closeCartPanel(() => {
-            if (typeof Swal !== "undefined") {
-              Swal.fire({
-                icon: "error",
-                title: "Stok Tidak Cukup",
-                text: `Stok ${name} lagi habis nihh, maaf yaaa :)`,
-                confirmButtonColor: "#7b2cbf",
-              });
-            } else {
-              alert(`Stok ${name} hanya ${stok} tersedia.`);
-            }
+    plus.onclick = () => {
+      let qty = parseInt(qtyText.textContent || "0", 10) + 1;
+
+      if (qty > stok) {
+        return closeCartPanel(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Stok Habis!",
+            text: `Maaf yaaa, stok ${name} lagi habis nih 🙏`,
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#7b2cbf",
           });
-          return;
-        }
-        qtyText.textContent = qty;
-        addToCart(name, price, qty);
-      });
-    }
+        });
+      }
 
-    if (minus) {
-      minus.addEventListener("click", () => {
-        let qty = parseInt(qtyText.textContent || "0", 10);
-        if (qty > 0) {
-          qty--;
-          qtyText.textContent = qty;
-          addToCart(name, price, qty);
-        }
-      });
-    }
+      qtyText.textContent = qty;
+      addToCart(id, name, price, qty);
+    };
+
+    minus.onclick = () => {
+      let qty = parseInt(qtyText.textContent || "0", 10);
+      if (qty > 0) {
+        qty--;
+        qtyText.textContent = qty;
+        addToCart(id, name, price, qty);
+      }
+    };
   });
 }
 
-// ===== Pasang listener Checkout & Clear =====
+// === Checkout + Konfirmasi + WhatsApp ===
 function attachCheckoutAndClearListeners() {
   if (checkoutBtn) {
-    console.log("Attaching checkout listener to button:", checkoutBtn);
-
-    // Hapus atribut disabled dari HTML dan atur melalui JavaScript
-    checkoutBtn.disabled = false;
-
-    checkoutBtn.addEventListener("click", function (ev) {
+    checkoutBtn.onclick = function (ev) {
       ev.preventDefault();
-      console.log("Checkout button clicked!");
-      console.log("Cart contents:", cart);
-      console.log("Cart keys length:", Object.keys(cart).length);
 
-      // Cek apakah keranjang kosong
       if (Object.keys(cart).length === 0) {
-        console.log("Cart is empty - showing alert");
-
-        // Tutup panel dan tampilkan alert
-        closeCartPanel(() => {
-          if (typeof Swal !== "undefined") {
-            Swal.fire({
-              icon: "warning",
-              title: "Keranjang Kosong!",
-              text: "Silhakan tambahkan item terlebih dahulu sebelum checkout.",
-              confirmButtonColor: "#7b2cbf",
-            });
-          } else {
-            alert(
-              "Keranjang kosong! Silhakan tambahkan item terlebih dahulu sebelum checkout."
-            );
-          }
+        return closeCartPanel(() => {
+          Swal.fire({
+            icon: "warning",
+            title: "Keranjang Kosong!",
+            text: "Silhakan tambahkan item terlebih dahulu sebelum checkout.",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#7b2cbf",
+          });
         });
-        return;
       }
 
-      // Lanjutkan proses checkout jika keranjang tidak kosong
-      console.log("Proceeding with checkout...");
-      let pesan = "Halo, saya ingin memesan:\n";
+      const buyerName = buyerNameInput?.value.trim();
+
+      if (!buyerName) {
+        return closeCartPanel(() => {
+          Swal.fire({
+            icon: "warning",
+            title: "Nama wajib di isi!",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#7b2cbf",
+          });
+        });
+      }
+
+      let ringkasanHTML = "<div style='text-align:left'>";
       let total = 0;
 
-      for (const [name, item] of Object.entries(cart)) {
-        const subtotal = item.price * item.qty;
-        pesan += `- ${name} x${item.qty} = Rp${subtotal.toLocaleString(
-          "id-ID"
-        )}\n`;
-        total += subtotal;
-      }
-
-      pesan += `\nTotal: Rp${total.toLocaleString("id-ID")}\n\nTerima kasih!`;
-      const nomor = "6282336881878";
-      const encodedPesan = encodeURIComponent(pesan);
-
-      // Update stok
-      fetch("update_stok.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          Object.entries(cart).map(([name, item]) => ({
-            name,
-            qty: item.qty,
-          }))
-        ),
-      }).catch((err) => {
-        console.error("Gagal update stok:", err);
+      Object.values(cart).forEach((item) => {
+        const sub = item.price * item.qty;
+        total += sub;
+        ringkasanHTML += `
+          <div style="display:flex;justify-content:space-between">
+            <span>${item.name} x${item.qty}</span>
+            <span>Rp${sub.toLocaleString("id-ID")}</span>
+          </div>`;
       });
 
-      // Kosongkan cart dan buka WA
-      clearCartAndResetCounters();
+      ringkasanHTML += `
+        <hr>
+        <div style="display:flex;justify-content:space-between;font-weight:bold">
+          <span>Total</span>
+          <span>Rp${total.toLocaleString("id-ID")}</span>
+        </div>
+      </div>`;
 
       closeCartPanel(() => {
-        if (typeof Swal !== "undefined") {
-          Swal.fire({
-            icon: "success",
-            title: "Pesanan Dikirim!",
-            text: "Anda akan diarahkan ke WhatsApp untuk menyelesaikan pesanan.",
-            confirmButtonText: "Lanjutkan",
-            confirmButtonColor: "#7b2cbf",
-          }).then(() => {
-            const isMobile = /Android|iPhone|iPad|iPod/i.test(
-              navigator.userAgent
-            );
-            const waUrl = isMobile
-              ? `whatsapp://send?phone=${nomor}&text=${encodedPesan}`
-              : `https://web.whatsapp.com/send?phone=${nomor}&text=${encodedPesan}`;
-            window.open(waUrl, "_blank");
-          });
-        } else {
-          alert("Pesanan dikirim! Anda akan diarahkan ke WhatsApp.");
-          const isMobile = /Android|iPhone|iPad|iPod/i.test(
-            navigator.userAgent
-          );
-          const waUrl = isMobile
-            ? `whatsapp://send?phone=${nomor}&text=${encodedPesan}`
-            : `https://web.whatsapp.com/send?phone=${nomor}&text=${encodedPesan}`;
-          window.open(waUrl, "_blank");
-        }
+        Swal.fire({
+          title: "Konfirmasi Pesanan",
+          html: `<p><b>Nama:</b> ${buyerName}</p>${ringkasanHTML}`,
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Ya, Pesan Sekarang",
+          cancelButtonText: "Batal",
+          confirmButtonColor: "#7b2cbf",
+        }).then((result) => {
+          if (!result.isConfirmed) return;
+
+          fetch("process_checkout.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: buyerName, cart }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.status === "success") {
+                clearCartAndResetCounters();
+                if (buyerNameInput) buyerNameInput.value = "";
+
+                Swal.fire({
+                  icon: "success",
+                  title: "Pesanan Diproses!",
+                  text: "Mengarahkan ke WhatsApp...",
+                  confirmButtonColor: "#7b2cbf",
+                }).then(() => {
+                  const nomorAdmin = "6282336881878";
+                  const isMobile = /Android|iPhone|iPad|iPod/i.test(
+                    navigator.userAgent
+                  );
+
+                  const waUrl = isMobile
+                    ? `whatsapp://send?phone=${nomorAdmin}&text=${encodeURIComponent(
+                        data.wa_message
+                      )}`
+                    : `https://web.whatsapp.com/send?phone=${nomorAdmin}&text=${encodeURIComponent(
+                        data.wa_message
+                      )}`;
+
+                  window.open(waUrl, "_blank");
+                });
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Gagal!",
+                  text: data.message,
+                  confirmButtonColor: "#7b2cbf",
+                });
+              }
+            });
+        });
       });
-    });
+    };
   }
 
   if (clearCartBtn) {
-    clearCartBtn.addEventListener("click", function () {
-      console.log("Clear cart button clicked");
-
+    clearCartBtn.onclick = function () {
       if (Object.keys(cart).length === 0) {
-        closeCartPanel(() => {
-          if (typeof Swal !== "undefined") {
-            Swal.fire({
-              icon: "warning",
-              title: "Keranjang Kosong",
-              text: "Tidak ada item untuk dihapus.",
-              confirmButtonColor: "#7b2cbf",
-            });
-          } else {
-            alert("Keranjang masih kosong.");
-          }
+        return closeCartPanel(() => {
+          Swal.fire({
+            icon: "warning",
+            title: "Keranjang Kosong",
+            text: "Tidak ada item untuk dihapus.",
+            confirmButtonColor: "#7b2cbf",
+          });
         });
-        return;
       }
 
-      // Konfirmasi hapus semua
       closeCartPanel(() => {
-        if (typeof Swal !== "undefined") {
-          Swal.fire({
-            icon: "question",
-            title: "Hapus Semua?",
-            text: "Apakah yakin ingin menghapus semua isi keranjang?",
-            showCancelButton: true,
-            confirmButtonText: "Ya, hapus",
-            cancelButtonText: "Batal",
-            confirmButtonColor: "#7b2cbf",
-            cancelButtonColor: "#6c757d",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              clearCartAndResetCounters();
-              Swal.fire({
-                icon: "success",
-                title: "Berhasil",
-                text: "Keranjang berhasil dikosongkan.",
-                confirmButtonColor: "#7b2cbf",
-              });
-            }
-          });
-        } else {
-          // fallback confirm
-          if (confirm("Yakin ingin menghapus semua isi keranjang?")) {
+        Swal.fire({
+          icon: "question",
+          title: "Hapus Semua?",
+          text: "Apakah yakin ingin menghapus semua isi keranjang?",
+          showCancelButton: true,
+          confirmButtonText: "Ya, hapus",
+          cancelButtonText: "Batal",
+          confirmButtonColor: "#7b2cbf",
+        }).then((result) => {
+          if (result.isConfirmed) {
             clearCartAndResetCounters();
-            alert("Keranjang berhasil dikosongkan.");
+            if (buyerNameInput) buyerNameInput.value = "";
+
+            Swal.fire({
+              icon: "success",
+              title: "Berhasil",
+              text: "Keranjang dikosongkan.",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#7b2cbf",
+            });
           }
-        }
+        });
       });
-    });
+    };
   }
 }

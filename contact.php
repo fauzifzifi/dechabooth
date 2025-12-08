@@ -145,27 +145,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kirim_pesan'])) {
   </div>
   <!-- end header section -->
 
-  <!-- panel keranjang -->
-  <div id="cartPanel" class="cart-panel">
-    <div class="cart-header">
-      <h3>Keranjang Belanja</h3>
-      <button id="closeCart" class="close-btn">×</button>
-    </div>
-
-    <div id="cartItems" class="cart-items"></div>
-
-    <div class="cart-footer">
-      <p>Total: Rp<span id="cartTotal">0</span></p>
-
-      <button id="checkoutBtn" class="btn-checkout">Checkout via WhatsApp</button>
-      <button id="clearCartBtn" class="btn-clear">Hapus Semua</button>
-    </div>
-  </div>
-
-  <!-- Tambahkan ini ⬇️ -->
+  <!-- ===== CART OVERLAY ===== -->
   <div id="cartOverlay" class="cart-overlay"></div>
 
-  <!-- panel keranjang -->
+  <!-- ===== CART PANEL ===== -->
+  <div id="cartPanel" class="cart-panel">
+
+    <!-- Header -->
+    <div class="cart-header">
+      <h3>
+        <i class="bi bi-cart4"></i>
+        Keranjang Belanja
+      </h3>
+      <button id="closeCart">×</button>
+    </div>
+
+    <!-- Isi Keranjang -->
+    <div class="cart-items" id="cartItems">
+      <p id="emptyCartMessage">Keranjang masih kosong</p>
+    </div>
+
+    <!-- Form Checkout (HANYA DI SINI) -->
+    <div class="cart-footer">
+      <input type="text" id="buyerName" placeholder="Masukkan nama Anda" class="cart-input">
+
+      <h4>Total: Rp<span id="cartTotal">0</span></h4>
+
+      <button id="checkoutBtn" class="btn-checkout">
+        Checkout via WhatsApp
+      </button>
+
+      <button id="clearCartBtn" class="btn-clear">
+        Hapus Semua
+      </button>
+    </div>
+  </div>
 
   <!-- contact section -->
   <section class="contact_section layout_padding">
